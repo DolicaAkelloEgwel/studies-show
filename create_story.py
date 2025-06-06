@@ -9,7 +9,7 @@ class NewsArticle(BaseModel):
     image_caption: str
 
 
-def _create_story(basic_prompt: str) -> ChatResponse:
+def _create_story(article_title: str) -> ChatResponse:
     return chat(
         model="deepseek-r1:8b",
         messages=[
@@ -19,7 +19,7 @@ def _create_story(basic_prompt: str) -> ChatResponse:
             },
             {
                 "role": "user",
-                "content": f"Please create an article with the given title: {basic_prompt}",
+                "content": f"Please create an article with the given title: {article_title}",
             },
         ],
         format=NewsArticle.model_json_schema(),
