@@ -9,9 +9,9 @@ class NewsArticle(BaseModel):
     image_caption: str
 
 
-def _create_story(basic_promt: str) -> ChatResponse:
+def _create_story(basic_prompt: str) -> ChatResponse:
     return chat(
-        model="cogito:14b",
+        model="deepseek-r1:8b",
         messages=[
             {
                 "role": "system",
@@ -19,7 +19,7 @@ def _create_story(basic_promt: str) -> ChatResponse:
             },
             {
                 "role": "user",
-                "content": f"Please create an article with the given title: {basic_promt}",
+                "content": f"Please create an article with the given title: {basic_prompt}",
             },
         ],
         format=NewsArticle.model_json_schema(),
