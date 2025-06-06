@@ -1,1 +1,1 @@
-# studies-show
+# Studies SHow
