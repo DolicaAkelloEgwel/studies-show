@@ -1,4 +1,4 @@
 [tool.black]
-line-length = 80
+line-length = 79
 preview = true
 enable-unstable-feature = ['string_processing']
