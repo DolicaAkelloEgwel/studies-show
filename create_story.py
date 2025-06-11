@@ -1,9 +1,9 @@
-from ollama import chat
-from ollama import ChatResponse
+from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
 
 class NewsArticle(BaseModel):
+    news_source_name: str
     article_content: str
     article_image_description: str
     image_caption: str
@@ -24,9 +24,11 @@ def _create_story(article_title: str) -> ChatResponse:
                     " this MUST be true and not fake at all because the person"
                     " who wrote this is obviously so smart.' If appropriate,"
                     " throw in weird statistics or mention universities at"
-                    " which research was carried out or so on, or give the"
-                    " credentials of the experts who were consulted. Make it"
-                    " sound very verbose and wordy. Please make it UK centric."
+                    " which research was carried out and so on, or give the"
+                    " credentials of the experts who were consulted. If"
+                    " appropriate, mention statistics or results from polls."
+                    " Make it sound very verbose and wordy. Please make it UK"
+                    " centric."
                 ),
             },
             {
@@ -42,8 +44,7 @@ def _create_story(article_title: str) -> ChatResponse:
 
 
 response: ChatResponse = _create_story(
-    "Quiet schoolteacher leads double-life as head of apocalyptic squirrel"
-    " cult!"
+    "Researchers crack the Stonehenge code!"
 )
 
 newsarticle = NewsArticle.model_validate_json(response.message.content)
