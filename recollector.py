@@ -2,10 +2,19 @@ import math
 
 import pyxel
 
+import constants
+
 
 class App:
-    def __init__(self, app_title: str, font_path: str, presenter):
-        pyxel.init(1280, 900, title=app_title)
+    def __init__(
+        self,
+        app_title: str,
+        font_path: str,
+        app_width: int,
+        app_height: int,
+        presenter,
+    ):
+        pyxel.init(app_width, app_height, title=app_title)
         self.bedstead = pyxel.Font(font_path)
         self.presenter = presenter
         with open("./logo", "r") as f:
@@ -38,5 +47,5 @@ class App:
             )
             i += 1
         if pyxel.frame_count % 30 < 25:
-            pyxel.text(55, 800, "[PRESS ANY KEY TO START]", 11, self.bedstead)
-        pyxel.text(55, 840, "© RANDOM COMPANY SOFTWARE", 11, self.bedstead)
+            pyxel.text(0, 800, constants.CENTERED_START, 11, self.bedstead)
+        pyxel.text(0, 840, constants.CENTERED_COPYRIGHT, 11, self.bedstead)
