@@ -47,5 +47,5 @@ class App:
             )
             i += 1
         if pyxel.frame_count % 30 < 25:
-            pyxel.text(0, 800, constants.CENTERED_START, 11, self.bedstead)
-        pyxel.text(0, 840, constants.CENTERED_COPYRIGHT, 11, self.bedstead)
+            pyxel.text(0, 768 - 120, constants.CENTERED_START, 11, self.bedstead)
+        pyxel.text(0, 768 - 60, constants.CENTERED_COPYRIGHT, 11, self.bedstead)
