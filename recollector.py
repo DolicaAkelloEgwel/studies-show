@@ -31,6 +31,11 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
+        if pyxel.frame_count % 1:
+            pyxel.dither(0.9)
+        else:
+            pyxel.dither(1)
+        pyxel.rect(1024 // 2 - 1, 0, 2, 1024, 8)  # check for alignment
         i = 0
         for line in self._text:
             pyxel.text(
@@ -47,5 +52,21 @@ class App:
             )
             i += 1
         if pyxel.frame_count % 30 < 25:
-            pyxel.text(0, 768 - 120, constants.CENTERED_START, 11, self.bedstead)
-        pyxel.text(0, 768 - 60, constants.CENTERED_COPYRIGHT, 11, self.bedstead)
+            pyxel.text(
+                constants.text_centre_y(
+                    constants.length_of_string(constants.START_TEXT)
+                ),
+                768 - 120,
+                constants.START_TEXT,
+                11,
+                self.bedstead,
+            )
+        pyxel.text(
+            constants.text_centre_y(
+                constants.length_of_string(constants.COPYRIGHT_TEXT)
+            ),
+            768 - 60,
+            constants.COPYRIGHT_TEXT,
+            11,
+            self.bedstead,
+        )
