@@ -1,3 +1,4 @@
+import argparse
 import math
 
 import pyxel
@@ -12,12 +13,23 @@ class App:
         font_path: str,
         app_width: int,
         app_height: int,
+        show_vline: bool,
     ):
         pyxel.init(app_width, app_height, title=app_title)
+
+        # load retro computer-y font
         self.bedstead = pyxel.Font(font_path)
-        with open("./logo", "r") as f:
+
+        # read the logo text
+        with open("./assets/logo", "r") as f:
             logo = f.readlines()
         self._text = logo + ["", "v8.3.4"]
+
+        if show_vline:
+            self.vline_col = 8
+        else:
+            self.vline_col = 0
+
         pyxel.run(self.update, self.draw)
 
     def update(self):
@@ -26,11 +38,9 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        if pyxel.frame_count % 1:
-            pyxel.dither(0.9)
-        else:
-            pyxel.dither(1)
-        pyxel.rect(1024 // 2 - 1, 0, 2, 1024, 8)  # check for alignment
+        pyxel.rect(
+            1024 // 2 - 1, 0, 2, 1024, self.vline_col
+        )  # check for alignment
         i = 0
         for line in self._text:
             pyxel.text(
@@ -45,6 +55,7 @@ class App:
                 11,
                 self.bedstead,
             )
+
             i += 1
         if pyxel.frame_count % 30 < 25:
             pyxel.text(
@@ -67,9 +78,14 @@ class App:
         )
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-vl", "--vline", action="store_true")
+args = parser.parse_args()
+
 App(
     constants.APP_TITLE,
     constants.FONT_PATH,
     constants.APP_WIDTH,
     constants.APP_HEIGHT,
+    args.vline,
 )
