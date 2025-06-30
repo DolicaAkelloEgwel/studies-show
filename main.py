@@ -41,7 +41,7 @@ class MainMenu:
             pyxel.quit()
 
     def draw(self):
-        pyxel.cls(0)
+        pyxel.cls(pyxel.COLOR_BLACK)
 
         # draw the centre line
         pyxel.rect(511, 0, 2, constants.APP_WIDTH, self.vline_col)
