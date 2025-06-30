@@ -30,13 +30,13 @@ class MainMenu:
         else:
             self.vline_col = pyxel.COLOR_BLACK
 
-        self.logo_y = constants.text_centre_y(
+        self.logo_x = constants.text_centre_x(
             constants.length_of_string(self._logo[1])
         )
-        self.start_text_y = constants.text_centre_y(
+        self.start_text_x = constants.text_centre_x(
             constants.length_of_string(constants.START_TEXT)
         )
-        self.copyright_y = constants.text_centre_y(
+        self.copyright_x = constants.text_centre_x(
             constants.length_of_string(constants.COPYRIGHT_TEXT)
         )
 
@@ -48,16 +48,14 @@ class MainMenu:
 
     def draw(self):
         pyxel.cls(0)
-        pyxel.rect(
-            1024 // 2 - 1, 0, 2, 1024, self.vline_col
-        )  # check for alignment
+        pyxel.rect(511, 0, 2, 1024, self.vline_col)  # check for alignment
         i = 0
         for line in self._logo:
             pyxel.text(
-                self.logo_y,
+                self.logo_x,
                 41
                 + (
-                    (i * 20)
+                    (i * constants.LINE_Y_DISTANCE)
                     + math.sin(pyxel.frame_count * 0.125 * 0.25) * 125
                     + 100
                 ),
@@ -69,14 +67,14 @@ class MainMenu:
 
         if pyxel.frame_count % 30 < 25:
             pyxel.text(
-                self.start_text_y,
+                self.start_text_x,
                 768 - 120,
                 constants.START_TEXT,
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
         pyxel.text(
-            self.copyright_y,
+            self.copyright_x,
             768 - 60,
             constants.COPYRIGHT_TEXT,
             pyxel.COLOR_LIME,

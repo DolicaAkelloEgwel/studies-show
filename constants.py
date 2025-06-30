@@ -16,7 +16,7 @@ def length_of_string(text: str) -> int:
     return n * 10 + (n - 1) * 2
 
 
-def text_centre_y(string_length: int) -> int:
+def text_centre_x(string_length: int) -> int:
     return APP_WIDTH // 2 - string_length // 2 - 2
 
 
