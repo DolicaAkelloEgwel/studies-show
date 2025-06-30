@@ -26,9 +26,9 @@ class MainMenu:
         self._logo = logo + ["", "v8.3.4"]
 
         if show_vline:
-            self.vline_col = 8
+            self.vline_col = pyxel.COLOR_RED
         else:
-            self.vline_col = 0
+            self.vline_col = pyxel.COLOR_BLACK
 
         self.logo_y = constants.text_centre_y(
             constants.length_of_string(self._logo[1])
