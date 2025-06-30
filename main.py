@@ -23,7 +23,7 @@ class MainMenu:
         # read the logo text
         with open(constants.LOGO_PATH, "r") as f:
             logo = f.readlines()
-        self._logo = logo + ["", "v8.3.4"]
+        self._logo = logo + ["", constants.VERSION]
 
         if show_vline:
             self.vline_col = pyxel.COLOR_RED

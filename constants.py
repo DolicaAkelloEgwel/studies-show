@@ -1,6 +1,7 @@
 import os
 
-APP_TITLE = "ЯECOLLECTOR v8.3.4"
+VERSION = "v8.3.4"
+APP_TITLE = "ЯECOLLECTOR " + VERSION
 COMMANDS = ("search", "t-and-c", "help", "whats-new", "thanks")
 BLOCK_CHARACTER = "█"
 ASSETS_PATH = "assets"
