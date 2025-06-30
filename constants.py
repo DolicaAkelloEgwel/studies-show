@@ -17,6 +17,10 @@ APP_HEIGHT = 768
 START_TEXT = "[PRESS ANY KEY TO START]"
 COPYRIGHT_TEXT = "(C) 2025 GRAVE MATTER"
 
+with open(LOGO_PATH, "r") as f:
+    logo = f.readlines()
+LOGO = logo + ["", VERSION]
+
 
 def length_of_string(text: str) -> int:
     n = len(text)

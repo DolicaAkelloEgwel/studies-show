@@ -20,17 +20,12 @@ class MainMenu:
         # load retro computer-y font
         self.bedstead = pyxel.Font(constants.FONT_PATH)
 
-        # read the logo text
-        with open(constants.LOGO_PATH, "r") as f:
-            logo = f.readlines()
-        self._logo = logo + ["", constants.VERSION]
-
         # set colour for vertical centre line
         self.vline_col = constants.get_vline_colour(show_vline)
 
         # determine x-values for text
         self.logo_x = constants.text_centre_x(
-            constants.length_of_string(self._logo[1])
+            constants.length_of_string(constants.LOGO[1])
         )
         self.start_text_x = constants.text_centre_x(
             constants.length_of_string(constants.START_TEXT)
@@ -53,7 +48,7 @@ class MainMenu:
 
         # draw the logo text
         i = 0
-        for line in self._logo:
+        for line in constants.LOGO:
             pyxel.text(
                 self.logo_x,
                 41
