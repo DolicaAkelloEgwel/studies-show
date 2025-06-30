@@ -18,11 +18,11 @@ START_TEXT = "[PRESS ANY KEY TO START]"
 COPYRIGHT_TEXT = "(C) 2025 GRAVE MATTER"
 
 with open(LOGO_PATH, "r") as f:
-    logo = f.readlines()
-LOGO = logo + ["", VERSION]
+    LOGO = f.readlines()
+LOGO = LOGO + ["", VERSION]
 
 
-def length_of_string(text: str) -> int:
+def width_of_string_in_pixels(text: str) -> int:
     n = len(text)
     return n * 10 + (n - 1) * 2
 

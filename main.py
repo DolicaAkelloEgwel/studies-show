@@ -25,13 +25,13 @@ class MainMenu:
 
         # determine x-values for text
         self.logo_x = constants.text_centre_x(
-            constants.length_of_string(constants.LOGO[1])
+            constants.width_of_string_in_pixels(constants.LOGO[1])
         )
         self.start_text_x = constants.text_centre_x(
-            constants.length_of_string(constants.START_TEXT)
+            constants.width_of_string_in_pixels(constants.START_TEXT)
         )
         self.copyright_x = constants.text_centre_x(
-            constants.length_of_string(constants.COPYRIGHT_TEXT)
+            constants.width_of_string_in_pixels(constants.COPYRIGHT_TEXT)
         )
 
         pyxel.run(self.update, self.draw)
