@@ -9,19 +9,19 @@ import constants
 class MainMenu:
     def __init__(
         self,
-        app_title: str,
-        font_path: str,
-        app_width: int,
-        app_height: int,
         show_vline: bool,
     ):
-        pyxel.init(app_width, app_height, title=app_title)
+        pyxel.init(
+            constants.APP_WIDTH,
+            constants.APP_HEIGHT,
+            title=constants.APP_TITLE,
+        )
 
         # load retro computer-y font
-        self.bedstead = pyxel.Font(font_path)
+        self.bedstead = pyxel.Font(constants.FONT_PATH)
 
         # read the logo text
-        with open("./assets/logo", "r") as f:
+        with open(constants.LOGO_PATH, "r") as f:
             logo = f.readlines()
         self._logo = logo + ["", "v8.3.4"]
 
@@ -48,7 +48,11 @@ class MainMenu:
 
     def draw(self):
         pyxel.cls(0)
-        pyxel.rect(511, 0, 2, 1024, self.vline_col)  # check for alignment
+
+        # draw the centre line
+        pyxel.rect(511, 0, 2, 1024, self.vline_col)
+
+        # draw the logo text
         i = 0
         for line in self._logo:
             pyxel.text(
@@ -65,6 +69,7 @@ class MainMenu:
             )
             i += 1
 
+        # make the start text flash
         if pyxel.frame_count % 30 < 25:
             pyxel.text(
                 self.start_text_x,
@@ -73,6 +78,8 @@ class MainMenu:
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
+
+        # copyright text
         pyxel.text(
             self.copyright_x,
             768 - 60,
@@ -87,9 +94,5 @@ parser.add_argument("-vl", "--vline", action="store_true")
 args = parser.parse_args()
 
 MainMenu(
-    constants.APP_TITLE,
-    constants.FONT_PATH,
-    constants.APP_WIDTH,
-    constants.APP_HEIGHT,
     args.vline,
 )
