@@ -25,11 +25,13 @@ class MainMenu:
             logo = f.readlines()
         self._logo = logo + ["", constants.VERSION]
 
+        # set colour for vertical centre line
         if show_vline:
             self.vline_col = pyxel.COLOR_RED
         else:
             self.vline_col = pyxel.COLOR_BLACK
 
+        # determine x-values for text
         self.logo_x = constants.text_centre_x(
             constants.length_of_string(self._logo[1])
         )
