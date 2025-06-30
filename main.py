@@ -47,8 +47,7 @@ class MainMenu:
         pyxel.rect(511, 0, 2, constants.APP_WIDTH, self.vline_col)
 
         # draw the logo text
-        i = 0
-        for line in constants.LOGO:
+        for i, line in enumerate(constants.LOGO):
             pyxel.text(
                 self.logo_x,
                 41
@@ -61,7 +60,6 @@ class MainMenu:
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
-            i += 1
 
         # make the start text flash
         if pyxel.frame_count % 30 < 25:
