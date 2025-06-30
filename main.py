@@ -50,7 +50,7 @@ class MainMenu:
         pyxel.cls(0)
 
         # draw the centre line
-        pyxel.rect(511, 0, 2, 1024, self.vline_col)
+        pyxel.rect(511, 0, 2, constants.APP_WIDTH, self.vline_col)
 
         # draw the logo text
         i = 0
