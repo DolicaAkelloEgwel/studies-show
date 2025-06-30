@@ -26,10 +26,7 @@ class MainMenu:
         self._logo = logo + ["", constants.VERSION]
 
         # set colour for vertical centre line
-        if show_vline:
-            self.vline_col = pyxel.COLOR_RED
-        else:
-            self.vline_col = pyxel.COLOR_BLACK
+        self.vline_col = constants.get_vline_colour(show_vline)
 
         # determine x-values for text
         self.logo_x = constants.text_centre_x(
