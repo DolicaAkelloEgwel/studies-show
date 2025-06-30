@@ -6,7 +6,7 @@ import pyxel
 import constants
 
 
-class App:
+class MainMenu:
     def __init__(
         self,
         app_title: str,
@@ -23,12 +23,22 @@ class App:
         # read the logo text
         with open("./assets/logo", "r") as f:
             logo = f.readlines()
-        self._text = logo + ["", "v8.3.4"]
+        self._logo = logo + ["", "v8.3.4"]
 
         if show_vline:
             self.vline_col = 8
         else:
             self.vline_col = 0
+
+        self.logo_y = constants.text_centre_y(
+            constants.length_of_string(self._logo[1])
+        )
+        self.start_text_y = constants.text_centre_y(
+            constants.length_of_string(constants.START_TEXT)
+        )
+        self.copyright_y = constants.text_centre_y(
+            constants.length_of_string(constants.COPYRIGHT_TEXT)
+        )
 
         pyxel.run(self.update, self.draw)
 
@@ -42,9 +52,9 @@ class App:
             1024 // 2 - 1, 0, 2, 1024, self.vline_col
         )  # check for alignment
         i = 0
-        for line in self._text:
+        for line in self._logo:
             pyxel.text(
-                55,
+                self.logo_y,
                 41
                 + (
                     (i * 20)
@@ -55,22 +65,18 @@ class App:
                 11,
                 self.bedstead,
             )
-
             i += 1
+
         if pyxel.frame_count % 30 < 25:
             pyxel.text(
-                constants.text_centre_y(
-                    constants.length_of_string(constants.START_TEXT)
-                ),
+                self.start_text_y,
                 768 - 120,
                 constants.START_TEXT,
                 11,
                 self.bedstead,
             )
         pyxel.text(
-            constants.text_centre_y(
-                constants.length_of_string(constants.COPYRIGHT_TEXT)
-            ),
+            self.copyright_y,
             768 - 60,
             constants.COPYRIGHT_TEXT,
             11,
@@ -82,7 +88,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-vl", "--vline", action="store_true")
 args = parser.parse_args()
 
-App(
+MainMenu(
     constants.APP_TITLE,
     constants.FONT_PATH,
     constants.APP_WIDTH,
