@@ -62,7 +62,7 @@ class MainMenu:
                     + 100
                 ),
                 line,
-                11,
+                pyxel.COLOR_LIME,
                 self.bedstead,
             )
             i += 1
@@ -72,14 +72,14 @@ class MainMenu:
                 self.start_text_y,
                 768 - 120,
                 constants.START_TEXT,
-                11,
+                pyxel.COLOR_LIME,
                 self.bedstead,
             )
         pyxel.text(
             self.copyright_y,
             768 - 60,
             constants.COPYRIGHT_TEXT,
-            11,
+            pyxel.COLOR_LIME,
             self.bedstead,
         )
 
