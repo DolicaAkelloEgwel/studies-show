@@ -24,15 +24,9 @@ class MainMenu:
         self.vline_col = constants.get_vline_colour(show_vline)
 
         # determine x-values for text
-        self.logo_x = constants.text_centre_x(
-            constants.width_of_string_in_pixels(constants.LOGO[1])
-        )
-        self.start_text_x = constants.text_centre_x(
-            constants.width_of_string_in_pixels(constants.START_TEXT)
-        )
-        self.copyright_x = constants.text_centre_x(
-            constants.width_of_string_in_pixels(constants.COPYRIGHT_TEXT)
-        )
+        self.logo_x = constants.text_centre_x(constants.LOGO[1])
+        self.start_text_x = constants.text_centre_x(constants.START_TEXT)
+        self.copyright_x = constants.text_centre_x(constants.COPYRIGHT_TEXT)
 
         pyxel.run(self.update, self.draw)
 

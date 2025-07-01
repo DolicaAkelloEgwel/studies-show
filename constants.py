@@ -22,12 +22,13 @@ with open(LOGO_PATH, "r") as f:
 LOGO = LOGO + ["", VERSION]
 
 
-def width_of_string_in_pixels(text: str) -> int:
+def _width_of_string_in_pixels(text: str) -> int:
     n = len(text)
     return n * 10 + (n - 1) * 2
 
 
-def text_centre_x(string_length: int) -> int:
+def text_centre_x(text: str) -> int:
+    string_length = _width_of_string_in_pixels(text)
     return APP_WIDTH // 2 - string_length // 2 - 2
 
 
