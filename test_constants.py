@@ -25,6 +25,12 @@ class TestHelperFunctions(unittest.TestCase):
     def test_given_two_char_string_then_centre_is_499(self):
         self.assertEqual(constants.text_centre_x("AA"), 499)
 
+    def test_given_frame_22_then_returns_true(self):
+        self.assertTrue(constants.show_25_frames(30 + 22))
+
+    def test_given_frame_29_then_returns_false(self):
+        self.assertFalse(constants.show_25_frames(30 + 29))
+
 
 if __name__ == "__main__":
     unittest.main()

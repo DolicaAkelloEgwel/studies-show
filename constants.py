@@ -39,5 +39,5 @@ def get_vline_colour(show_vline: bool) -> int:
     return int(show_vline) * RED_COL
 
 
-def show_25_frames(frame_count: int):
+def show_25_frames(frame_count: int) -> bool:
     return frame_count % 30 < 25
