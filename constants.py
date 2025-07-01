@@ -22,16 +22,16 @@ with open(LOGO_PATH, "r") as f:
 LOGO = LOGO + ["", VERSION]
 
 
-def _width_of_string_in_pixels(text: str) -> int:
-    n = len(text)
-    if n == 0:
-        return 0
-    return n * 10 + (n - 1) * 2
+def _width_of_string_in_pixels(num_chars: int) -> int:
+    return num_chars * 10 + (num_chars - 1) * 2
 
 
 def text_centre_x(text: str) -> int:
-    string_length = _width_of_string_in_pixels(text)
-    return APP_WIDTH // 2 - string_length // 2 - 2
+    num_chars = len(text)
+    if num_chars == 0:
+        raise ValueError("String has length 0")
+    string_width_in_pixels = _width_of_string_in_pixels(text)
+    return APP_WIDTH // 2 - string_width_in_pixels // 2 - 2
 
 
 def get_vline_colour(show_vline: bool) -> int:
