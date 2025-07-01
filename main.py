@@ -57,7 +57,7 @@ class StartScreen:
             )
 
         # make the start text flash
-        if pyxel.frame_count % 30 < 25:
+        if constants.show_25_frames(pyxel.frame_count):
             pyxel.text(
                 self.start_text_x,
                 768 - 120,
