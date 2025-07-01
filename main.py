@@ -39,7 +39,13 @@ class StartScreen:
         pyxel.cls(pyxel.COLOR_BLACK)
 
         # draw the centre line
-        pyxel.rect(511, 0, 2, constants.APP_WIDTH, self.vline_col)
+        pyxel.rect(
+            constants.HALF_APP_WIDTH - 1,
+            0,
+            2,
+            constants.APP_WIDTH,
+            self.vline_col,
+        )
 
         # draw the logo text
         for i, line in enumerate(constants.LOGO):
