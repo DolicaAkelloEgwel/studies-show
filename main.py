@@ -6,7 +6,7 @@ import pyxel
 import constants
 
 
-class MainMenu:
+class StartScreen:
     def __init__(
         self,
         show_vline: bool,
@@ -35,6 +35,7 @@ class MainMenu:
             pyxel.quit()
 
     def draw(self):
+        # clear screen
         pyxel.cls(pyxel.COLOR_BLACK)
 
         # draw the centre line
@@ -79,6 +80,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-vl", "--vline", action="store_true")
 args = parser.parse_args()
 
-MainMenu(
+StartScreen(
     args.vline,
 )
