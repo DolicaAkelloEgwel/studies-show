@@ -25,9 +25,13 @@ class App:
         self.logo_x = constants.text_centre_x(constants.LOGO[1])
         self.start_text_x = constants.text_centre_x(constants.START_TEXT)
         self.copyright_x = constants.text_centre_x(constants.COPYRIGHT_TEXT)
+        self.t_and_c_title_x = constants.text_centre_x(
+            constants.TERMS_AND_CONDITIONS_TITLE
+        )
 
         self._show_title_screen = True
         self._show_terms_and_conditions = False
+        self._show_recollector_terminal = False
 
         pyxel.run(self.update, self.draw)
 
@@ -72,14 +76,24 @@ class App:
         )
 
     def _draw_terms_and_conditions(self):
-        # copyright text
+
+        # terms and conditions title
         pyxel.text(
-            22,
-            constants.COPYRIGHT_TEXT_Y,
-            "TERMS AND CONDITIONS",
+            self.t_and_c_title_x,
+            20,
+            constants.TERMS_AND_CONDITIONS_TITLE,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
+
+        for i, line in enumerate(constants.TERMS_AND_CONDITIONS_TEXT):
+            pyxel.text(
+                20,
+                60 + i * constants.LINE_Y_DISTANCE,
+                line,
+                pyxel.COLOR_LIME,
+                self.bedstead,
+            )
 
     def draw(self):
         # clear screen
@@ -96,8 +110,10 @@ class App:
 
         if self._show_title_screen:
             self._draw_title_screen()
-        if self._show_terms_and_conditions:
+        elif self._show_terms_and_conditions:
             self._draw_terms_and_conditions()
+        elif self._show_recollector_terminal:
+            self._draw_recollector_terminal()
 
 
 parser = argparse.ArgumentParser()
