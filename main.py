@@ -66,7 +66,7 @@ class StartScreen:
         if constants.show_25_frames(pyxel.frame_count):
             pyxel.text(
                 self.start_text_x,
-                768 - 120,
+                constants.START_TEXT_Y,
                 constants.START_TEXT,
                 pyxel.COLOR_LIME,
                 self.bedstead,
@@ -75,7 +75,7 @@ class StartScreen:
         # copyright text
         pyxel.text(
             self.copyright_x,
-            768 - 60,
+            constants.COPYRIGHT_TEXT_Y,
             constants.COPYRIGHT_TEXT,
             pyxel.COLOR_LIME,
             self.bedstead,
