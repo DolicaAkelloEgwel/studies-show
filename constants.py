@@ -24,6 +24,8 @@ LOGO = LOGO + ["", VERSION]
 
 def _width_of_string_in_pixels(text: str) -> int:
     n = len(text)
+    if n == 0:
+        return 0
     return n * 10 + (n - 1) * 2
 
 
