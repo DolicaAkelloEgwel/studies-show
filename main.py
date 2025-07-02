@@ -4,6 +4,7 @@ import math
 import pyxel
 
 import constants
+import helpers
 
 
 class App:
@@ -57,7 +58,7 @@ class App:
             )
 
         # make the start text flash
-        if constants.show_25_frames(pyxel.frame_count):
+        if helpers.flash_text(pyxel.frame_count):
             pyxel.text(
                 self.start_text_x,
                 constants.START_TEXT_Y,
