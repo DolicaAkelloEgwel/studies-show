@@ -42,9 +42,23 @@ class App:
 
         pyxel.run(self.update, self.draw)
 
-    def update(self):
-        if self._state == State.TITLE and pyxel.btnp(pyxel.KEY_RETURN):
+    def _update_title(self):
+        if pyxel.btnp(pyxel.KEY_RETURN):
             self._state = State.TERMS_AND_CONDITIONS
+
+    def _update_terms_and_conditions(self):
+        pass
+
+    def _update_terminal(self):
+        pass
+
+    def update(self):
+        if self._state == State.TITLE:
+            self._update_title()
+        elif self._state == State.TERMS_AND_CONDITIONS:
+            self._update_terms_and_conditions()
+        elif self._state == State.TERMINAL:
+            self._update_terminal()
 
     def _draw_title_screen(self):
         # draw the logo text
