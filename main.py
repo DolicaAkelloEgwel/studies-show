@@ -35,9 +35,6 @@ class App:
 
         # determine x-values for text
         self.logo_x = constants.text_centre_x(constants.LOGO[1])
-        self.t_and_c_title_x = constants.text_centre_x(
-            constants.TERMS_AND_CONDITIONS_TITLE
-        )
 
         # set initial state
         self._state = State.TITLE
@@ -104,9 +101,9 @@ class App:
 
         # terms and conditions title
         pyxel.text(
-            self.t_and_c_title_x,
-            20,
-            constants.TERMS_AND_CONDITIONS_TITLE,
+            constants.TERMS_AND_CONDITIONS_TITLE.x,
+            constants.TERMS_AND_CONDITIONS_TITLE.y,
+            constants.TERMS_AND_CONDITIONS_TITLE.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
@@ -121,9 +118,9 @@ class App:
             )
 
         pyxel.text(
-            60,
-            constants.APP_HEIGHT - 60,
-            constants.ACCEPT_OR_DECLINE,
+            constants.ACCEPT_OR_DECLINE.x,
+            constants.ACCEPT_OR_DECLINE.y,
+            constants.ACCEPT_OR_DECLINE.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
