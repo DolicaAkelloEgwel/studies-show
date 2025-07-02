@@ -21,7 +21,10 @@ class App:
         show_vline: bool,
     ):
         pyxel.init(
-            constants.APP_WIDTH, constants.APP_HEIGHT, constants.APP_TITLE
+            constants.APP_WIDTH,
+            constants.APP_HEIGHT,
+            constants.APP_TITLE,
+            quit_key=300,
         )
 
         # load retro computer-y font
@@ -38,6 +41,7 @@ class App:
             constants.TERMS_AND_CONDITIONS_TITLE
         )
 
+        # set initial state
         self._state = State.TITLE
 
         pyxel.run(self.update, self.draw)
@@ -47,7 +51,10 @@ class App:
             self._state = State.TERMS_AND_CONDITIONS
 
     def _update_terms_and_conditions(self):
-        pass
+        if pyxel.btnp(pyxel.KEY_A):
+            self._state = State.TERMINAL
+        if pyxel.btnp(pyxel.KEY_D):
+            self._state = State.TITLE
 
     def _update_terminal(self):
         pass
@@ -114,6 +121,9 @@ class App:
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
+
+    def _draw_recollector_terminal(self):
+        pass
 
     def draw(self):
         # clear screen

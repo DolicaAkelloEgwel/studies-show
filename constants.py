@@ -1,4 +1,6 @@
 import os
+import textwrap
+from math import floor
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
@@ -28,6 +30,7 @@ TERMS_AND_CONDITIONS_TITLE = "TERMS AND CONDITIONS"
 
 with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
     TERMS_AND_CONDITIONS_TEXT = f.readlines()
+TERMS_AND_CONDITIONS_TEXT = "\n".join(TERMS_AND_CONDITIONS_TEXT)
 
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
@@ -44,3 +47,12 @@ def text_centre_x(text: str) -> int:
 
 def get_vline_colour(show_vline: bool) -> int:
     return int(show_vline) * RED_COL
+
+
+def wrap_text_for_border(text: str, border: int) -> str:
+    max_pixel_width = APP_WIDTH - border * 2
+    max_chars = floor(max_pixel_width / 12 + (1 / 6))
+    return textwrap.wrap(text, max_chars, replace_whitespace=False)
+
+
+TERMS_AND_CONDITIONS_TEXT = wrap_text_for_border(TERMS_AND_CONDITIONS_TEXT, 20)
