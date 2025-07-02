@@ -69,7 +69,7 @@ class App:
                 self.logo_x,
                 41
                 + (
-                    (i * constants.LINE_Y_DISTANCE)
+                    (i * constants.TEXT_PIXEL_HEIGHT)
                     + math.sin(pyxel.frame_count * 0.125 * 0.25) * 125
                     + 100
                 ),
@@ -111,7 +111,7 @@ class App:
         for i, line in enumerate(constants.TERMS_AND_CONDITIONS_TEXT):
             pyxel.text(
                 constants.TERMS_AND_CONDITIONS_BORDER,
-                60 + i * constants.LINE_Y_DISTANCE,
+                60 + i * constants.TEXT_PIXEL_HEIGHT,
                 line,
                 pyxel.COLOR_LIME,
                 self.bedstead,

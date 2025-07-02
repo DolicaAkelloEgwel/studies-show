@@ -8,19 +8,24 @@ COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
 BLOCK_CHARACTER = "█"
 ASSETS_PATH = "assets"
 FONT_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
-LINE_Y_DISTANCE = 20
-TOP_LINE_Y = 40
-RED_COL = 8
+
+# height of the font in pixels
+TEXT_PIXEL_HEIGHT = 20
+# the colour red in pyxel
+RED = 8
+# amount of x-border in pixels for the terms and conditions text
 TERMS_AND_CONDITIONS_BORDER = 80
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
 APP_HEIGHT = 768
 
+# load the logo text into a list + blank line + version text
 with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
 
+# load the terms and conditions text
 with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
     terms_and_conditions_text = f.readlines()
 
@@ -38,13 +43,13 @@ def text_centre_x(text: str) -> int:
 
 
 def get_vline_colour(show_vline: bool) -> int:
-    return int(show_vline) * RED_COL
+    return int(show_vline) * RED
 
 
 def wrap_text_for_border(text: str, border: int) -> str:
     max_pixel_width = APP_WIDTH - border * 2
     max_chars = floor(max_pixel_width / 12 + (1 / 6))
-    return textwrap.wrap(text, max_chars, replace_whitespace=False)
+    return textwrap.wrap(text, max_chars)
 
 
 TERMS_AND_CONDITIONS_TEXT = []
@@ -67,5 +72,5 @@ START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
 COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)
 TERMS_AND_CONDITIONS_TITLE = CenteredText("TERMS AND CONDITIONS", 20)
 ACCEPT_OR_DECLINE = CenteredText(
-    "(A)CCEPT" + " " * 20 + "(D)ECLINE", APP_HEIGHT - 60
+    "(A)CCEPT" + " " * 20 + "(D)ECLINE", APP_HEIGHT - 80
 )
