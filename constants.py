@@ -16,18 +16,13 @@ APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
 APP_HEIGHT = 768
 
-START_TEXT = "[PRESS ENTER TO START]"
-START_TEXT_Y = APP_HEIGHT - 120
-
-COPYRIGHT_TEXT = "(C) 2025 GRAVE MATTER"
-COPYRIGHT_TEXT_Y = APP_HEIGHT - 60
-
 with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
 
 TERMS_AND_CONDITIONS_TITLE = "TERMS AND CONDITIONS"
-TERMS_AND_CONDITIONS_BORDER = 120
+TERMS_AND_CONDITIONS_BORDER = 80
+ACCEPT_OR_DECLINE = "(A)ccept" + " " * 10 + "(D)ecline"
 
 with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
     terms_and_conditions_text = f.readlines()
@@ -63,4 +58,13 @@ for line in terms_and_conditions_text:
         split_text += [""]
     TERMS_AND_CONDITIONS_TEXT += split_text
 
-print(TERMS_AND_CONDITIONS_TEXT)
+
+class CenteredText:
+    def __init__(self, text: str, y: int):
+        self.text = text
+        self.x = text_centre_x(text)
+        self.y = y
+
+
+START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
+COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)

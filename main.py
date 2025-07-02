@@ -35,8 +35,6 @@ class App:
 
         # determine x-values for text
         self.logo_x = constants.text_centre_x(constants.LOGO[1])
-        self.start_text_x = constants.text_centre_x(constants.START_TEXT)
-        self.copyright_x = constants.text_centre_x(constants.COPYRIGHT_TEXT)
         self.t_and_c_title_x = constants.text_centre_x(
             constants.TERMS_AND_CONDITIONS_TITLE
         )
@@ -86,18 +84,18 @@ class App:
         # make the start text flash
         if helpers.flash_text(pyxel.frame_count):
             pyxel.text(
-                self.start_text_x,
-                constants.START_TEXT_Y,
-                constants.START_TEXT,
+                constants.START_TEXT.x,
+                constants.START_TEXT.y,
+                constants.START_TEXT.text,
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
 
         # copyright text
         pyxel.text(
-            self.copyright_x,
-            constants.COPYRIGHT_TEXT_Y,
-            constants.COPYRIGHT_TEXT,
+            constants.COPYRIGHT_TEXT.x,
+            constants.COPYRIGHT_TEXT.y,
+            constants.COPYRIGHT_TEXT.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
@@ -121,6 +119,14 @@ class App:
                 pyxel.COLOR_LIME,
                 self.bedstead,
             )
+
+        pyxel.text(
+            60,
+            constants.APP_HEIGHT - 60,
+            constants.ACCEPT_OR_DECLINE,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
 
     def _draw_recollector_terminal(self):
         pass
