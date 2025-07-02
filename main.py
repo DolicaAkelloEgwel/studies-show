@@ -1,5 +1,6 @@
 import argparse
 import math
+from enum import Enum
 
 import pyxel
 
@@ -7,7 +8,14 @@ import constants
 import helpers
 
 
+class State(Enum):
+    TITLE = 1
+    TERMS_AND_CONDITIONS = 2
+    TERMINAL = 3
+
+
 class App:
+
     def __init__(
         self,
         show_vline: bool,
@@ -30,16 +38,13 @@ class App:
             constants.TERMS_AND_CONDITIONS_TITLE
         )
 
-        self._show_title_screen = True
-        self._show_terms_and_conditions = False
-        self._show_recollector_terminal = False
+        self._state = State.TITLE
 
         pyxel.run(self.update, self.draw)
 
     def update(self):
-        if self._show_title_screen and pyxel.btnp(pyxel.KEY_RETURN):
-            self._show_title_screen = False
-            self._show_terms_and_conditions = True
+        if self._state == State.TITLE and pyxel.btnp(pyxel.KEY_RETURN):
+            self._state = State.TERMS_AND_CONDITIONS
 
     def _draw_title_screen(self):
         # draw the logo text
@@ -109,11 +114,11 @@ class App:
             self.vline_col,
         )
 
-        if self._show_title_screen:
+        if self._state == State.TITLE:
             self._draw_title_screen()
-        elif self._show_terms_and_conditions:
+        elif self._state == State.TERMS_AND_CONDITIONS:
             self._draw_terms_and_conditions()
-        elif self._show_recollector_terminal:
+        elif self._state == State.TERMINAL:
             self._draw_recollector_terminal()
 
 
