@@ -115,7 +115,7 @@ class App:
 
         for i, line in enumerate(constants.TERMS_AND_CONDITIONS_TEXT):
             pyxel.text(
-                20,
+                constants.TERMS_AND_CONDITIONS_BORDER,
                 60 + i * constants.LINE_Y_DISTANCE,
                 line,
                 pyxel.COLOR_LIME,
