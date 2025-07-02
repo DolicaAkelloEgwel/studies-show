@@ -4,13 +4,14 @@ from math import floor
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
-COMMANDS = ("search", "t-and-c", "help", "whats-new", "thanks")
+COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
 BLOCK_CHARACTER = "█"
 ASSETS_PATH = "assets"
 FONT_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
 LINE_Y_DISTANCE = 20
 TOP_LINE_Y = 40
 RED_COL = 8
+TERMS_AND_CONDITIONS_BORDER = 80
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
@@ -19,10 +20,6 @@ APP_HEIGHT = 768
 with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
-
-TERMS_AND_CONDITIONS_TITLE = "TERMS AND CONDITIONS"
-TERMS_AND_CONDITIONS_BORDER = 80
-ACCEPT_OR_DECLINE = "(A)ccept" + " " * 10 + "(D)ecline"
 
 with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
     terms_and_conditions_text = f.readlines()
@@ -68,3 +65,7 @@ class CenteredText:
 
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
 COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)
+TERMS_AND_CONDITIONS_TITLE = CenteredText("TERMS AND CONDITIONS", 20)
+ACCEPT_OR_DECLINE = CenteredText(
+    "(A)CCEPT" + " " * 20 + "(D)ECLINE", APP_HEIGHT - 60
+)
