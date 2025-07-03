@@ -7,14 +7,15 @@ APP_TITLE = "ЯECOLLECTOR " + VERSION
 COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
 BLOCK_CHARACTER = "█"
 ASSETS_PATH = "assets"
-FONT_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
+BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
+BOLD_BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-bold-20.bdf")
 
 # height of the font in pixels
 TEXT_PIXEL_HEIGHT = 20
 # the colour red in pyxel
 RED = 8
 # amount of x-border in pixels for the terms and conditions text
-TERMS_AND_CONDITIONS_BORDER = 80
+BORDER_TERMS_AND_CONDITIONS = 80
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
@@ -52,13 +53,13 @@ def wrap_text_for_border(text: str, border: int) -> str:
     return textwrap.wrap(text, max_chars)
 
 
-TERMS_AND_CONDITIONS_TEXT = []
+TEXT_TERMS_AND_CONDITIONS = []
 
 for line in terms_and_conditions_text:
-    split_text = wrap_text_for_border(line, TERMS_AND_CONDITIONS_BORDER)
+    split_text = wrap_text_for_border(line, BORDER_TERMS_AND_CONDITIONS)
     if len(split_text) == 0:
         split_text += [""]
-    TERMS_AND_CONDITIONS_TEXT += split_text
+    TEXT_TERMS_AND_CONDITIONS += split_text
 
 
 class CenteredText:
@@ -68,9 +69,16 @@ class CenteredText:
         self.y = y
 
 
+TERMS_TEXT_Y = int(
+    (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
+)
+
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
 COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)
-TERMS_AND_CONDITIONS_TITLE = CenteredText("TERMS AND CONDITIONS", 20)
+TERMS_AND_CONDITIONS_TITLE = CenteredText(
+    "TERMS AND CONDITIONS", TERMS_TEXT_Y // 2 - 10
+)
 ACCEPT_OR_DECLINE = CenteredText(
-    "(A)CCEPT" + " " * 20 + "(D)ECLINE", APP_HEIGHT - 80
+    "(A)CCEPT" + " " * 20 + "(D)ECLINE",
+    APP_HEIGHT - TERMS_TEXT_Y // 2 - 10,
 )
