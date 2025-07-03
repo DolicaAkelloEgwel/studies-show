@@ -28,7 +28,8 @@ class App:
         )
 
         # load retro computer-y font
-        self.bedstead = pyxel.Font(constants.FONT_PATH)
+        self.bedstead = pyxel.Font(constants.BEDSTEAD_PATH)
+        self.bold_bedstead = pyxel.Font(constants.BOLD_BEDSTEAD_PATH)
 
         # set colour for vertical centre line
         self.vline_col = constants.get_vline_colour(show_vline)
@@ -108,10 +109,10 @@ class App:
             self.bedstead,
         )
 
-        for i, line in enumerate(constants.TERMS_AND_CONDITIONS_TEXT):
+        for i, line in enumerate(constants.TEXT_TERMS_AND_CONDITIONS):
             pyxel.text(
-                constants.TERMS_AND_CONDITIONS_BORDER,
-                60 + i * constants.TEXT_PIXEL_HEIGHT,
+                constants.BORDER_TERMS_AND_CONDITIONS,
+                constants.TERMS_TEXT_Y + i * constants.TEXT_PIXEL_HEIGHT,
                 line,
                 pyxel.COLOR_LIME,
                 self.bedstead,
