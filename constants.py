@@ -26,10 +26,6 @@ with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
 
-# load the terms and conditions text
-with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
-    terms_and_conditions_text = f.readlines()
-
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
     return num_chars * 10 + (num_chars - 1) * 2
@@ -52,6 +48,10 @@ def wrap_text_for_border(text: str, border: int) -> str:
     max_chars = floor(max_pixel_width / 12 + (1 / 6))
     return textwrap.wrap(text, max_chars)
 
+
+# load the terms and conditions text
+with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
+    terms_and_conditions_text = f.readlines()
 
 TEXT_TERMS_AND_CONDITIONS = []
 

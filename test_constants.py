@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 import constants
 
@@ -24,6 +25,12 @@ class TestConstantsFunctions(unittest.TestCase):
 
     def test_given_two_char_string_then_centre_is_499(self):
         self.assertEqual(constants.text_centre_x("AA"), 499)
+
+    def test_given_453_pixel_border_then_max_chars_per_line_is_10(self):
+        text = "hello"
+        with patch("constants.textwrap.wrap") as mock_wrap:
+            constants.wrap_text_for_border(text, 453)
+        mock_wrap.assert_called_once_with(text, 10)
 
 
 if __name__ == "__main__":
