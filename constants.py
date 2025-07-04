@@ -6,6 +6,7 @@ VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
 COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
 BLOCK_CHARACTER = "█"
+
 ASSETS_PATH = "assets"
 BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
 BOLD_BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-bold-20.bdf")
@@ -28,10 +29,29 @@ LOGO = LOGO + ["", VERSION]
 
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
+    """Finds the width of the text in pixels given the number of characters.
+
+    Args:
+        num_chars (int): Number of characters in a string.
+
+    Returns:
+        int: Width of the string in pixels.
+    """
     return num_chars * 10 + (num_chars - 1) * 2
 
 
 def text_centre_x(text: str) -> int:
+    """Finds the x value that will centre text on the screen.
+
+    Args:
+        text (str): The text to be displayed.
+
+    Raises:
+        ValueError: When the string is empty.
+
+    Returns:
+        int: x-value to give to pyxel in order to centre the string.
+    """
     num_chars = len(text)
     if num_chars == 0:
         raise ValueError("String has length 0")
@@ -40,6 +60,16 @@ def text_centre_x(text: str) -> int:
 
 
 def get_vline_colour(show_vline: bool) -> int:
+    """Determines what colour the vertical line should be.
+
+    Args:
+        show_vline (bool): Bool that tells us whether or not the vertical line
+                           should be visible.
+
+    Returns:
+        int: Returns the pyxel red colour value when show_vline is True,
+             otherwise black is returned.
+    """
     return int(show_vline) * RED
 
 
