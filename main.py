@@ -26,6 +26,7 @@ class App:
             constants.APP_TITLE,
             quit_key=300,
         )
+        pyxel.colors[pyxel.COLOR_LIME] = 0x00FF7F
 
         # load retro computer-y font
         self.bedstead = pyxel.Font(constants.BEDSTEAD_PATH)
