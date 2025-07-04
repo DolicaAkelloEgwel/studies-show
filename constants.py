@@ -94,6 +94,12 @@ for line in terms_and_conditions_text:
 
 class CenteredText:
     def __init__(self, text: str, y: int):
+        """Simple object for storing info about centered text.
+
+        Args:
+            text (str): The text to be displayed.
+            y (int): The y-value for the string's position.
+        """
         self.text = text
         self.x = text_centre_x(text)
         self.y = y
