@@ -32,6 +32,14 @@ class TestConstantsFunctions(unittest.TestCase):
             constants.wrap_text_for_border(text, 453)
         mock_wrap.assert_called_once_with(text, 10)
 
+    def test_centered_text(self):
+        text = "hello"
+        y = 8
+        centered_text = constants.CenteredText(text, y)
+        self.assertEqual(text, centered_text.text)
+        self.assertEqual(y, centered_text.y)
+        self.assertEqual(constants.text_centre_x(text), centered_text.x)
+
 
 if __name__ == "__main__":
     unittest.main()

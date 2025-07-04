@@ -16,7 +16,7 @@ TEXT_PIXEL_HEIGHT = 20
 # the colour red in pyxel
 RED = 8
 # amount of x-border in pixels for the terms and conditions text
-BORDER_TERMS_AND_CONDITIONS = 80
+BORDER_TERMS_AND_CONDITIONS = 100
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
@@ -85,6 +85,7 @@ with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
 
 TEXT_TERMS_AND_CONDITIONS = []
 
+# create wrapped terms and conditions text
 for line in terms_and_conditions_text:
     split_text = wrap_text_for_border(line, BORDER_TERMS_AND_CONDITIONS)
     if len(split_text) == 0:
@@ -104,17 +105,23 @@ class CenteredText:
         self.x = text_centre_x(text)
         self.y = y
 
-
+# prepare text that will be centered in the different states
 TERMS_TEXT_Y = int(
     (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
 )
 
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
 COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)
-TERMS_AND_CONDITIONS_TITLE = CenteredText(
-    "TERMS AND CONDITIONS", TERMS_TEXT_Y // 2 - 10
-)
 ACCEPT_OR_DECLINE = CenteredText(
     "(A)CCEPT" + " " * 20 + "(D)ECLINE",
     APP_HEIGHT - TERMS_TEXT_Y // 2 - 10,
 )
+
+# creating some padding to make it look more title-ish
+padding = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
+padding = (padding - len("TERMS AND CONDITIONS")) // 2 - 1
+padding = "*" * padding
+TERMS_AND_CONDITIONS_TITLE = CenteredText(
+    padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
+)
+
