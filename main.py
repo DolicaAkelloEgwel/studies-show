@@ -26,6 +26,7 @@ class App:
             constants.APP_TITLE,
             quit_key=300,
         )
+        # swap out the default green for a more "terminal" green
         pyxel.colors[pyxel.COLOR_LIME] = 0x00FF7F
 
         # load retro computer-y font
@@ -110,6 +111,7 @@ class App:
             self.bedstead,
         )
 
+        # display the lines from the terms and conditions text
         for i, line in enumerate(constants.TEXT_TERMS_AND_CONDITIONS):
             pyxel.text(
                 constants.BORDER_TERMS_AND_CONDITIONS,
@@ -119,6 +121,7 @@ class App:
                 self.bedstead,
             )
 
+        # display the accept or decline text at the bottom
         pyxel.text(
             constants.ACCEPT_OR_DECLINE.x,
             constants.ACCEPT_OR_DECLINE.y,
