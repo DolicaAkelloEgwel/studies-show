@@ -11,7 +11,7 @@ import helpers
 class State(Enum):
     TITLE = 1
     TERMS_AND_CONDITIONS = 2
-    TERMINAL = 3
+    MAIN_MENU = 3
 
 
 class App:
@@ -50,11 +50,11 @@ class App:
 
     def _update_terms_and_conditions(self):
         if pyxel.btnp(pyxel.KEY_A):
-            self._state = State.TERMINAL
+            self._state = State.MAIN_MENU
         if pyxel.btnp(pyxel.KEY_D):
             self._state = State.TITLE
 
-    def _update_terminal(self):
+    def _update_main_menu(self):
         pass
 
     def update(self):
@@ -62,8 +62,8 @@ class App:
             self._update_title()
         elif self._state == State.TERMS_AND_CONDITIONS:
             self._update_terms_and_conditions()
-        elif self._state == State.TERMINAL:
-            self._update_terminal()
+        elif self._state == State.MAIN_MENU:
+            self._update_main_menu()
 
     def _draw_title_screen(self):
         # draw the logo text
@@ -130,7 +130,7 @@ class App:
             self.bedstead,
         )
 
-    def _draw_recollector_terminal(self):
+    def _draw_main_menu(self):
         pass
 
     def draw(self):
@@ -150,8 +150,8 @@ class App:
             self._draw_title_screen()
         elif self._state == State.TERMS_AND_CONDITIONS:
             self._draw_terms_and_conditions()
-        elif self._state == State.TERMINAL:
-            self._draw_recollector_terminal()
+        elif self._state == State.MAIN_MENU:
+            self._draw_main_menu()
 
 
 parser = argparse.ArgumentParser()
