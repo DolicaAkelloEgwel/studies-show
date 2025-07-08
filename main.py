@@ -55,7 +55,8 @@ class App:
             self._state = State.TITLE
 
     def _update_main_menu(self):
-        pass
+        if pyxel.btnp(pyxel.KEY_RETURN):
+            pass
 
     def update(self):
         if self._state == State.TITLE:
