@@ -27,6 +27,8 @@ with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
 
+PRINTER_NAME = "M834"
+
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
     """Finds the width of the text in pixels given the number of characters.
@@ -105,6 +107,7 @@ class CenteredText:
         self.x = text_centre_x(text)
         self.y = y
 
+
 # prepare text that will be centered in the different states
 TERMS_TEXT_Y = int(
     (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
@@ -124,4 +127,3 @@ padding = "*" * padding
 TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
-
