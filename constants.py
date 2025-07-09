@@ -134,6 +134,17 @@ class MenuCenteredText(CenteredText):
         new_state: int,
         selected: bool = False,
     ):
+        """Object for storing menu item info.
+
+        Args:
+            text (str): The text that gets displayed for the menu item.
+            description (str): A description of the menu item.
+            y (int): The y-value for the text position.
+            new_state (int): The new state value for when the menu option has
+                             been selected.
+            selected (bool, optional): Whether or not this item has been
+                                       selected. Defaults to False.
+        """
         super().__init__(text, y)
         self._selected = selected
         self._description_text = description
@@ -235,6 +246,7 @@ MENU_OPTIONS[0]._selected = True
 
 
 def move_main_menu_selection_up():
+    """Move the selection on the main menu up."""
     if MENU_OPTIONS[0].selected:
         # do nothing if the top item is selected
         return
@@ -249,6 +261,7 @@ def move_main_menu_selection_up():
 
 
 def move_main_menu_selection_down():
+    """Move the selection on the main menu down."""
     if MENU_OPTIONS[-1].selected:
         # do nothing if the bottom item is selected
         return
@@ -262,6 +275,7 @@ def move_main_menu_selection_down():
 
 
 def reset_main_menu():
+    """Reset the main menu by making all but the first item unselected."""
     MENU_OPTIONS[0].selected = True
     for i in range(1, len(MENU_OPTIONS)):
         MENU_OPTIONS[i].selected = False
