@@ -1,17 +1,10 @@
 import argparse
 import math
-from enum import Enum
 
 import pyxel
 
 import constants
 import helpers
-
-
-class State(Enum):
-    TITLE = 1
-    TERMS_AND_CONDITIONS = 2
-    MAIN_MENU = 3
 
 
 class App:
@@ -40,34 +33,36 @@ class App:
         self.logo_x = constants.text_centre_x(constants.LOGO[1])
 
         # set initial state
-        self._state = State.TITLE
+        self._state = constants.State.TITLE
 
         pyxel.run(self.update, self.draw)
 
     def _update_title(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
-            self._state = State.TERMS_AND_CONDITIONS
+            self._state = constants.State.TERMS_AND_CONDITIONS
 
     def _update_terms_and_conditions(self):
         if pyxel.btnp(pyxel.KEY_A):
-            self._state = State.MAIN_MENU
+            self._state = constants.State.MAIN_MENU
         if pyxel.btnp(pyxel.KEY_D):
-            self._state = State.TITLE
+            self._state = constants.State.TITLE
 
     def _update_main_menu(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
-            pass
+            for item in constants.MENU_OPTIONS:
+                if item.selected:
+                    self._state = item.new_state
         elif pyxel.btnp(pyxel.KEY_UP):
             constants.move_selection_up()
         elif pyxel.btnp(pyxel.KEY_DOWN):
             constants.move_selection_down()
 
     def update(self):
-        if self._state == State.TITLE:
+        if self._state == constants.State.TITLE:
             self._update_title()
-        elif self._state == State.TERMS_AND_CONDITIONS:
+        elif self._state == constants.State.TERMS_AND_CONDITIONS:
             self._update_terms_and_conditions()
-        elif self._state == State.MAIN_MENU:
+        elif self._state == constants.State.MAIN_MENU:
             self._update_main_menu()
 
     def _draw_title_screen(self):
@@ -138,6 +133,7 @@ class App:
     def _draw_main_menu(self):
 
         for i, line in enumerate(constants.LOGO):
+            # draw the logo at the top of the menu screen
             pyxel.text(
                 self.logo_x,
                 constants.MENU_LOGO_Y + ((i * constants.TEXT_PIXEL_HEIGHT)),
@@ -148,9 +144,11 @@ class App:
 
         for item in constants.MENU_OPTIONS:
             if item._selected:
+                # if an item is selected then draw a rectangle behind it
                 pyxel.rect(
                     0, item.y - 15, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
                 )
+                # show a description of this menu item near the bottom of the screen
                 pyxel.text(
                     item._description_x,
                     constants.APP_HEIGHT - constants.MENU_DESCRIPTION_OFFSET,
@@ -158,6 +156,7 @@ class App:
                     pyxel.COLOR_LIME,
                     self.bedstead,
                 )
+            # show the menu item text
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
     def draw(self):
@@ -173,11 +172,11 @@ class App:
             self.vline_col,
         )
 
-        if self._state == State.TITLE:
+        if self._state == constants.State.TITLE:
             self._draw_title_screen()
-        elif self._state == State.TERMS_AND_CONDITIONS:
+        elif self._state == constants.State.TERMS_AND_CONDITIONS:
             self._draw_terms_and_conditions()
-        elif self._state == State.MAIN_MENU:
+        elif self._state == constants.State.MAIN_MENU:
             self._draw_main_menu()
 
 

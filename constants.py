@@ -1,6 +1,18 @@
 import os
 import textwrap
+from enum import Enum
 from math import floor
+
+
+class State(Enum):
+    TITLE = 1
+    TERMS_AND_CONDITIONS = 2
+    MAIN_MENU = 3
+    SEARCH = 4
+    HELP = 5
+    WHATS_NEW = 6
+    THANKS = 7
+
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
@@ -113,16 +125,26 @@ class CenteredText:
 
 class MenuCenteredText(CenteredText):
     def __init__(
-        self, text: str, description: str, y: int, selected: bool = False
+        self,
+        text: str,
+        description: str,
+        y: int,
+        new_state: int,
+        selected: bool = False,
     ):
         super().__init__(text, y)
         self._selected = selected
         self._description_text = description
         self._description_x = text_centre_x(description)
+        self._new_state = new_state
 
     @property
     def selected(self):
         return self._selected
+
+    @property
+    def new_state(self):
+        return self._new_state
 
     @selected.setter
     def selected(self, selected):
@@ -165,11 +187,15 @@ REMAINING_MENU_Y = APP_HEIGHT - MENU_LOGO_PIXEL_HEIGHT
 
 # menu items and their descriptions
 MENU_OPTIONS = [
-    ("SEARCH", "Search the database for an article or paper."),
-    ("HELP", "See the help info."),
-    ("WHAT'S NEW", "See the new features in our latest version"),
-    ("THANKS", "A shout-out to those who have helped."),
-    ("QUIT", "Return to the dancing logo screen."),
+    ("SEARCH", "Search the database for an article or paper.", State.SEARCH),
+    ("HELP", "See the help info.", State.HELP),
+    (
+        "WHAT'S NEW",
+        "See the new features in our latest version",
+        State.WHATS_NEW,
+    ),
+    ("THANKS", "A shout-out to those who have helped.", State.THANKS),
+    ("QUIT", "Return to the dancing logo screen.", State.TITLE),
 ]
 N_MENU_OPTIONS = len(MENU_OPTIONS)
 
@@ -186,12 +212,15 @@ MENU_ITEM_Y_OFFSET = (
 
 MENU_OPTIONS = [
     MenuCenteredText(
-        text[0], text[1], MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP)
+        option[0],
+        option[1],
+        MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP),
+        option[2],
     )
-    for i, text in enumerate(MENU_OPTIONS)
+    for i, option in enumerate(MENU_OPTIONS)
 ]
 
-# start with the first item being selected
+# start with the first menu item being selected
 MENU_OPTIONS[0]._selected = True
 
 
