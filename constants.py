@@ -6,7 +6,7 @@ VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
 BLOCK_CHARACTER = "█"
 SELECTED_CHARACTER = "▷ "
-MENU_LOGO_Y = 50
+MENU_LOGO_Y = 100
 
 ASSETS_PATH = "assets"
 BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
@@ -107,6 +107,19 @@ class CenteredText:
         self.y = y
 
 
+class MenuCenteredText(CenteredText):
+    def __init__(self, text: str, y: int, selected: bool = False):
+        super().__init__(text, y)
+        self._selected = selected
+
+    @property
+    def color(self) -> int:
+        if self._selected:
+            return 0
+        else:
+            return 11
+
+
 def _centre_block_of_text(text: list[str], line_height: int) -> int:
     return int((APP_HEIGHT - (line_height * len(text))) * 0.5)
 
@@ -131,14 +144,27 @@ TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
 
+MENU_LOGO_PIXEL_HEIGHT = (2 * MENU_LOGO_Y) + (TEXT_PIXEL_HEIGHT * len(LOGO))
+REMAINING_MENU_Y = APP_HEIGHT - MENU_LOGO_PIXEL_HEIGHT
+
 
 MENU_OPTIONS = ["SEARCH", "HELP", "WHAT'S NEW", "THANKS", "QUIT"]
 N_MENU_OPTIONS = len(MENU_OPTIONS)
+
 MENU_ITEM_GAP = 50
 MENU_OPTIONS_PIXEL_HEIGHT = (TEXT_PIXEL_HEIGHT * N_MENU_OPTIONS) + (
     (N_MENU_OPTIONS - 1) * (MENU_ITEM_GAP - TEXT_PIXEL_HEIGHT)
 )
+
+OFFSET = (
+    floor((REMAINING_MENU_Y - MENU_LOGO_PIXEL_HEIGHT) // 2)
+    + MENU_LOGO_PIXEL_HEIGHT
+    + 30
+)
+
+
 MENU_OPTIONS = [
-    CenteredText(text, MENU_Y + 100 + (i * MENU_ITEM_GAP))
+    MenuCenteredText(text, OFFSET + (i * MENU_ITEM_GAP))
     for i, text in enumerate(MENU_OPTIONS)
 ]
+MENU_OPTIONS[2]._selected = True

@@ -143,9 +143,11 @@ class App:
             )
 
         for item in constants.MENU_OPTIONS:
-            pyxel.text(
-                item.x, item.y, item.text, pyxel.COLOR_LIME, self.bedstead
-            )
+            if item._selected:
+                pyxel.rect(
+                    0, item.y - 15, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
+                )
+            pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
     def draw(self):
         # clear screen
