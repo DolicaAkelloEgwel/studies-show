@@ -151,6 +151,13 @@ class App:
                 pyxel.rect(
                     0, item.y - 15, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
                 )
+                pyxel.text(
+                    item._description_x,
+                    constants.APP_HEIGHT - constants.MENU_DESCRIPTION_OFFSET,
+                    item._description_text,
+                    pyxel.COLOR_LIME,
+                    self.bedstead,
+                )
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
     def draw(self):

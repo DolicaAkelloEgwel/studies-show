@@ -4,9 +4,13 @@ from math import floor
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
-BLOCK_CHARACTER = "█"
+
 SELECTED_CHARACTER = "▷ "
+
+# how far down the menu screen the first line of the logo appears
 MENU_LOGO_Y = 100
+# offset for the menu description text that appears on the bottom
+MENU_DESCRIPTION_OFFSET = 40
 
 ASSETS_PATH = "assets"
 BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
@@ -108,9 +112,13 @@ class CenteredText:
 
 
 class MenuCenteredText(CenteredText):
-    def __init__(self, text: str, y: int, selected: bool = False):
+    def __init__(
+        self, text: str, description: str, y: int, selected: bool = False
+    ):
         super().__init__(text, y)
         self._selected = selected
+        self._description_text = description
+        self._description_x = text_centre_x(description)
 
     @property
     def selected(self):
@@ -155,8 +163,14 @@ TERMS_AND_CONDITIONS_TITLE = CenteredText(
 MENU_LOGO_PIXEL_HEIGHT = (2 * MENU_LOGO_Y) + (TEXT_PIXEL_HEIGHT * len(LOGO))
 REMAINING_MENU_Y = APP_HEIGHT - MENU_LOGO_PIXEL_HEIGHT
 
-
-MENU_OPTIONS = ["SEARCH", "HELP", "WHAT'S NEW", "THANKS", "QUIT"]
+# menu items and their descriptions
+MENU_OPTIONS = [
+    ("SEARCH", "Search the database for an article or paper."),
+    ("HELP", "See the help info."),
+    ("WHAT'S NEW", "See the new features in our latest version"),
+    ("THANKS", "A shout-out to those who have helped."),
+    ("QUIT", "Return to the dancing logo screen."),
+]
 N_MENU_OPTIONS = len(MENU_OPTIONS)
 
 MENU_ITEM_GAP = 50
@@ -167,23 +181,27 @@ MENU_OPTIONS_PIXEL_HEIGHT = (TEXT_PIXEL_HEIGHT * N_MENU_OPTIONS) + (
 MENU_ITEM_Y_OFFSET = (
     floor((REMAINING_MENU_Y - MENU_LOGO_PIXEL_HEIGHT) // 2)
     + MENU_LOGO_PIXEL_HEIGHT
-    + 30
 )
 
 
 MENU_OPTIONS = [
-    MenuCenteredText(text, MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP))
+    MenuCenteredText(
+        text[0], text[1], MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP)
+    )
     for i, text in enumerate(MENU_OPTIONS)
 ]
-MENU_OPTIONS[-1]._selected = True
+
+# start with the first item being selected
+MENU_OPTIONS[0]._selected = True
 
 
 def move_selection_up():
     if MENU_OPTIONS[0].selected:
+        # do nothing if the top item is selected
         return
     for i in range(1, len(MENU_OPTIONS)):
         if MENU_OPTIONS[i].selected:
-            # because it's *~pythonic~*
+            # swapping the values because it's *~pythonic~*
             MENU_OPTIONS[i].selected, MENU_OPTIONS[i - 1].selected = (
                 MENU_OPTIONS[i - 1].selected,
                 MENU_OPTIONS[i].selected,
@@ -193,6 +211,7 @@ def move_selection_up():
 
 def move_selection_down():
     if MENU_OPTIONS[-1].selected:
+        # do nothing if the bottom item is selected
         return
     for i in range(len(MENU_OPTIONS) - 1):
         if MENU_OPTIONS[i].selected:
