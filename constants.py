@@ -4,7 +4,6 @@ from math import floor
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
-COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
 BLOCK_CHARACTER = "█"
 
 ASSETS_PATH = "assets"
@@ -105,6 +104,7 @@ class CenteredText:
         self.x = text_centre_x(text)
         self.y = y
 
+
 # prepare text that will be centered in the different states
 TERMS_TEXT_Y = int(
     (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
@@ -125,3 +125,7 @@ TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
 
+MENU_OPTIONS = ["SEARCH", "HELP", "WHAT'S NEW", "THANKS", "QUIT"]
+MENU_OPTIONS = [
+    CenteredText(text, i * 20) for i, text in enumerate(MENU_OPTIONS)
+]

@@ -132,7 +132,11 @@ class App:
         )
 
     def _draw_main_menu(self):
-        pass
+
+        for item in constants.MENU_OPTIONS:
+            pyxel.text(
+                item.x, item.y, item.text, pyxel.COLOR_LIME, self.bedstead
+            )
 
     def draw(self):
         # clear screen
