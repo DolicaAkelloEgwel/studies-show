@@ -44,6 +44,8 @@ with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
 LOGO = LOGO + ["", VERSION]
 
+PRINTER_NAME = "M834"
+
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
     """Finds the width of the text in pixels given the number of characters.
