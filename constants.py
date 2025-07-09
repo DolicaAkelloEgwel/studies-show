@@ -234,7 +234,7 @@ MENU_OPTIONS = [
 MENU_OPTIONS[0]._selected = True
 
 
-def move_selection_up():
+def move_main_menu_selection_up():
     if MENU_OPTIONS[0].selected:
         # do nothing if the top item is selected
         return
@@ -248,7 +248,7 @@ def move_selection_up():
             return
 
 
-def move_selection_down():
+def move_main_menu_selection_down():
     if MENU_OPTIONS[-1].selected:
         # do nothing if the bottom item is selected
         return
@@ -261,7 +261,7 @@ def move_selection_down():
             return
 
 
-def reset_selected_menu_item():
+def reset_main_menu():
     MENU_OPTIONS[0].selected = True
     for i in range(1, len(MENU_OPTIONS)):
         MENU_OPTIONS[i].selected = False

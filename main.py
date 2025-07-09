@@ -52,12 +52,12 @@ class App:
             for item in constants.MENU_OPTIONS:
                 if item.selected:
                     self._state = item.new_state
-                    constants.reset_selected_menu_item()
+                    constants.reset_main_menu()
                     return
         elif pyxel.btnp(pyxel.KEY_UP):
-            constants.move_selection_up()
+            constants.move_main_menu_selection_up()
         elif pyxel.btnp(pyxel.KEY_DOWN):
-            constants.move_selection_down()
+            constants.move_main_menu_selection_down()
 
     def update(self):
         if self._state == constants.State.TITLE:
