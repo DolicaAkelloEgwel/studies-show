@@ -259,3 +259,9 @@ def move_selection_down():
                 MENU_OPTIONS[i].selected,
             )
             return
+
+
+def reset_selected_menu_item():
+    MENU_OPTIONS[0].selected = True
+    for i in range(1, len(MENU_OPTIONS)):
+        MENU_OPTIONS[i].selected = False

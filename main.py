@@ -52,6 +52,8 @@ class App:
             for item in constants.MENU_OPTIONS:
                 if item.selected:
                     self._state = item.new_state
+                    constants.reset_selected_menu_item()
+                    return
         elif pyxel.btnp(pyxel.KEY_UP):
             constants.move_selection_up()
         elif pyxel.btnp(pyxel.KEY_DOWN):
