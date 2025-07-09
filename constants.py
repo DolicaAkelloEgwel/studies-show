@@ -139,11 +139,19 @@ class MenuCenteredText(CenteredText):
         self._new_state = new_state
 
     @property
-    def selected(self):
+    def selected(self) -> bool:
         return self._selected
 
     @property
-    def new_state(self):
+    def description_text(self) -> str:
+        return self._description_text
+
+    @property
+    def description_x(self) -> int:
+        return self._description_x
+
+    @property
+    def new_state(self) -> int:
         return self._new_state
 
     @selected.setter

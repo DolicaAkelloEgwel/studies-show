@@ -143,16 +143,16 @@ class App:
             )
 
         for item in constants.MENU_OPTIONS:
-            if item._selected:
+            if item.selected:
                 # if an item is selected then draw a rectangle behind it
                 pyxel.rect(
                     0, item.y - 15, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
                 )
                 # show a description of this menu item near the bottom of the screen
                 pyxel.text(
-                    item._description_x,
+                    item.description_x,
                     constants.APP_HEIGHT - constants.MENU_DESCRIPTION_OFFSET,
-                    item._description_text,
+                    item.description_text,
                     pyxel.COLOR_LIME,
                     self.bedstead,
                 )
