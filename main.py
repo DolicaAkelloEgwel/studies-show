@@ -136,7 +136,7 @@ class App:
             # draw the logo at the top of the menu screen
             pyxel.text(
                 self.logo_x,
-                constants.MENU_LOGO_Y + ((i * constants.TEXT_PIXEL_HEIGHT)),
+                constants.MENU_LOGO_Y + (i * constants.TEXT_PIXEL_HEIGHT),
                 line,
                 pyxel.COLOR_LIME,
                 self.bedstead,
@@ -146,7 +146,7 @@ class App:
             if item.selected:
                 # if an item is selected then draw a rectangle behind it
                 pyxel.rect(
-                    0, item.y - 15, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
+                    0, item.y - 16, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
                 )
                 # show a description of this menu item near the bottom of the screen
                 pyxel.text(
