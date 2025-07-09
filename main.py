@@ -57,6 +57,10 @@ class App:
     def _update_main_menu(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
             pass
+        elif pyxel.btnp(pyxel.KEY_UP):
+            constants.move_selection_up()
+        elif pyxel.btnp(pyxel.KEY_DOWN):
+            constants.move_selection_down()
 
     def update(self):
         if self._state == State.TITLE:

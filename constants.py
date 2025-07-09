@@ -116,6 +116,10 @@ class MenuCenteredText(CenteredText):
     def selected(self):
         return self._selected
 
+    @selected.setter
+    def selected(self, selected):
+        self._selected = selected
+
     @property
     def color(self) -> int:
         if self._selected:
@@ -171,4 +175,17 @@ MENU_OPTIONS = [
     MenuCenteredText(text, MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP))
     for i, text in enumerate(MENU_OPTIONS)
 ]
-MENU_OPTIONS[0]._selected = True
+MENU_OPTIONS[-1]._selected = True
+
+
+def move_selection_up():
+    if MENU_OPTIONS[0].selected:
+        return
+    for i in range(1, len(MENU_OPTIONS)):
+        if MENU_OPTIONS[i].selected:
+            MENU_OPTIONS[i].selected = False
+            MENU_OPTIONS[i - 1].selected = True
+
+
+def move_selection_down():
+    pass
