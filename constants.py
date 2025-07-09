@@ -183,9 +183,21 @@ def move_selection_up():
         return
     for i in range(1, len(MENU_OPTIONS)):
         if MENU_OPTIONS[i].selected:
-            MENU_OPTIONS[i].selected = False
-            MENU_OPTIONS[i - 1].selected = True
+            # because it's *~pythonic~*
+            MENU_OPTIONS[i].selected, MENU_OPTIONS[i - 1].selected = (
+                MENU_OPTIONS[i - 1].selected,
+                MENU_OPTIONS[i].selected,
+            )
+            return
 
 
 def move_selection_down():
-    pass
+    if MENU_OPTIONS[-1].selected:
+        return
+    for i in range(len(MENU_OPTIONS) - 1):
+        if MENU_OPTIONS[i].selected:
+            MENU_OPTIONS[i].selected, MENU_OPTIONS[i + 1].selected = (
+                MENU_OPTIONS[i + 1].selected,
+                MENU_OPTIONS[i].selected,
+            )
+            return
