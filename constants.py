@@ -113,6 +113,10 @@ class MenuCenteredText(CenteredText):
         self._selected = selected
 
     @property
+    def selected(self):
+        return self._selected
+
+    @property
     def color(self) -> int:
         if self._selected:
             return 0
@@ -156,7 +160,7 @@ MENU_OPTIONS_PIXEL_HEIGHT = (TEXT_PIXEL_HEIGHT * N_MENU_OPTIONS) + (
     (N_MENU_OPTIONS - 1) * (MENU_ITEM_GAP - TEXT_PIXEL_HEIGHT)
 )
 
-OFFSET = (
+MENU_ITEM_Y_OFFSET = (
     floor((REMAINING_MENU_Y - MENU_LOGO_PIXEL_HEIGHT) // 2)
     + MENU_LOGO_PIXEL_HEIGHT
     + 30
@@ -164,7 +168,7 @@ OFFSET = (
 
 
 MENU_OPTIONS = [
-    MenuCenteredText(text, OFFSET + (i * MENU_ITEM_GAP))
+    MenuCenteredText(text, MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP))
     for i, text in enumerate(MENU_OPTIONS)
 ]
-MENU_OPTIONS[2]._selected = True
+MENU_OPTIONS[0]._selected = True
