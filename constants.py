@@ -5,6 +5,8 @@ from math import floor
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
 BLOCK_CHARACTER = "█"
+SELECTED_CHARACTER = "▷ "
+MENU_LOGO_Y = 50
 
 ASSETS_PATH = "assets"
 BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
@@ -105,9 +107,13 @@ class CenteredText:
         self.y = y
 
 
+def _centre_block_of_text(text: list[str], line_height: int) -> int:
+    return int((APP_HEIGHT - (line_height * len(text))) * 0.5)
+
+
 # prepare text that will be centered in the different states
-TERMS_TEXT_Y = int(
-    (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
+TERMS_TEXT_Y = _centre_block_of_text(
+    TEXT_TERMS_AND_CONDITIONS, TEXT_PIXEL_HEIGHT
 )
 
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
@@ -125,7 +131,14 @@ TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
 
+
 MENU_OPTIONS = ["SEARCH", "HELP", "WHAT'S NEW", "THANKS", "QUIT"]
+N_MENU_OPTIONS = len(MENU_OPTIONS)
+MENU_ITEM_GAP = 50
+MENU_OPTIONS_PIXEL_HEIGHT = (TEXT_PIXEL_HEIGHT * N_MENU_OPTIONS) + (
+    (N_MENU_OPTIONS - 1) * (MENU_ITEM_GAP - TEXT_PIXEL_HEIGHT)
+)
 MENU_OPTIONS = [
-    CenteredText(text, i * 20) for i, text in enumerate(MENU_OPTIONS)
+    CenteredText(text, MENU_Y + 100 + (i * MENU_ITEM_GAP))
+    for i, text in enumerate(MENU_OPTIONS)
 ]

@@ -133,6 +133,15 @@ class App:
 
     def _draw_main_menu(self):
 
+        for i, line in enumerate(constants.LOGO):
+            pyxel.text(
+                self.logo_x,
+                constants.MENU_LOGO_Y + ((i * constants.TEXT_PIXEL_HEIGHT)),
+                line,
+                pyxel.COLOR_LIME,
+                self.bedstead,
+            )
+
         for item in constants.MENU_OPTIONS:
             pyxel.text(
                 item.x, item.y, item.text, pyxel.COLOR_LIME, self.bedstead
