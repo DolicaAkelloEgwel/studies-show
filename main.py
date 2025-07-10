@@ -1,5 +1,6 @@
 import argparse
 import math
+import time
 
 import pyxel
 
@@ -35,29 +36,49 @@ class App:
         # set initial state
         self._state = constants.State.TITLE
 
+        # start timer
+        self.start_time = None
+
         pyxel.run(self.update, self.draw)
+
+    def _idle_limit(self):
+        return time.time() - self.start_time >= constants.IDLE_LIMIT
+
+    def _restart_timer(self):
+        self.start_time = time.time()
 
     def _update_title(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
+            self._restart_timer()
             self._state = constants.State.TERMS_AND_CONDITIONS
 
     def _update_terms_and_conditions(self):
         if pyxel.btnp(pyxel.KEY_A):
             self._state = constants.State.MAIN_MENU
-        if pyxel.btnp(pyxel.KEY_D):
+        elif pyxel.btnp(pyxel.KEY_D):
+            self._state = constants.State.TITLE
+        elif self._idle_limit():
+            self._restart_timer()
             self._state = constants.State.TITLE
 
     def _update_main_menu(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
             for item in constants.MENU_OPTIONS:
                 if item.selected:
+                    self._restart_timer()
                     self._state = item.new_state
                     constants.reset_main_menu()
                     return
         elif pyxel.btnp(pyxel.KEY_UP):
+            self._restart_timer()
             constants.move_main_menu_selection_up()
         elif pyxel.btnp(pyxel.KEY_DOWN):
+            self._restart_timer()
             constants.move_main_menu_selection_down()
+        elif self._idle_limit():
+            self._restart_timer()
+            constants.reset_main_menu()
+            self._state = constants.State.TITLE
 
     def update(self):
         if self._state == constants.State.TITLE:
@@ -150,7 +171,7 @@ class App:
                 pyxel.rect(
                     0, item.y - 16, constants.APP_WIDTH, 50, pyxel.COLOR_LIME
                 )
-                # show a description of this menu item near the bottom of the screen
+                # show a description of this menu item near the bottom
                 pyxel.text(
                     item.description_x,
                     constants.APP_HEIGHT - constants.MENU_DESCRIPTION_OFFSET,
