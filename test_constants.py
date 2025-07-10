@@ -5,6 +5,10 @@ import constants
 
 
 class TestConstantsFunctions(unittest.TestCase):
+    def tearDown(self):
+        # reset menu after each test
+        constants.reset_main_menu()
+
     def test_given_true_then_vline_is_red(self):
         self.assertEqual(constants.get_vline_colour(True), 8)
 
@@ -41,17 +45,29 @@ class TestConstantsFunctions(unittest.TestCase):
         self.assertEqual(constants.text_centre_x(text), centered_text.x)
 
     def test_first_main_menu_option_is_selected_by_default(self):
+        # check top is selected
         self.assertTrue(constants.MENU_OPTIONS[0].selected)
+        # check remainder aren't selected
+        for i in range(1, len(constants.MENU_OPTIONS)):
+            self.assertFalse(constants.MENU_OPTIONS[i].selected)
 
     def test_no_change_when_move_main_menu_selection_up_and_already_at_top(
         self,
     ):
-        constants.move_main_menu_selection_up()
+        # check top is selected
         self.assertTrue(constants.MENU_OPTIONS[0].selected)
+
+        constants.move_main_menu_selection_up()
+
+        # check top is still selected
+        self.assertTrue(constants.MENU_OPTIONS[0].selected)
+
+        # check everything else isn't selected
         for i in range(1, len(constants.MENU_OPTIONS)):
             self.assertFalse(constants.MENU_OPTIONS[i].selected)
 
     def test_menu_selection_moves_up(self):
+        # make second item the selected one
         (
             constants.MENU_OPTIONS[0].selected,
             constants.MENU_OPTIONS[1].selected,
@@ -66,9 +82,49 @@ class TestConstantsFunctions(unittest.TestCase):
         # move selection up
         constants.move_main_menu_selection_up()
 
-        # test new state
+        # test first item is now selected again
         self.assertTrue(constants.MENU_OPTIONS[0].selected)
-        self.assertFalse(constants.MENU_OPTIONS[1].selected)
+        # check everything else isn't selected
+        for i in range(1, len(constants.MENU_OPTIONS)):
+            self.assertFalse(constants.MENU_OPTIONS[i].selected)
+
+    def test_no_change_when_move_main_menu_selection_down_and_at_bottom(
+        self,
+    ):
+        # make last item the selected one
+        (
+            constants.MENU_OPTIONS[0].selected,
+            constants.MENU_OPTIONS[-1].selected,
+        ) = (
+            constants.MENU_OPTIONS[-1].selected,
+            constants.MENU_OPTIONS[0].selected,
+        )
+        # test the swap
+        self.assertFalse(constants.MENU_OPTIONS[0].selected)
+        self.assertTrue(constants.MENU_OPTIONS[-1].selected)
+
+        # move selection down
+        constants.move_main_menu_selection_down()
+
+        # check bottom option is still selected
+        self.assertTrue(constants.MENU_OPTIONS[-1].selected)
+        # check everything else isn't selected
+        for i in range(len(constants.MENU_OPTIONS) - 1):
+            self.assertFalse(constants.MENU_OPTIONS[i].selected)
+
+    def test_menu_selection_moves_down(self):
+        # check first is selected
+        self.assertTrue(constants.MENU_OPTIONS[0].selected)
+
+        # move selection down
+        constants.move_main_menu_selection_down()
+
+        # check second is selection
+        self.assertTrue(constants.MENU_OPTIONS[1].selected)
+        # check everything else is unselected
+        self.assertFalse(constants.MENU_OPTIONS[0].selected)
+        for i in range(2, len(constants.MENU_OPTIONS)):
+            self.assertFalse(constants.MENU_OPTIONS[i].selected)
 
 
 if __name__ == "__main__":
