@@ -1,11 +1,28 @@
 import os
 import textwrap
+from enum import Enum
 from math import floor
+
+
+class State(Enum):
+    TITLE = 1
+    TERMS_AND_CONDITIONS = 2
+    MAIN_MENU = 3
+    SEARCH = 4
+    HELP = 5
+    WHATS_NEW = 6
+    THANKS = 7
+
 
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
-COMMANDS = ("Search", "Help", "What's New", "Thanks", "Quit")
-BLOCK_CHARACTER = "█"
+
+SELECTED_CHARACTER = "▷ "
+
+# how far down the menu screen the first line of the logo appears
+MENU_LOGO_Y = 100
+# offset for the menu description text that appears on the bottom
+MENU_DESCRIPTION_OFFSET = 40
 
 ASSETS_PATH = "assets"
 BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-20.bdf")
@@ -108,9 +125,67 @@ class CenteredText:
         self.y = y
 
 
+class MenuCenteredText(CenteredText):
+    def __init__(
+        self,
+        text: str,
+        description: str,
+        y: int,
+        new_state: int,
+        selected: bool = False,
+    ):
+        """Object for storing menu item info.
+
+        Args:
+            text (str): The text that gets displayed for the menu item.
+            description (str): A description of the menu item.
+            y (int): The y-value for the text position.
+            new_state (int): The new state value for when the menu option has
+                             been selected.
+            selected (bool, optional): Whether or not this item has been
+                                       selected. Defaults to False.
+        """
+        super().__init__(text, y)
+        self._selected = selected
+        self._description_text = description
+        self._description_x = text_centre_x(description)
+        self._new_state = new_state
+
+    @property
+    def selected(self) -> bool:
+        return self._selected
+
+    @property
+    def description_text(self) -> str:
+        return self._description_text
+
+    @property
+    def description_x(self) -> int:
+        return self._description_x
+
+    @property
+    def new_state(self) -> int:
+        return self._new_state
+
+    @selected.setter
+    def selected(self, selected):
+        self._selected = selected
+
+    @property
+    def color(self) -> int:
+        if self._selected:
+            return 0
+        else:
+            return 11
+
+
+def _centre_block_of_text(text: list[str], line_height: int) -> int:
+    return int((APP_HEIGHT - (line_height * len(text))) * 0.5)
+
+
 # prepare text that will be centered in the different states
-TERMS_TEXT_Y = int(
-    (APP_HEIGHT - (TEXT_PIXEL_HEIGHT * len(TEXT_TERMS_AND_CONDITIONS))) * 0.5
+TERMS_TEXT_Y = _centre_block_of_text(
+    TEXT_TERMS_AND_CONDITIONS, TEXT_PIXEL_HEIGHT
 )
 
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
@@ -127,3 +202,80 @@ padding = "*" * padding
 TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
+
+MENU_LOGO_PIXEL_HEIGHT = (2 * MENU_LOGO_Y) + (TEXT_PIXEL_HEIGHT * len(LOGO))
+REMAINING_MENU_Y = APP_HEIGHT - MENU_LOGO_PIXEL_HEIGHT
+
+# menu items + descriptions + states
+MENU_OPTIONS = [
+    ("SEARCH", "Search the database for an article or paper.", State.SEARCH),
+    ("HELP", "See the help info.", State.HELP),
+    (
+        "WHAT'S NEW",
+        "See the new features in our latest version.",
+        State.WHATS_NEW,
+    ),
+    ("THANKS", "A shout-out to those who have helped.", State.THANKS),
+    ("QUIT", "Return to the dancing logo screen.", State.TITLE),
+]
+N_MENU_OPTIONS = len(MENU_OPTIONS)
+
+MENU_ITEM_GAP = 50
+MENU_OPTIONS_PIXEL_HEIGHT = (TEXT_PIXEL_HEIGHT * N_MENU_OPTIONS) + (
+    (N_MENU_OPTIONS - 1) * (MENU_ITEM_GAP - TEXT_PIXEL_HEIGHT)
+)
+
+MENU_ITEM_Y_OFFSET = (
+    floor((REMAINING_MENU_Y - MENU_LOGO_PIXEL_HEIGHT) // 2)
+    + MENU_LOGO_PIXEL_HEIGHT
+)
+
+
+MENU_OPTIONS = [
+    MenuCenteredText(
+        option[0],
+        option[1],
+        MENU_ITEM_Y_OFFSET + (i * MENU_ITEM_GAP),
+        option[2],
+    )
+    for i, option in enumerate(MENU_OPTIONS)
+]
+
+# start with the first menu item being selected
+MENU_OPTIONS[0]._selected = True
+
+
+def move_main_menu_selection_up():
+    """Move the selection on the main menu up."""
+    if MENU_OPTIONS[0].selected:
+        # do nothing if the top item is selected
+        return
+    for i in range(1, len(MENU_OPTIONS)):
+        if MENU_OPTIONS[i].selected:
+            # swapping the values because it's *~pythonic~*
+            MENU_OPTIONS[i].selected, MENU_OPTIONS[i - 1].selected = (
+                MENU_OPTIONS[i - 1].selected,
+                MENU_OPTIONS[i].selected,
+            )
+            return
+
+
+def move_main_menu_selection_down():
+    """Move the selection on the main menu down."""
+    if MENU_OPTIONS[-1].selected:
+        # do nothing if the bottom item is selected
+        return
+    for i in range(len(MENU_OPTIONS) - 1):
+        if MENU_OPTIONS[i].selected:
+            MENU_OPTIONS[i].selected, MENU_OPTIONS[i + 1].selected = (
+                MENU_OPTIONS[i + 1].selected,
+                MENU_OPTIONS[i].selected,
+            )
+            return
+
+
+def reset_main_menu():
+    """Reset the main menu by making all but the first item unselected."""
+    MENU_OPTIONS[0].selected = True
+    for i in range(1, len(MENU_OPTIONS)):
+        MENU_OPTIONS[i].selected = False
