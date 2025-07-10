@@ -39,6 +39,8 @@ APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
 APP_HEIGHT = 768
 
+IDLE_LIMIT = 30
+
 # load the logo text into a list + blank line + version text
 with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
     LOGO = f.readlines()
