@@ -58,14 +58,12 @@ class App:
         elif pyxel.btnp(pyxel.KEY_D):
             self._state = constants.State.TITLE
         elif self._idle_limit():
-            self._restart_timer()
             self._state = constants.State.TITLE
 
     def _update_main_menu(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
             for item in constants.MENU_OPTIONS:
                 if item.selected:
-                    self._restart_timer()
                     self._state = item.new_state
                     constants.reset_main_menu()
                     return
@@ -76,7 +74,6 @@ class App:
             self._restart_timer()
             constants.move_main_menu_selection_down()
         elif self._idle_limit():
-            self._restart_timer()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
