@@ -206,13 +206,13 @@ TERMS_AND_CONDITIONS_TITLE = CenteredText(
 MENU_LOGO_PIXEL_HEIGHT = (2 * MENU_LOGO_Y) + (TEXT_PIXEL_HEIGHT * len(LOGO))
 REMAINING_MENU_Y = APP_HEIGHT - MENU_LOGO_PIXEL_HEIGHT
 
-# menu items and their descriptions
+# menu items + descriptions + states
 MENU_OPTIONS = [
     ("SEARCH", "Search the database for an article or paper.", State.SEARCH),
     ("HELP", "See the help info.", State.HELP),
     (
         "WHAT'S NEW",
-        "See the new features in our latest version",
+        "See the new features in our latest version.",
         State.WHATS_NEW,
     ),
     ("THANKS", "A shout-out to those who have helped.", State.THANKS),
