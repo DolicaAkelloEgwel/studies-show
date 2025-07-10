@@ -40,6 +40,36 @@ class TestConstantsFunctions(unittest.TestCase):
         self.assertEqual(y, centered_text.y)
         self.assertEqual(constants.text_centre_x(text), centered_text.x)
 
+    def test_first_main_menu_option_is_selected_by_default(self):
+        self.assertTrue(constants.MENU_OPTIONS[0].selected)
+
+    def test_no_change_when_move_main_menu_selection_up_and_already_at_top(
+        self,
+    ):
+        constants.move_main_menu_selection_up()
+        self.assertTrue(constants.MENU_OPTIONS[0].selected)
+        for i in range(1, len(constants.MENU_OPTIONS)):
+            self.assertFalse(constants.MENU_OPTIONS[i].selected)
+
+    def test_menu_selection_moves_up(self):
+        (
+            constants.MENU_OPTIONS[0].selected,
+            constants.MENU_OPTIONS[1].selected,
+        ) = (
+            constants.MENU_OPTIONS[1].selected,
+            constants.MENU_OPTIONS[0].selected,
+        )
+        # test the swap
+        self.assertFalse(constants.MENU_OPTIONS[0].selected)
+        self.assertTrue(constants.MENU_OPTIONS[1].selected)
+
+        # move selection up
+        constants.move_main_menu_selection_up()
+
+        # test new state
+        self.assertTrue(constants.MENU_OPTIONS[0].selected)
+        self.assertFalse(constants.MENU_OPTIONS[1].selected)
+
 
 if __name__ == "__main__":
     unittest.main()
