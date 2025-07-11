@@ -299,3 +299,11 @@ for line in thanks_text:
     if len(split_text) == 0:
         split_text += [""]
     TEXT_THANKS += split_text
+
+# thanks screen title - just gonna make it match terms and conditions
+padding = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
+padding = (padding - len("THANKS")) // 2 - 1
+padding = "*" * padding
+THANKS_TITLE = CenteredText(
+    padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
+)

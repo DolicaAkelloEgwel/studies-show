@@ -165,6 +165,16 @@ class App:
         )
 
     def _draw_thanks(self):
+
+        # thanks title
+        pyxel.text(
+            constants.THANKS_TITLE.x,
+            constants.THANKS_TITLE.y,
+            constants.THANKS_TITLE.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
         # display the lines from the terms and conditions text
         for i, line in enumerate(constants.TEXT_THANKS):
             pyxel.text(
