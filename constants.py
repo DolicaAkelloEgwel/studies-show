@@ -32,21 +32,27 @@ BOLD_BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-bold-20.bdf")
 TEXT_PIXEL_HEIGHT = 20
 # the colour red in pyxel
 RED = 8
-# amount of x-border in pixels for the terms and conditions text
-BORDER_TERMS_AND_CONDITIONS = 100
+# amount of x-border in pixels for blocks of text
+BORDER_TEXT_BLOCK = 100
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
 APP_HEIGHT = 768
 
 IDLE_LIMIT = 30
+PRINTER_NAME = "M834"
+
+
+def _read_text_block_from_file(filename: str) -> list[str]:
+    with open(filename, "r") as f:
+        return f.readlines()
+
 
 # load the logo text into a list + blank line + version text
-with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
-    LOGO = f.readlines()
-LOGO = LOGO + ["", VERSION]
-
-PRINTER_NAME = "M834"
+LOGO = _read_text_block_from_file(os.path.join(ASSETS_PATH, "logo")) + [
+    "",
+    VERSION,
+]
 
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
@@ -101,14 +107,14 @@ def wrap_text_for_border(text: str, border: int) -> str:
 
 
 # load the terms and conditions text
-with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
-    terms_and_conditions_text = f.readlines()
-
-TEXT_TERMS_AND_CONDITIONS = []
+terms_and_conditions_text = _read_text_block_from_file(
+    os.path.join(ASSETS_PATH, "terms-and-conditions")
+)
 
 # create wrapped terms and conditions text
+TEXT_TERMS_AND_CONDITIONS = []
 for line in terms_and_conditions_text:
-    split_text = wrap_text_for_border(line, BORDER_TERMS_AND_CONDITIONS)
+    split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
     if len(split_text) == 0:
         split_text += [""]
     TEXT_TERMS_AND_CONDITIONS += split_text
@@ -281,3 +287,15 @@ def reset_main_menu():
     MENU_OPTIONS[0].selected = True
     for i in range(1, len(MENU_OPTIONS)):
         MENU_OPTIONS[i].selected = False
+
+
+# load the thanks screen text
+thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
+
+# create wrapped thanks text
+TEXT_THANKS = []
+for line in thanks_text:
+    split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
+    if len(split_text) == 0:
+        split_text += [""]
+    TEXT_THANKS += split_text
