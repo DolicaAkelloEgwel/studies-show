@@ -77,7 +77,7 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
-    def _update_thanks_screen(self):
+    def _update_info_screen(self):
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
@@ -93,8 +93,11 @@ class App:
             self._update_terms_and_conditions()
         elif self._state == constants.State.MAIN_MENU:
             self._update_main_menu()
-        elif self._state == constants.State.THANKS:
-            self._update_thanks_screen()
+        elif self._state in [
+            constants.State.THANKS,
+            constants.State.WHATS_NEW,
+        ]:
+            self._update_info_screen()
 
     def _draw_title_screen(self):
         # draw the logo text
@@ -161,19 +164,20 @@ class App:
             self.bedstead,
         )
 
-    def _draw_thanks(self):
-
-        # thanks title
+    def _draw_info_screen(
+        self, title: constants.PaddedCenteredText, text_block: list[str]
+    ):
+        # title
         pyxel.text(
-            constants.THANKS_TITLE.x,
-            constants.THANKS_TITLE.y,
-            constants.THANKS_TITLE.text,
+            title.x,
+            title.y,
+            title.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
 
-        # display the lines from the terms and conditions text
-        for i, line in enumerate(constants.TEXT_THANKS):
+        # display the lines from the text block
+        for i, line in enumerate(text_block):
             pyxel.text(
                 constants.BORDER_TEXT_BLOCK,
                 constants.TERMS_TEXT_Y + i * constants.TEXT_PIXEL_HEIGHT,
@@ -240,7 +244,13 @@ class App:
         elif self._state == constants.State.MAIN_MENU:
             self._draw_main_menu()
         elif self._state == constants.State.THANKS:
-            self._draw_thanks()
+            self._draw_info_screen(
+                constants.THANKS_TITLE, constants.TEXT_THANKS
+            )
+        elif self._state == constants.State.WHATS_NEW:
+            self._draw_info_screen(
+                constants.WHATS_NEW_TITLE, constants.TEXT_WHATS_NEW
+            )
 
 
 parser = argparse.ArgumentParser()
