@@ -48,6 +48,12 @@ def _read_text_block_from_file(filename: str) -> list[str]:
         return f.readlines()
 
 
+def _create_title_padding(title: str) -> str:
+    padding = (TEXT_EXTENT - len(title)) // 2 - 1
+    padding = "*" * padding
+    return padding
+
+
 # load the logo text into a list + blank line + version text
 LOGO = _read_text_block_from_file(os.path.join(ASSETS_PATH, "logo")) + [
     "",
@@ -213,8 +219,7 @@ ACCEPT_OR_DECLINE = CenteredText(
 
 # creating some padding to make it look more title-ish
 TEXT_EXTENT = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
-padding = (TEXT_EXTENT - len("TERMS AND CONDITIONS")) // 2 - 1
-padding = "*" * padding
+padding = _create_title_padding("TERMS AND CONDITIONS")
 TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
 )
@@ -297,6 +302,8 @@ def reset_main_menu():
         MENU_OPTIONS[i].selected = False
 
 
+# thanks
+
 # load the thanks screen text
 thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
 
@@ -304,11 +311,22 @@ thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
 TEXT_THANKS = _create_wrapped_text_list(thanks_text)
 
 # thanks screen title - just gonna make it match terms and conditions
-padding = (TEXT_EXTENT - len("THANKS")) // 2 - 1
-padding = "*" * padding
+padding = _create_title_padding("THANKS")
 THANKS_TITLE = CenteredText(
     padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
 )
 
 # text for go back message - same y as accept or decline text
 BACK_TEXT = CenteredText("Esc - Back", ACCEPT_OR_DECLINE.y)
+
+# what's new
+
+# load the what's new text
+whats_new_text = _read_text_block_from_file(
+    os.path.join(ASSETS_PATH, "whats-new")
+)
+
+# create wrapped what's new text
+TEXT_WHATS_NEW = _create_wrapped_text_list(whats_new_text)
+
+# what's new title
