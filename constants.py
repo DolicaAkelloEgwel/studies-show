@@ -32,21 +32,27 @@ BOLD_BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-bold-20.bdf")
 TEXT_PIXEL_HEIGHT = 20
 # the colour red in pyxel
 RED = 8
-# amount of x-border in pixels for the terms and conditions text
-BORDER_TERMS_AND_CONDITIONS = 100
+# amount of x-border in pixels for blocks of text
+BORDER_TEXT_BLOCK = 100
 
 APP_WIDTH = 1024
 HALF_APP_WIDTH = APP_WIDTH // 2
 APP_HEIGHT = 768
 
 IDLE_LIMIT = 30
+PRINTER_NAME = "M834"
+
+
+def _read_text_block_from_file(filename: str) -> list[str]:
+    with open(filename, "r") as f:
+        return f.readlines()
+
 
 # load the logo text into a list + blank line + version text
-with open(os.path.join(ASSETS_PATH, "logo"), "r") as f:
-    LOGO = f.readlines()
-LOGO = LOGO + ["", VERSION]
-
-PRINTER_NAME = "M834"
+LOGO = _read_text_block_from_file(os.path.join(ASSETS_PATH, "logo")) + [
+    "",
+    VERSION,
+]
 
 
 def _width_of_string_in_pixels(num_chars: int) -> int:
@@ -101,17 +107,25 @@ def wrap_text_for_border(text: str, border: int) -> str:
 
 
 # load the terms and conditions text
-with open(os.path.join(ASSETS_PATH, "terms-and-conditions"), "r") as f:
-    terms_and_conditions_text = f.readlines()
+terms_and_conditions_text = _read_text_block_from_file(
+    os.path.join(ASSETS_PATH, "terms-and-conditions")
+)
 
-TEXT_TERMS_AND_CONDITIONS = []
+
+def _create_wrapped_text_list(text: list[str]) -> list[str]:
+    wrapped_lines = []
+    for line in text:
+        split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
+        if len(split_text) == 0:
+            split_text += [""]
+        wrapped_lines += split_text
+    return wrapped_lines
+
 
 # create wrapped terms and conditions text
-for line in terms_and_conditions_text:
-    split_text = wrap_text_for_border(line, BORDER_TERMS_AND_CONDITIONS)
-    if len(split_text) == 0:
-        split_text += [""]
-    TEXT_TERMS_AND_CONDITIONS += split_text
+TEXT_TERMS_AND_CONDITIONS = _create_wrapped_text_list(
+    terms_and_conditions_text
+)
 
 
 class CenteredText:
@@ -198,8 +212,8 @@ ACCEPT_OR_DECLINE = CenteredText(
 )
 
 # creating some padding to make it look more title-ish
-padding = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
-padding = (padding - len("TERMS AND CONDITIONS")) // 2 - 1
+TEXT_EXTENT = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
+padding = (TEXT_EXTENT - len("TERMS AND CONDITIONS")) // 2 - 1
 padding = "*" * padding
 TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
@@ -281,3 +295,20 @@ def reset_main_menu():
     MENU_OPTIONS[0].selected = True
     for i in range(1, len(MENU_OPTIONS)):
         MENU_OPTIONS[i].selected = False
+
+
+# load the thanks screen text
+thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
+
+# create wrapped thanks text
+TEXT_THANKS = _create_wrapped_text_list(thanks_text)
+
+# thanks screen title - just gonna make it match terms and conditions
+padding = (TEXT_EXTENT - len("THANKS")) // 2 - 1
+padding = "*" * padding
+THANKS_TITLE = CenteredText(
+    padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
+)
+
+# text for go back message - same y as accept or decline text
+BACK_TEXT = CenteredText("Esc - Back", ACCEPT_OR_DECLINE.y)

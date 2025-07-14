@@ -77,6 +77,15 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
+    def _update_thanks_screen(self):
+        if pyxel.btnp(pyxel.KEY_ESCAPE):
+            self._restart_timer()
+            self._state = constants.State.MAIN_MENU
+        elif self._idle_limit():
+            self._restart_timer()
+            constants.reset_main_menu()
+            self._state = constants.State.TITLE
+
     def update(self):
         if self._state == constants.State.TITLE:
             self._update_title()
@@ -84,6 +93,8 @@ class App:
             self._update_terms_and_conditions()
         elif self._state == constants.State.MAIN_MENU:
             self._update_main_menu()
+        elif self._state == constants.State.THANKS:
+            self._update_thanks_screen()
 
     def _draw_title_screen(self):
         # draw the logo text
@@ -134,7 +145,7 @@ class App:
         # display the lines from the terms and conditions text
         for i, line in enumerate(constants.TEXT_TERMS_AND_CONDITIONS):
             pyxel.text(
-                constants.BORDER_TERMS_AND_CONDITIONS,
+                constants.BORDER_TEXT_BLOCK,
                 constants.TERMS_TEXT_Y + i * constants.TEXT_PIXEL_HEIGHT,
                 line,
                 pyxel.COLOR_LIME,
@@ -146,6 +157,36 @@ class App:
             constants.ACCEPT_OR_DECLINE.x,
             constants.ACCEPT_OR_DECLINE.y,
             constants.ACCEPT_OR_DECLINE.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
+    def _draw_thanks(self):
+
+        # thanks title
+        pyxel.text(
+            constants.THANKS_TITLE.x,
+            constants.THANKS_TITLE.y,
+            constants.THANKS_TITLE.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
+        # display the lines from the terms and conditions text
+        for i, line in enumerate(constants.TEXT_THANKS):
+            pyxel.text(
+                constants.BORDER_TEXT_BLOCK,
+                constants.TERMS_TEXT_Y + i * constants.TEXT_PIXEL_HEIGHT,
+                line,
+                pyxel.COLOR_LIME,
+                self.bedstead,
+            )
+
+        # show the go back text
+        pyxel.text(
+            constants.BACK_TEXT.x,
+            constants.BACK_TEXT.y,
+            constants.BACK_TEXT.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
@@ -198,6 +239,8 @@ class App:
             self._draw_terms_and_conditions()
         elif self._state == constants.State.MAIN_MENU:
             self._draw_main_menu()
+        elif self._state == constants.State.THANKS:
+            self._draw_thanks()
 
 
 parser = argparse.ArgumentParser()
