@@ -80,17 +80,7 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
-    def _update_thanks_screen(self):
-        if pyxel.btnp(pyxel.KEY_ESCAPE):
-            self._restart_timer()
-            self._state = constants.State.MAIN_MENU
-        elif self._idle_limit():
-            self._restart_timer()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
-
-    def _update_whats_new_screen(self):
-        # todo - refactor here...
+    def _update_info_screen(self):
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
@@ -106,10 +96,11 @@ class App:
             self._update_terms_and_conditions()
         elif self._state == constants.State.MAIN_MENU:
             self._update_main_menu()
-        elif self._state == constants.State.THANKS:
-            self._update_thanks_screen()
-        elif self._state == constants.State.WHATS_NEW:
-            self._update_whats_new_screen()
+        elif self._state in [
+            constants.State.THANKS,
+            constants.State.WHATS_NEW,
+        ]:
+            self._update_info_screen()
 
     def _draw_title_screen(self):
         # draw the logo text
