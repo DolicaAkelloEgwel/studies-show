@@ -147,6 +147,12 @@ class CenteredText:
         self.y = y
 
 
+class PaddedCenteredText(CenteredText):
+    def __init__(self, title: str, y: int):
+        padding = _create_title_padding(title)
+        super().__init__(f"{padding} {title} {padding}", y)
+
+
 class MenuCenteredText(CenteredText):
     def __init__(
         self,
@@ -311,10 +317,7 @@ thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
 TEXT_THANKS = _create_wrapped_text_list(thanks_text)
 
 # thanks screen title - just gonna make it match terms and conditions
-padding = _create_title_padding("THANKS")
-THANKS_TITLE = CenteredText(
-    padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
-)
+THANKS_TITLE = PaddedCenteredText("THANKS", TERMS_TEXT_Y // 2 - 10)
 
 # text for go back message - same y as accept or decline text
 BACK_TEXT = CenteredText("Esc - Back", ACCEPT_OR_DECLINE.y)
@@ -330,7 +333,4 @@ whats_new_text = _read_text_block_from_file(
 TEXT_WHATS_NEW = _create_wrapped_text_list(whats_new_text)
 
 # what's new title
-padding = _create_title_padding("WHAT'S NEW")
-WHATS_NEW_TITLE = CenteredText(
-    padding + " WHAT'S NEW " + padding, TERMS_TEXT_Y // 2 - 10
-)
+WHATS_NEW_TITLE = PaddedCenteredText("WHAT'S NEW", TERMS_TEXT_Y // 2 - 10)

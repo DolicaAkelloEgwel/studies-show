@@ -179,7 +179,7 @@ class App:
             self.bedstead,
         )
 
-        # display the lines from the terms and conditions text
+        # display the lines from the text block
         for i, line in enumerate(text_block):
             pyxel.text(
                 constants.BORDER_TEXT_BLOCK,
