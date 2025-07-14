@@ -168,7 +168,7 @@ class App:
         )
 
     def _draw_info_screen(
-        self, title: constants.CenteredText, text_block: list[str]
+        self, title: constants.PaddedCenteredText, text_block: list[str]
     ):
         # title
         pyxel.text(
