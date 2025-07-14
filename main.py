@@ -89,6 +89,16 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
+    def _update_whats_new_screen(self):
+        # todo - refactor here...
+        if pyxel.btnp(pyxel.KEY_ESCAPE):
+            self._restart_timer()
+            self._state = constants.State.MAIN_MENU
+        elif self._idle_limit():
+            self._restart_timer()
+            constants.reset_main_menu()
+            self._state = constants.State.TITLE
+
     def update(self):
         if self._state == constants.State.TITLE:
             self._update_title()
@@ -98,6 +108,8 @@ class App:
             self._update_main_menu()
         elif self._state == constants.State.THANKS:
             self._update_thanks_screen()
+        elif self._state == constants.State.WHATS_NEW:
+            self._update_whats_new_screen()
 
     def _draw_title_screen(self):
         # draw the logo text
@@ -194,6 +206,36 @@ class App:
             self.bedstead,
         )
 
+    def _draw_whats_new(self):
+
+        # what's new title
+        pyxel.text(
+            constants.WHATS_NEW_TITLE.x,
+            constants.WHATS_NEW_TITLE.y,
+            constants.WHATS_NEW_TITLE.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
+        # display the lines from the terms and conditions text
+        for i, line in enumerate(constants.TEXT_WHATS_NEW):
+            pyxel.text(
+                constants.BORDER_TEXT_BLOCK,
+                constants.TERMS_TEXT_Y + i * constants.TEXT_PIXEL_HEIGHT,
+                line,
+                pyxel.COLOR_LIME,
+                self.bedstead,
+            )
+
+        # show the go back text
+        pyxel.text(
+            constants.BACK_TEXT.x,
+            constants.BACK_TEXT.y,
+            constants.BACK_TEXT.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def _draw_main_menu(self):
 
         for i, line in enumerate(constants.LOGO):
@@ -244,6 +286,8 @@ class App:
             self._draw_main_menu()
         elif self._state == constants.State.THANKS:
             self._draw_thanks()
+        elif self._state == constants.State.WHATS_NEW:
+            self._draw_whats_new()
 
 
 parser = argparse.ArgumentParser()

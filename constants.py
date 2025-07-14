@@ -330,3 +330,7 @@ whats_new_text = _read_text_block_from_file(
 TEXT_WHATS_NEW = _create_wrapped_text_list(whats_new_text)
 
 # what's new title
+padding = _create_title_padding("WHAT'S NEW")
+WHATS_NEW_TITLE = CenteredText(
+    padding + " WHAT'S NEW " + padding, TERMS_TEXT_Y // 2 - 10
+)
