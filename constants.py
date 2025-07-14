@@ -204,8 +204,8 @@ ACCEPT_OR_DECLINE = CenteredText(
 )
 
 # creating some padding to make it look more title-ish
-padding = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
-padding = (padding - len("TERMS AND CONDITIONS")) // 2 - 1
+TEXT_EXTENT = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
+padding = (TEXT_EXTENT - len("TERMS AND CONDITIONS")) // 2 - 1
 padding = "*" * padding
 TERMS_AND_CONDITIONS_TITLE = CenteredText(
     padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
@@ -301,8 +301,7 @@ for line in thanks_text:
     TEXT_THANKS += split_text
 
 # thanks screen title - just gonna make it match terms and conditions
-padding = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
-padding = (padding - len("THANKS")) // 2 - 1
+padding = (TEXT_EXTENT - len("THANKS")) // 2 - 1
 padding = "*" * padding
 THANKS_TITLE = CenteredText(
     padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
