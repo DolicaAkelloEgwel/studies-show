@@ -111,13 +111,21 @@ terms_and_conditions_text = _read_text_block_from_file(
     os.path.join(ASSETS_PATH, "terms-and-conditions")
 )
 
+
+def _create_wrapped_text_list(text: list[str]) -> list[str]:
+    wrapped_lines = []
+    for line in text:
+        split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
+        if len(split_text) == 0:
+            split_text += [""]
+        wrapped_lines += split_text
+    return wrapped_lines
+
+
 # create wrapped terms and conditions text
-TEXT_TERMS_AND_CONDITIONS = []
-for line in terms_and_conditions_text:
-    split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
-    if len(split_text) == 0:
-        split_text += [""]
-    TEXT_TERMS_AND_CONDITIONS += split_text
+TEXT_TERMS_AND_CONDITIONS = _create_wrapped_text_list(
+    terms_and_conditions_text
+)
 
 
 class CenteredText:
@@ -293,12 +301,7 @@ def reset_main_menu():
 thanks_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "thanks"))
 
 # create wrapped thanks text
-TEXT_THANKS = []
-for line in thanks_text:
-    split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
-    if len(split_text) == 0:
-        split_text += [""]
-    TEXT_THANKS += split_text
+TEXT_THANKS = _create_wrapped_text_list(thanks_text)
 
 # thanks screen title - just gonna make it match terms and conditions
 padding = (TEXT_EXTENT - len("THANKS")) // 2 - 1
