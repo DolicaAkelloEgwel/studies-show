@@ -185,6 +185,7 @@ class App:
                 self.bedstead,
             )
 
+        # show the go back text
         pyxel.text(
             constants.BACK_TEXT.x,
             constants.BACK_TEXT.y,
