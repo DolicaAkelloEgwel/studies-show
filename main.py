@@ -185,6 +185,14 @@ class App:
                 self.bedstead,
             )
 
+        pyxel.text(
+            constants.BACK_TEXT.x,
+            constants.BACK_TEXT.y,
+            constants.BACK_TEXT.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def _draw_main_menu(self):
 
         for i, line in enumerate(constants.LOGO):

@@ -307,3 +307,6 @@ padding = "*" * padding
 THANKS_TITLE = CenteredText(
     padding + " THANKS " + padding, TERMS_TEXT_Y // 2 - 10
 )
+
+# text for go back message - same y as accept or decline text
+BACK_TEXT = CenteredText("Esc - Back", ACCEPT_OR_DECLINE.y)
