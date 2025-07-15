@@ -99,6 +99,7 @@ class App:
         elif self._state in [
             constants.State.THANKS,
             constants.State.WHATS_NEW,
+            constants.State.HELP,
         ]:
             self._update_info_screen()
 
@@ -254,6 +255,8 @@ class App:
             self._draw_info_screen(
                 constants.WHATS_NEW_TITLE, constants.TEXT_WHATS_NEW
             )
+        elif self._state == constants.State.HELP:
+            self._draw_info_screen(constants.HELP_TITLE, constants.TEXT_HELP)
 
 
 parser = argparse.ArgumentParser()
