@@ -4,3 +4,6 @@ texput.log
 .coverage
 document.aux
 document.pdf
+output.aux
+output.log
+output.tex
