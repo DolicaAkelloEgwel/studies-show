@@ -334,3 +334,14 @@ TEXT_WHATS_NEW = _create_wrapped_text_list(whats_new_text)
 
 # what's new title
 WHATS_NEW_TITLE = PaddedCenteredText("WHAT'S NEW", TERMS_TEXT_Y // 2 - 10)
+
+# help
+
+# load help text
+help_text = _read_text_block_from_file(os.path.join(ASSETS_PATH, "help"))
+
+# create wrapped help text
+TEXT_HELP = _create_wrapped_text_list(help_text)
+
+# help title
+HELP_TITLE = PaddedCenteredText("HELP", TERMS_TEXT_Y // 2 - 10)

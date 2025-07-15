@@ -10,6 +10,8 @@ cfgv==3.4.0
     # via pre-commit
 click==8.2.1
     # via black
+coverage==7.9.2
+    # via -r .requirements-dev.in
 distlib==0.3.9
     # via virtualenv
 filelock==3.18.0
