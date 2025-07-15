@@ -2,3 +2,5 @@ __pycache__
 document.log
 texput.log
 .coverage
+document.aux
+document.pdf
