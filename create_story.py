@@ -2,7 +2,8 @@ from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
 # will experiment with this...
-IMAGE_PROMPT_MODEL = "brxce/stable-diffusion-prompt-generator:latest"
+IMAGE_PROMPT_MODEL = "trollek/qwen2-diffusion-prompter"
+ARTICLE_GENERATION_MODEL = "dolphin-phi:latest"
 
 
 class NewsArticle(BaseModel):
@@ -14,7 +15,7 @@ class NewsArticle(BaseModel):
 
 def _create_story(article_title: str) -> ChatResponse:
     return chat(
-        model="dolphin-phi:latest",
+        model=ARTICLE_GENERATION_MODEL,
         messages=[
             {
                 "role": "system",
@@ -50,9 +51,17 @@ def _stable_diffusion_prompt(image_description: str) -> str:
     return chat(
         model=IMAGE_PROMPT_MODEL,
         messages=[
+            # {
+            #     "role": "system",
+            #     "content": (
+            #         "Given an image description, you will create a text-to-image prompt that can generate that image. Please ensure the image is photorealistic and suitable for a newspaper. Do not say anything related to digital art."
+            #     ),
+            # },
             {
                 "role": "user",
-                "content": image_description,
+                "content": (
+                    f"{image_description}, photorealistic, 4K, detailed"
+                ),
             },
         ],
     )
@@ -62,9 +71,12 @@ response: ChatResponse = _create_story(
     "Researchers crack the Stonehenge code!"
 )
 
-newsarticle = NewsArticle.model_validate_json(response.message.content)
-print(
-    _stable_diffusion_prompt(
-        newsarticle.article_image_description
-    ).message.content
-)
+news_article = NewsArticle.model_validate_json(response.message.content)
+image_prompt = _stable_diffusion_prompt(
+    news_article.article_image_description
+).message.content
+
+print(news_article)
+print("")
+print(IMAGE_PROMPT_MODEL)
+print(image_prompt)
