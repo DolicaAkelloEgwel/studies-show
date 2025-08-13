@@ -1,6 +1,9 @@
 from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
+# will experiment with this...
+IMAGE_PROMPT_MODEL = "brxce/stable-diffusion-prompt-generator:latest"
+
 
 class NewsArticle(BaseModel):
     news_source_name: str
@@ -11,7 +14,7 @@ class NewsArticle(BaseModel):
 
 def _create_story(article_title: str) -> ChatResponse:
     return chat(
-        model="deepseek-r1:8b",
+        model="dolphin-phi:latest",
         messages=[
             {
                 "role": "system",
@@ -43,9 +46,25 @@ def _create_story(article_title: str) -> ChatResponse:
     )
 
 
+def _stable_diffusion_prompt(image_description: str) -> str:
+    return chat(
+        model=IMAGE_PROMPT_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": image_description,
+            },
+        ],
+    )
+
+
 response: ChatResponse = _create_story(
     "Researchers crack the Stonehenge code!"
 )
 
 newsarticle = NewsArticle.model_validate_json(response.message.content)
-print(newsarticle)
+print(
+    _stable_diffusion_prompt(
+        newsarticle.article_image_description
+    ).message.content
+)
