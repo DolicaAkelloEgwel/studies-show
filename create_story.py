@@ -62,7 +62,8 @@ def _stable_diffusion_prompt(
             {
                 "role": "user",
                 "content": (
-                    f"{image_description}, photorealistic, 4K, detailed"
+                    f"{image_description}, photorealistic, 4K, detailed,"
+                    " cinematic lighting"
                 ),
             },
         ],
