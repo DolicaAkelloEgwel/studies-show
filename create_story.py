@@ -1,6 +1,16 @@
 from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
+# will experiment with this...
+prompt_models = [
+    "trollek/qwen2-diffusion-prompter",
+    "gnokit/improve-prompt:latest",
+    "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
+    "brxce/stable-diffusion-prompt-generator:latest",
+]
+IMAGE_PROMPT_MODEL = "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest"
+ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
+
 
 class NewsArticle(BaseModel):
     news_source_name: str
@@ -11,7 +21,7 @@ class NewsArticle(BaseModel):
 
 def _create_story(article_title: str) -> ChatResponse:
     return chat(
-        model="deepseek-r1:8b",
+        model=ARTICLE_GENERATION_MODEL,
         messages=[
             {
                 "role": "system",
@@ -43,9 +53,34 @@ def _create_story(article_title: str) -> ChatResponse:
     )
 
 
+def _stable_diffusion_prompt(
+    image_description: str, prompt_model: str = IMAGE_PROMPT_MODEL
+) -> str:
+    return chat(
+        model=prompt_model,
+        messages=[
+            {
+                "role": "user",
+                "content": (
+                    f"{image_description}, photorealistic, 4K, detailed,"
+                    " cinematic lighting"
+                ),
+            },
+        ],
+    )
+
+
 response: ChatResponse = _create_story(
-    "Researchers crack the Stonehenge code!"
+    "Mathematicians declare that 1 + 1 is now 3!"
 )
 
-newsarticle = NewsArticle.model_validate_json(response.message.content)
-print(newsarticle)
+news_article = NewsArticle.model_validate_json(response.message.content)
+
+print(news_article)
+
+image_prompt = _stable_diffusion_prompt(
+    news_article.article_image_description
+).message.content
+print("")
+print(IMAGE_PROMPT_MODEL)
+print(image_prompt)
