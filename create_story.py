@@ -2,8 +2,14 @@ from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
 # will experiment with this...
+prompt_models = [
+    "trollek/qwen2-diffusion-prompter",
+    "gnokit/improve-prompt:latest",
+    "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
+    "brxce/stable-diffusion-prompt-generator:latest",
+]
 IMAGE_PROMPT_MODEL = "trollek/qwen2-diffusion-prompter"
-ARTICLE_GENERATION_MODEL = "dolphin-phi:latest"
+ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
 
 
 class NewsArticle(BaseModel):
@@ -47,9 +53,9 @@ def _create_story(article_title: str) -> ChatResponse:
     )
 
 
-def _stable_diffusion_prompt(image_description: str) -> str:
+def _stable_diffusion_prompt(image_description: str, prompt_model: str) -> str:
     return chat(
-        model=IMAGE_PROMPT_MODEL,
+        model=prompt_model,
         messages=[
             # {
             #     "role": "system",
@@ -72,11 +78,13 @@ response: ChatResponse = _create_story(
 )
 
 news_article = NewsArticle.model_validate_json(response.message.content)
-image_prompt = _stable_diffusion_prompt(
-    news_article.article_image_description
-).message.content
 
 print(news_article)
-print("")
-print(IMAGE_PROMPT_MODEL)
-print(image_prompt)
+
+for model in prompt_models:
+    image_prompt = _stable_diffusion_prompt(
+        news_article.article_image_description, model
+    ).message.content
+    print("")
+    print(model)
+    print(image_prompt)
