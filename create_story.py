@@ -70,7 +70,7 @@ def _stable_diffusion_prompt(
 
 
 response: ChatResponse = _create_story(
-    "The pope steps down and says he's an atheist"
+    "Mathematicians declare that 1 + 1 is now 3!"
 )
 
 news_article = NewsArticle.model_validate_json(response.message.content)
