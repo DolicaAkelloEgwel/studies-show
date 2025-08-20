@@ -71,7 +71,7 @@ def _stable_diffusion_prompt(
 
 
 def create_story(article_title: str):
-    response: ChatResponse = create_story(article_title)
+    response: ChatResponse = _create_story(article_title)
     news_article = NewsArticle.model_validate_json(response.message.content)
 
     image_prompt = _stable_diffusion_prompt(
