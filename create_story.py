@@ -53,7 +53,9 @@ def _create_story(article_title: str) -> ChatResponse:
     )
 
 
-def _stable_diffusion_prompt(image_description: str, prompt_model: str) -> str:
+def _stable_diffusion_prompt(
+    image_description: str, prompt_model: str = IMAGE_PROMPT_MODEL
+) -> str:
     return chat(
         model=prompt_model,
         messages=[
@@ -75,10 +77,9 @@ news_article = NewsArticle.model_validate_json(response.message.content)
 
 print(news_article)
 
-for model in prompt_models:
-    image_prompt = _stable_diffusion_prompt(
-        news_article.article_image_description, model
-    ).message.content
-    print("")
-    print(model)
-    print(image_prompt)
+image_prompt = _stable_diffusion_prompt(
+    news_article.article_image_description
+).message.content
+print("")
+print(IMAGE_PROMPT_MODEL)
+print(image_prompt)
