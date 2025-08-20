@@ -70,17 +70,12 @@ def _stable_diffusion_prompt(
     )
 
 
-response: ChatResponse = _create_story(
-    "Mathematicians declare that 1 + 1 is now 3!"
-)
+def create_story(article_title: str):
+    response: ChatResponse = create_story(article_title)
+    news_article = NewsArticle.model_validate_json(response.message.content)
 
-news_article = NewsArticle.model_validate_json(response.message.content)
+    image_prompt = _stable_diffusion_prompt(
+        news_article.article_image_description
+    ).message.content
 
-print(news_article)
-
-image_prompt = _stable_diffusion_prompt(
-    news_article.article_image_description
-).message.content
-print("")
-print(IMAGE_PROMPT_MODEL)
-print(image_prompt)
+    return (news_article, image_prompt)
