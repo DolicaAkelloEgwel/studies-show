@@ -2,7 +2,3 @@ ollama
 python-svg
 pydantic
 pyxel
-torch
-diffusers
-accelerate
-transformers
