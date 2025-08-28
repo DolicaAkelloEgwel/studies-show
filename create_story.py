@@ -15,11 +15,12 @@ ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
 class NewsArticle(BaseModel):
     news_source_name: str
     article_content: str
+    article_title: str
     article_image_description: str
     image_caption: str
 
 
-def _create_story(article_title: str) -> ChatResponse:
+def _create_story(article_summary: str) -> ChatResponse:
     return chat(
         model=ARTICLE_GENERATION_MODEL,
         messages=[
@@ -44,8 +45,8 @@ def _create_story(article_title: str) -> ChatResponse:
             {
                 "role": "user",
                 "content": (
-                    "Please create an article with the given title:"
-                    f" {article_title}"
+                    "Please create an article with the given content:"
+                    f" {article_summary}"
                 ),
             },
         ],
@@ -70,8 +71,8 @@ def _stable_diffusion_prompt(
     )
 
 
-def create_story(article_title: str):
-    response: ChatResponse = _create_story(article_title)
+def create_story(article_summary: str):
+    response: ChatResponse = _create_story(article_summary)
     news_article = NewsArticle.model_validate_json(response.message.content)
 
     image_prompt = _stable_diffusion_prompt(
@@ -79,3 +80,9 @@ def create_story(article_title: str):
     ).message.content
 
     return (news_article, image_prompt)
+
+
+article, prompt = create_story("Scientists discover 1 + 1 = 3")
+print(article)
+print(" ")
+print(prompt)
