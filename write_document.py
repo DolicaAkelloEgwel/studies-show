@@ -96,7 +96,7 @@ def write_document(article: ArticleInfo):
             "\\byline{" + article.title + "}{" + article.author + "}\n"
         )
         outfile.write(
-            "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
+            "\\begin{window}[2,r,\\includegraphics[width=50pt]{./output.jpg}"
             + ",\\centerline{"
             + article.image_caption
             + "}]\n"
