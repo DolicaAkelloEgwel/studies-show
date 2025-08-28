@@ -66,6 +66,7 @@ class ArticleInfo:
             " mysterious enigma, is now at the center of a new scientific"
             " revolution."
         )
+        self.image_caption = "Woo! Caption!"
 
 
 def write_document(article: ArticleInfo):
@@ -94,6 +95,13 @@ def write_document(article: ArticleInfo):
         outfile.write(
             "\\byline{" + article.title + "}{" + article.author + "}\n"
         )
+        outfile.write(
+            "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
+            + ",\\centerline{"
+            + article.image_caption
+            + "}]\n"
+        )
+        outfile.write("\\end{window}")
         outfile.write(article.content)
         outfile.write("\\closearticle\n")
 
