@@ -13,11 +13,12 @@ ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
 
 
 class NewsArticle(BaseModel):
-    news_source_name: str
     article_content: str
     article_title: str
     article_image_description: str
+    article_author: str
     image_caption: str
+    article_date: str
 
 
 def _create_story(article_summary: str) -> ChatResponse:
@@ -80,9 +81,3 @@ def create_story(article_summary: str):
     ).message.content
 
     return (news_article, image_prompt)
-
-
-article, prompt = create_story("Scientists discover 1 + 1 = 3")
-print(article)
-print(" ")
-print(prompt)

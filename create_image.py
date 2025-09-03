@@ -1,3 +1,5 @@
+import gc
+
 import torch
 from diffusers import DiffusionPipeline
 
@@ -10,4 +12,8 @@ def create_image(prompt: str):
     )
     pipe = pipe.to("cuda")
     image = pipe(prompt).images[0]
+
+    torch.cuda.empty_cache()
+    gc.collect()
+
     return image
