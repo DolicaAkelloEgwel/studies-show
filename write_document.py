@@ -6,10 +6,6 @@ import constants
 class ArticleInfo:
     def __init__(self):
         self.date = "June 10th 1991"
-        self.volume = "3"
-        self.issue = "12"
-        self.paper_name = "Whatever Times:"
-        self.price = "99p"
         self.title = "Stone Henge Mysteries Revealed!"
         self.author = "Firstname Lastname"
         self.content = (
@@ -80,10 +76,12 @@ def write_document(article: ArticleInfo):
         outfile.write("\n")
 
         outfile.write("\\date{" + article.date + "}\n")
-        outfile.write("\\currentvolume{" + article.volume + "}\n")
-        outfile.write("\\currentissue{" + article.issue + "}\n")
-        outfile.write("\\SetPaperName{" + article.paper_name + "}\n")
-        outfile.write("\\SetPaperPrice{" + article.price + "}\n")
+        outfile.write("\\currentvolume{" + "12" + "}\n")
+        outfile.write("\\currentissue{" + "3" + "}\n")
+        outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
+        outfile.write("\\SetPaperLocation{" + "London" + "}\n")
+        outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
+        outfile.write("\\SetPaperPrice{" + "£3.99" + "}\n")
 
         # start by putting the top stuff in the file
         with open(
@@ -96,14 +94,13 @@ def write_document(article: ArticleInfo):
             "\\byline{" + article.title + "}{" + article.author + "}\n"
         )
         outfile.write(
-            "\\begin{window}[2,r,\\includegraphics[width=50pt]{./output.jpg}"
+            "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
             + ",\\centerline{"
             + article.image_caption
             + "}]\n"
         )
         outfile.write("\\end{window}")
         outfile.write(article.content)
-        outfile.write("\\closearticle\n")
 
         # start by putting the top stuff in the file
         with open(

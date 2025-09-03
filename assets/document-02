@@ -1,29 +1,10 @@
-% [LianTze] times (the package not the font) is rather outdated now; use newtx (see later)
-% \usepackage{times}
 \usepackage{graphicx}
 \usepackage{multicol}
-
 \usepackage{picinpar}
-%uasage of picinpar:
-%\begin{window}[1,l,\includegraphics{},caption]xxxxx\end{window}
-
-
-%% [LianTze] Contains some modifications
 \usepackage{newspaper-mod}
-%%... so now you can redefine the headline and byline style if you want to.
-%% These can be issued just before any
-%% byline or headline in the paper, to
-%% individually style each article
-%%
-% \renewcommand{\headlinestyle}{\itshape\Large\lsstyle}
-% \renewcommand{\bylinestyle}{\bfseries\Large\raggedright}
-
-
-%%%%%%%%%  Front matter   %%%%%%%%%%
-
 \usepackage{lipsum}
 
 \begin{document}
 \maketitle
 
-\begin{multicols}{2}
+\begin{multicols}{3}

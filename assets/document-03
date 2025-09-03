@@ -1,3 +1,9 @@
+\closearticle
+
+\headline{Another Headline}
+\lipsum[1-2]
+\closearticle
+
 \end{multicols}
 
 \end{document}
