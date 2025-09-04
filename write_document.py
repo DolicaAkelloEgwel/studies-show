@@ -27,7 +27,7 @@ def write_document(article):
         outfile.write("\\currentissue{" + str(randint(1, 20)) + "}\n")
         outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
         outfile.write("\\SetPaperLocation{" + "London" + "}\n")
-        outfile.write("\\SetPaperSlogal{``" + choice(SLOGANS) + "''}")
+        outfile.write("\\SetPaperSlogan{``" + choice(SLOGANS) + "''}\n")
         outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
         outfile.write("\\SetPaperPrice{" + "£3.99" + "}\n")
 
