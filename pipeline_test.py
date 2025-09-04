@@ -11,4 +11,4 @@ img = create_image(image_prompt)
 img.save("output.jpg")
 
 write_document(article)
-print_document()
+# print_document()
