@@ -19,7 +19,7 @@ class NewsArticle(BaseModel):
     article_title: str
     article_image_description: str
     article_author: str
-    image_caption: str
+    short_image_caption: str
     article_date: str
 
 
