@@ -1,3 +1,5 @@
+import re
+
 from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
@@ -75,6 +77,11 @@ def _stable_diffusion_prompt(
 def create_story(article_summary: str):
     response: ChatResponse = _create_story(article_summary)
     news_article = NewsArticle.model_validate_json(response.message.content)
+
+    # remove other characters that deepseek sometimes spits out
+    news_article.article_content = re.sub(
+        r"[^\x00-\x7f]", r"", news_article.article_content
+    )
 
     image_prompt = _stable_diffusion_prompt(
         news_article.article_image_description
