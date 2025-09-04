@@ -5,9 +5,10 @@ from random import choice, randint
 import constants
 
 SLOGANS = [
-    "For when your pineal gland is cluttered.",
-    "Telling the news before it happens.",
+    "For when your pineal gland gets murky.",
+    "Telling the news before it happens!",
     "Keeping your finger on the pulse.",
+    "You lost the game.",
 ]
 
 
@@ -45,10 +46,18 @@ def write_document(article):
             + article.article_author
             + "}\n"
         )
+
+        # lazy way of breaking up the caption
+        words = article.short_image_caption.split()
+        first_line = " ".join(words[:6])
+        second_line = " ".join(words[6:])
+
         outfile.write(
             "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
             + ",\\centerline{"
-            + article.image_caption
+            + first_line
+            + "}, \\centerline{"
+            + second_line
             + "}]\n"
         )
         outfile.write("\\end{window}")
