@@ -1,7 +1,14 @@
 import os
 import subprocess
+from random import choice, randint
 
 import constants
+
+SLOGANS = [
+    "For when your pineal gland is cluttered.",
+    "Telling the news before it happens.",
+    "Keeping your finger on the pulse.",
+]
 
 
 def write_document(article):
@@ -16,10 +23,11 @@ def write_document(article):
         outfile.write("\n")
 
         outfile.write("\\date{" + article.article_date + "}\n")
-        outfile.write("\\currentvolume{" + "12" + "}\n")
-        outfile.write("\\currentissue{" + "3" + "}\n")
+        outfile.write("\\currentvolume{" + str(randint(100, 500)) + "}\n")
+        outfile.write("\\currentissue{" + str(randint(1, 20)) + "}\n")
         outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
         outfile.write("\\SetPaperLocation{" + "London" + "}\n")
+        outfile.write("\\SetPaperSlogal{``" + choice(SLOGANS) + "''}")
         outfile.write("\\SetPaperName{" + "Recollector Times:" + "}\n")
         outfile.write("\\SetPaperPrice{" + "£3.99" + "}\n")
 
