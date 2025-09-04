@@ -1,7 +1,7 @@
 \closearticle
 
 \headline{Another Headline}
-\lipsum[1-2]
+\lipsum[1-5]
 \closearticle
 
 \end{multicols}
