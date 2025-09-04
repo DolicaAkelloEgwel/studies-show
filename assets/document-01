@@ -1,5 +1,5 @@
 \documentclass{article}
-
+\usepackage[1]{pagesel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
