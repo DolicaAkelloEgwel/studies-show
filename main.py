@@ -86,6 +86,19 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
+    def _update_search(self):
+        if pyxel.btnp(pyxel.KEY_ESCAPE):
+            self._restart_timer()
+            self._state = constants.State.MAIN_MENU
+        elif pyxel.btnp(pyxel.KEY_TAB):
+            pass
+        elif self._idle_limit():
+            self._restart_timer()
+            constants.reset_main_menu()
+            self._state = constants.State.TITLE
+        else:
+            pass
+
     def update(self):
         if self._state == constants.State.TITLE:
             self._update_title()
@@ -99,6 +112,8 @@ class App:
             constants.State.HELP,
         ]:
             self._update_info_screen()
+        elif self._state == constants.State.SEARCH:
+            self._update_search()
 
     def _draw_text(self, text: constants.CenteredText):
         pyxel.text(
