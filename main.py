@@ -225,6 +225,16 @@ class App:
             # show the menu item text
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
+    def _draw_search_screen(self, title=constants.SEARCH_TITLE):
+        # title
+        pyxel.text(
+            title.x,
+            title.y,
+            title.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def draw(self):
         # clear screen
         pyxel.cls(pyxel.COLOR_BLACK)
@@ -254,6 +264,8 @@ class App:
             )
         elif self._state == constants.State.HELP:
             self._draw_info_screen(constants.HELP_TITLE, constants.TEXT_HELP)
+        elif self._state == constants.State.SEARCH:
+            self._draw_search_screen()
 
 
 parser = argparse.ArgumentParser()

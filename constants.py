@@ -345,3 +345,8 @@ TEXT_HELP = _create_wrapped_text_list(help_text)
 
 # help title
 HELP_TITLE = PaddedCenteredText("HELP", TERMS_TEXT_Y // 2 - 10)
+
+# search
+
+# input title
+SEARCH_TITLE = PaddedCenteredText("SEARCH", TERMS_TEXT_Y // 2 - 10)
