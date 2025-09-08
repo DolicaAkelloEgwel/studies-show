@@ -100,7 +100,7 @@ class App:
         ]:
             self._update_info_screen()
 
-    def _draw_text(self, text: constants.PaddedCenteredText):
+    def _draw_text(self, text: constants.CenteredText):
         pyxel.text(
             text.x,
             text.y,
