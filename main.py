@@ -100,6 +100,15 @@ class App:
         ]:
             self._update_info_screen()
 
+    def _draw_text(self, text: constants.PaddedCenteredText):
+        pyxel.text(
+            text.x,
+            text.y,
+            text.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def _draw_title_screen(self):
         # draw the logo text
         for i, line in enumerate(constants.LOGO):
@@ -188,13 +197,7 @@ class App:
             )
 
         # show the go back text
-        pyxel.text(
-            constants.BACK_TEXT.x,
-            constants.BACK_TEXT.y,
-            constants.BACK_TEXT.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.BACK_TEXT)
 
     def _draw_main_menu(self):
 
@@ -236,13 +239,7 @@ class App:
         )
 
         # show the go back text
-        pyxel.text(
-            constants.BACK_TEXT.x,
-            constants.BACK_TEXT.y,
-            constants.BACK_TEXT.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.BACK_TEXT)
 
     def draw(self):
         # clear screen
