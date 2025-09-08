@@ -127,33 +127,15 @@ class App:
 
         # make the start text flash
         if helpers.flash_text(pyxel.frame_count):
-            pyxel.text(
-                constants.START_TEXT.x,
-                constants.START_TEXT.y,
-                constants.START_TEXT.text,
-                pyxel.COLOR_LIME,
-                self.bedstead,
-            )
+            self._draw_text(constants.START_TEXT)
 
         # copyright text
-        pyxel.text(
-            constants.COPYRIGHT_TEXT.x,
-            constants.COPYRIGHT_TEXT.y,
-            constants.COPYRIGHT_TEXT.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.COPYRIGHT_TEXT)
 
     def _draw_terms_and_conditions(self):
 
         # terms and conditions title
-        pyxel.text(
-            constants.TERMS_AND_CONDITIONS_TITLE.x,
-            constants.TERMS_AND_CONDITIONS_TITLE.y,
-            constants.TERMS_AND_CONDITIONS_TITLE.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.TERMS_AND_CONDITIONS_TITLE)
 
         # display the lines from the terms and conditions text
         for i, line in enumerate(constants.TEXT_TERMS_AND_CONDITIONS):
@@ -166,25 +148,13 @@ class App:
             )
 
         # display the accept or decline text at the bottom
-        pyxel.text(
-            constants.ACCEPT_OR_DECLINE.x,
-            constants.ACCEPT_OR_DECLINE.y,
-            constants.ACCEPT_OR_DECLINE.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.ACCEPT_OR_DECLINE)
 
     def _draw_info_screen(
         self, title: constants.PaddedCenteredText, text_block: list[str]
     ):
         # title
-        pyxel.text(
-            title.x,
-            title.y,
-            title.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(title)
 
         # display the lines from the text block
         for i, line in enumerate(text_block):
@@ -230,13 +200,7 @@ class App:
 
     def _draw_search_screen(self):
         # title
-        pyxel.text(
-            constants.SEARCH_TITLE.x,
-            constants.SEARCH_TITLE.y,
-            constants.SEARCH_TITLE.text,
-            pyxel.COLOR_LIME,
-            self.bedstead,
-        )
+        self._draw_text(constants.SEARCH_TITLE)
 
         # show the go back text
         self._draw_text(constants.BACK_TEXT)
