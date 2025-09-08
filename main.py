@@ -235,6 +235,15 @@ class App:
             self.bedstead,
         )
 
+        # show the go back text
+        pyxel.text(
+            constants.BACK_TEXT.x,
+            constants.BACK_TEXT.y,
+            constants.BACK_TEXT.text,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def draw(self):
         # clear screen
         pyxel.cls(pyxel.COLOR_BLACK)
