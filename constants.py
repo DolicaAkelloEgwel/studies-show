@@ -383,3 +383,10 @@ class SearchElement:
         if self._selected:
             return GREEN
         return GREY
+
+
+SEARCH_ELEMENTS = [
+    SearchElement("Year"),
+    SearchElement("Summary"),
+    SearchElement("Start"),
+]
