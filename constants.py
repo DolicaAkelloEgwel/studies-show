@@ -32,6 +32,10 @@ BOLD_BEDSTEAD_PATH = os.path.join(ASSETS_PATH, "bedstead-bold-20.bdf")
 TEXT_PIXEL_HEIGHT = 20
 # the colour red in pyxel
 RED = 8
+# the colour grey in pyxel
+GREY = 13
+# the colour green in pyxel
+GREEN = 11
 # amount of x-border in pixels for blocks of text
 BORDER_TEXT_BLOCK = 100
 
@@ -355,3 +359,27 @@ SEARCH_TITLE = PaddedCenteredText("SEARCH", TERMS_TEXT_Y // 2 - 10)
 SEARCH_BACK_TEXT = CenteredText(
     "Tab - Move || Enter - Search || Esc - Back", ACCEPT_OR_DECLINE.y
 )
+
+
+# element
+class SearchElement:
+    def __init__(self, name: str):
+        self._name = name
+        self._selected = False
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def selected(self) -> bool:
+        return self._selected
+
+    @selected.setter
+    def selected(self, val: bool):
+        self._selected = val
+
+    def colour(self) -> int:
+        if self._selected:
+            return GREEN
+        return GREY
