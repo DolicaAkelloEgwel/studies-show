@@ -350,3 +350,8 @@ HELP_TITLE = PaddedCenteredText("HELP", TERMS_TEXT_Y // 2 - 10)
 
 # input title
 SEARCH_TITLE = PaddedCenteredText("SEARCH", TERMS_TEXT_Y // 2 - 10)
+
+# back text
+SEARCH_BACK_TEXT = CenteredText(
+    "Tab - Move || Enter - Search || Esc - Back", ACCEPT_OR_DECLINE.y
+)

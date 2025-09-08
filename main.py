@@ -203,7 +203,7 @@ class App:
         self._draw_text(constants.SEARCH_TITLE)
 
         # show the go back text
-        self._draw_text(constants.BACK_TEXT)
+        self._draw_text(constants.SEARCH_BACK_TEXT)
 
     def draw(self):
         # clear screen
