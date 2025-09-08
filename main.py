@@ -225,12 +225,12 @@ class App:
             # show the menu item text
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
-    def _draw_search_screen(self, title=constants.SEARCH_TITLE):
+    def _draw_search_screen(self):
         # title
         pyxel.text(
-            title.x,
-            title.y,
-            title.text,
+            constants.SEARCH_TITLE.x,
+            constants.SEARCH_TITLE.y,
+            constants.SEARCH_TITLE.text,
             pyxel.COLOR_LIME,
             self.bedstead,
         )
