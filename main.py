@@ -143,19 +143,20 @@ class App:
 
             if pyxel.btnp(pyxel.KEY_BACKSPACE):
                 self._restart_timer()
-                constants.YEAR_INPUT.content = constants.YEAR_INPUT.content[
-                    :-1
-                ]
+                constants.YEAR_INPUT.backspace()
                 return
 
             num = _check_number_press()
             if not num:
                 return
             self._restart_timer()
-            constants.YEAR_INPUT.content += num
+            constants.YEAR_INPUT.add_char(num)
 
         elif constants.SUMMARY_INPUT.selected:
-            pass
+            if pyxel.btnp(pyxel.KEY_BACKSPACE):
+                self._restart_timer()
+                constants.SUMMARY_INPUT.backspace()
+                return
         elif constants.START_SEARCH_BUTTON.selected:
             pass
         elif self._idle_limit():

@@ -433,9 +433,11 @@ class SearchElement:
     def content(self) -> str:
         return self._content
 
-    @content.setter
-    def content(self, val: str):
-        self._content = val
+    def add_char(self, char: str):
+        self._content += char
+
+    def backspace(self):
+        self._content = self._content[:-1]
 
     @property
     def colour(self) -> int:
