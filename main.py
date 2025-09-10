@@ -8,6 +8,52 @@ import constants
 import helpers
 
 
+def _check_number_press() -> str:
+    if pyxel.btnp(pyxel.KEY_0):
+        return "0"
+    if pyxel.btnp(pyxel.KEY_1):
+        return "1"
+    if pyxel.btnp(pyxel.KEY_2):
+        return "2"
+    if pyxel.btnp(pyxel.KEY_3):
+        return "3"
+    if pyxel.btnp(pyxel.KEY_4):
+        return "4"
+    if pyxel.btnp(pyxel.KEY_5):
+        return "5"
+    if pyxel.btnp(pyxel.KEY_6):
+        return "6"
+    if pyxel.btnp(pyxel.KEY_7):
+        return "7"
+    if pyxel.btnp(pyxel.KEY_8):
+        return "8"
+    if pyxel.btnp(pyxel.KEY_9):
+        return "9"
+
+
+def _check_letter_press() -> str:
+    if pyxel.btnp(pyxel.KEY_A):
+        return "A"
+    if pyxel.btnp(pyxel.KEY_B):
+        return "B"
+    if pyxel.btnp(pyxel.KEY_C):
+        return "C"
+    if pyxel.btnp(pyxel.KEY_D):
+        return "D"
+    if pyxel.btnp(pyxel.KEY_E):
+        return "E"
+    if pyxel.btnp(pyxel.KEY_F):
+        return "F"
+    if pyxel.btnp(pyxel.KEY_G):
+        return "G"
+    if pyxel.btnp(pyxel.KEY_H):
+        return "H"
+    if pyxel.btnp(pyxel.KEY_I):
+        return "I"
+    if pyxel.btnp(pyxel.KEY_J):
+        return "J"
+
+
 class App:
 
     def __init__(
@@ -86,28 +132,6 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
-    def _check_number_press(self) -> int:
-        if pyxel.btnp(pyxel.KEY_0):
-            return "0"
-        if pyxel.btnp(pyxel.KEY_1):
-            return "1"
-        if pyxel.btnp(pyxel.KEY_2):
-            return "2"
-        if pyxel.btnp(pyxel.KEY_3):
-            return "3"
-        if pyxel.btnp(pyxel.KEY_4):
-            return "4"
-        if pyxel.btnp(pyxel.KEY_5):
-            return "5"
-        if pyxel.btnp(pyxel.KEY_6):
-            return "6"
-        if pyxel.btnp(pyxel.KEY_7):
-            return "7"
-        if pyxel.btnp(pyxel.KEY_8):
-            return "8"
-        if pyxel.btnp(pyxel.KEY_9):
-            return "9"
-
     def _update_search(self):
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
@@ -116,16 +140,20 @@ class App:
             self._restart_timer()
             constants.move_search_selection()
         elif constants.YEAR_INPUT.selected:
-            num = self._check_number_press()
+
+            if pyxel.btnp(pyxel.KEY_BACKSPACE):
+                self._restart_timer()
+                constants.YEAR_INPUT.content = constants.YEAR_INPUT.content[
+                    :-1
+                ]
+                return
+
+            num = _check_number_press()
             if not num:
-                if pyxel.btnp(pyxel.KEY_BACKSPACE):
-                    self._restart_timer()
-                    constants.YEAR_INPUT.content = (
-                        constants.YEAR_INPUT.content[:-1]
-                    )
                 return
             self._restart_timer()
             constants.YEAR_INPUT.content += num
+
         elif constants.SUMMARY_INPUT.selected:
             pass
         elif constants.START_SEARCH_BUTTON.selected:
