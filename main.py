@@ -91,7 +91,7 @@ class App:
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
         elif pyxel.btnp(pyxel.KEY_TAB):
-            pass
+            constants.move_search_selection()
         elif self._idle_limit():
             self._restart_timer()
             constants.reset_main_menu()
