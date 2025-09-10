@@ -217,6 +217,15 @@ class App:
         # title
         self._draw_text(constants.SEARCH_TITLE)
 
+        # year input
+        pyxel.text(
+            constants.YEAR_INPUT.x,
+            constants.YEAR_INPUT.y,
+            constants.YEAR_INPUT.name,
+            constants.YEAR_INPUT.colour,
+            self.bedstead,
+        )
+
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
 
