@@ -86,6 +86,28 @@ class App:
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
+    def _check_number_press(self) -> int:
+        if pyxel.btnp(pyxel.KEY_0):
+            return "0"
+        if pyxel.btnp(pyxel.KEY_1):
+            return "1"
+        if pyxel.btnp(pyxel.KEY_2):
+            return "2"
+        if pyxel.btnp(pyxel.KEY_3):
+            return "3"
+        if pyxel.btnp(pyxel.KEY_4):
+            return "4"
+        if pyxel.btnp(pyxel.KEY_5):
+            return "5"
+        if pyxel.btnp(pyxel.KEY_6):
+            return "6"
+        if pyxel.btnp(pyxel.KEY_7):
+            return "7"
+        if pyxel.btnp(pyxel.KEY_8):
+            return "8"
+        if pyxel.btnp(pyxel.KEY_9):
+            return "9"
+
     def _update_search(self):
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
@@ -97,8 +119,17 @@ class App:
             self._restart_timer()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
-        else:
-            pass
+        elif constants.YEAR_INPUT.selected:
+            num = self._check_number_press()
+            if not num:
+                if pyxel.btnp(pyxel.KEY_BACKSPACE):
+                    self._restart_timer()
+                    constants.YEAR_INPUT.content = (
+                        constants.YEAR_INPUT.content[:-1]
+                    )
+                return
+            self._restart_timer()
+            constants.YEAR_INPUT.content += num
 
     def update(self):
         if self._state == constants.State.TITLE:
