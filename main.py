@@ -241,6 +241,13 @@ class App:
             constants.YEAR_INPUT.inner_box.height,
             pyxel.COLOR_BLACK,
         )
+        pyxel.text(
+            constants.YEAR_INPUT.x + 6,
+            constants.YEAR_INPUT.y + 20 + 2 + 2 + 2 + 1,
+            constants.YEAR_INPUT.content,
+            constants.YEAR_INPUT.colour,
+            self.bedstead,
+        )
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
