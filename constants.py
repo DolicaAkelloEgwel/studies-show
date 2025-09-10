@@ -363,9 +363,11 @@ SEARCH_BACK_TEXT = CenteredText(
 
 # element for search screen
 class SearchElement:
-    def __init__(self, name: str):
+    def __init__(self, name: str, y: int):
         self._name = name
         self._selected = False
+        self._x = SEARCH_TITLE.x
+        self._y = y
 
     @property
     def name(self) -> str:
@@ -379,17 +381,32 @@ class SearchElement:
     def selected(self, val: bool):
         self._selected = val
 
+    @property
+    def x(self) -> int:
+        return self._x
+
+    @property
+    def y(self) -> int:
+        return self._y
+
+    @property
     def colour(self) -> int:
         if self._selected:
             return GREEN
         return GREY
 
 
+YEAR_INPUT = SearchElement("YEAR:", 100)
+SUMMARY_INPUT = SearchElement("SUMMARY:", 100)
+START_SEARCH_BUTTON = SearchElement("Start Search", 200)
+
 SEARCH_ELEMENTS = [
-    SearchElement("Year"),
-    SearchElement("Summary"),
-    SearchElement("Start"),
+    YEAR_INPUT,
+    SUMMARY_INPUT,
+    START_SEARCH_BUTTON,
 ]
+
+YEAR_INPUT.selected = True
 
 
 def move_search_selection():
