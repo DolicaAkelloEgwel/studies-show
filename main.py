@@ -30,6 +30,8 @@ def _check_number_press() -> str:
     if pyxel.btnp(pyxel.KEY_9):
         return "9"
 
+    return ""
+
 
 def _check_letter_press() -> str:
     if pyxel.btnp(pyxel.KEY_A):
@@ -52,6 +54,40 @@ def _check_letter_press() -> str:
         return "I"
     if pyxel.btnp(pyxel.KEY_J):
         return "J"
+    if pyxel.btnp(pyxel.KEY_K):
+        return "K"
+    if pyxel.btnp(pyxel.KEY_L):
+        return "L"
+    if pyxel.btnp(pyxel.KEY_M):
+        return "M"
+    if pyxel.btnp(pyxel.KEY_N):
+        return "N"
+    if pyxel.btnp(pyxel.KEY_O):
+        return "O"
+    if pyxel.btnp(pyxel.KEY_P):
+        return "P"
+    if pyxel.btnp(pyxel.KEY_Q):
+        return "Q"
+    if pyxel.btnp(pyxel.KEY_R):
+        return "R"
+    if pyxel.btnp(pyxel.KEY_S):
+        return "S"
+    if pyxel.btnp(pyxel.KEY_T):
+        return "T"
+    if pyxel.btnp(pyxel.KEY_U):
+        return "U"
+    if pyxel.btnp(pyxel.KEY_V):
+        return "V"
+    if pyxel.btnp(pyxel.KEY_W):
+        return "W"
+    if pyxel.btnp(pyxel.KEY_X):
+        return "X"
+    if pyxel.btnp(pyxel.KEY_Y):
+        return "Y"
+    if pyxel.btnp(pyxel.KEY_Z):
+        return "Z"
+
+    return ""
 
 
 class App:
@@ -157,6 +193,15 @@ class App:
                 self._restart_timer()
                 constants.SUMMARY_INPUT.backspace()
                 return
+
+            char = _check_letter_press()
+            num = _check_number_press()
+
+            if not char and not num:
+                return
+
+            constants.SUMMARY_INPUT.add_char(char + num)
+
         elif constants.START_SEARCH_BUTTON.selected:
             pass
         elif self._idle_limit():
