@@ -361,7 +361,7 @@ SEARCH_BACK_TEXT = CenteredText(
 )
 
 
-# element
+# element for search screen
 class SearchElement:
     def __init__(self, name: str):
         self._name = name
@@ -390,3 +390,18 @@ SEARCH_ELEMENTS = [
     SearchElement("Summary"),
     SearchElement("Start"),
 ]
+
+
+def move_search_selection():
+    """Move the selection on the search screen."""
+    length = len(SEARCH_ELEMENTS)
+    for i in range(length):
+        if SEARCH_ELEMENTS[i].selected:
+            (
+                SEARCH_ELEMENTS[i].selected,
+                SEARCH_ELEMENTS[(i + 1) % length].selected,
+            ) = (
+                SEARCH_ELEMENTS[(i + 1) % length].selected,
+                SEARCH_ELEMENTS[i].selected,
+            )
+            return
