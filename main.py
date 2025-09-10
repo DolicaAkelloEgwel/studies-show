@@ -220,7 +220,7 @@ class App:
 
         # year input text
         pyxel.text(
-            constants.YEAR_INPUT.x,
+            constants.YEAR_INPUT.text_x,
             constants.YEAR_INPUT.y,
             constants.YEAR_INPUT.name,
             constants.YEAR_INPUT.colour,
@@ -228,14 +228,14 @@ class App:
         )
 
         pyxel.rect(
-            constants.YEAR_INPUT.x + 50,
+            constants.YEAR_INPUT.outer_box_x,
             constants.YEAR_INPUT.y,
             700,
             50,
             constants.YEAR_INPUT.colour,
         )
         pyxel.rect(
-            constants.YEAR_INPUT.x + 50 + 2,
+            constants.YEAR_INPUT.inner_box_x,
             constants.YEAR_INPUT.y + 2,
             700 - 4,
             50 - 4,

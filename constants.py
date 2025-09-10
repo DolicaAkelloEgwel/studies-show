@@ -366,7 +366,9 @@ class SearchElement:
     def __init__(self, name: str, y: int):
         self._name = name
         self._selected = False
-        self._x = SEARCH_TITLE.x
+        self._text_x = SEARCH_TITLE.x
+        self._outer_box_x = SEARCH_TITLE.x + 70
+        self._inner_box_x = self._outer_box_x + 2
         self._y = y
 
     @property
@@ -382,8 +384,16 @@ class SearchElement:
         self._selected = val
 
     @property
-    def x(self) -> int:
-        return self._x
+    def text_x(self) -> int:
+        return self._text_x
+
+    @property
+    def outer_box_x(self) -> int:
+        return self._outer_box_x
+
+    @property
+    def inner_box_x(self) -> int:
+        return self._inner_box_x
 
     @property
     def y(self) -> int:
