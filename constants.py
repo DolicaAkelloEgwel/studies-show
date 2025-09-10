@@ -361,6 +361,7 @@ SEARCH_BACK_TEXT = CenteredText(
 )
 
 
+# class for input box info
 class Box:
     def __init__(self, x: int, y: int, width: int, height: int):
         self._x = x
@@ -387,7 +388,7 @@ class Box:
 
 # element for search screen
 class SearchElement:
-    def __init__(self, name: str, y: int):
+    def __init__(self, name: str, y: int, n_lines: int):
         self._name = name
         self._selected = False
         self._x = SEARCH_TITLE.x
@@ -396,7 +397,7 @@ class SearchElement:
             SEARCH_TITLE.x + 2,
             y + TEXT_PIXEL_HEIGHT + 2,
             _width_of_string_in_pixels(len(SEARCH_TITLE.text)),
-            TEXT_PIXEL_HEIGHT + 8,
+            (TEXT_PIXEL_HEIGHT * n_lines) + 8,
         )
         self.inner_box = Box(
             self.outer_box.x + 2,
@@ -443,9 +444,9 @@ class SearchElement:
         return GREY
 
 
-YEAR_INPUT = SearchElement("YEAR:", 100)
-SUMMARY_INPUT = SearchElement("SUMMARY:", 100)
-START_SEARCH_BUTTON = SearchElement("Start Search", 200)
+YEAR_INPUT = SearchElement("YEAR:", 100, 1)
+SUMMARY_INPUT = SearchElement("SUMMARY:", 100, 3)
+START_SEARCH_BUTTON = SearchElement("Start Search", 200, 0)
 
 SEARCH_ELEMENTS = [
     YEAR_INPUT,
