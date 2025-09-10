@@ -361,15 +361,52 @@ SEARCH_BACK_TEXT = CenteredText(
 )
 
 
+class Box:
+    def __init__(self, x: int, y: int, width: int, height: int):
+        self._x = x
+        self._y = y
+        self._width = width
+        self._height = height
+
+    @property
+    def x(self) -> int:
+        return self._x
+
+    @property
+    def y(self) -> int:
+        return self._y
+
+    @property
+    def width(self) -> int:
+        return self._width
+
+    @property
+    def height(self) -> int:
+        return self._height
+
+
 # element for search screen
 class SearchElement:
     def __init__(self, name: str, y: int):
         self._name = name
         self._selected = False
-        self._text_x = SEARCH_TITLE.x
-        self._outer_box_x = SEARCH_TITLE.x + 70
-        self._inner_box_x = self._outer_box_x + 2
+        self._x = SEARCH_TITLE.x
+
+        self.outer_box = Box(
+            SEARCH_TITLE.x + 2,
+            y + TEXT_PIXEL_HEIGHT + 2,
+            _width_of_string_in_pixels(len(SEARCH_TITLE.text)),
+            TEXT_PIXEL_HEIGHT + 8,
+        )
+        self.inner_box = Box(
+            self.outer_box.x + 2,
+            self.outer_box.y + 2,
+            _width_of_string_in_pixels(len(SEARCH_TITLE.text)) - 4,
+            TEXT_PIXEL_HEIGHT + 4,
+        )
+
         self._y = y
+        self._content = ""
 
     @property
     def name(self) -> str:
@@ -384,20 +421,20 @@ class SearchElement:
         self._selected = val
 
     @property
-    def text_x(self) -> int:
-        return self._text_x
-
-    @property
-    def outer_box_x(self) -> int:
-        return self._outer_box_x
-
-    @property
-    def inner_box_x(self) -> int:
-        return self._inner_box_x
+    def x(self) -> int:
+        return self._x
 
     @property
     def y(self) -> int:
         return self._y
+
+    @property
+    def content(self) -> str:
+        return self._content
+
+    @content.setter
+    def content(self, val: str):
+        self._content = val
 
     @property
     def colour(self) -> int:
