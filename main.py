@@ -275,7 +275,7 @@ class App:
             pyxel.COLOR_BLACK,
         )
         pyxel.text(
-            input_field.x + 6,
+            input_field.inner_box.x + 2,
             input_field.inner_box.y + 3,
             input_field.content,
             input_field.colour,
