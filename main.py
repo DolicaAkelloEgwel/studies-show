@@ -289,6 +289,9 @@ class App:
         # year input text
         self._draw_search_input_field(constants.YEAR_INPUT)
 
+        # summary input text
+        self._draw_search_input_field(constants.SUMMARY_INPUT)
+
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
 

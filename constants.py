@@ -445,8 +445,8 @@ class SearchElement:
 
 
 YEAR_INPUT = SearchElement("YEAR:", 100, 1)
-SUMMARY_INPUT = SearchElement("SUMMARY:", 100, 3)
-START_SEARCH_BUTTON = SearchElement("Start Search", 200, 0)
+SUMMARY_INPUT = SearchElement("SUMMARY:", 180, 5)
+START_SEARCH_BUTTON = SearchElement("START SEARCH", 200, 0)
 
 SEARCH_ELEMENTS = [
     YEAR_INPUT,
