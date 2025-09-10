@@ -401,8 +401,8 @@ class SearchElement:
         self.inner_box = Box(
             self.outer_box.x + 2,
             self.outer_box.y + 2,
-            _width_of_string_in_pixels(len(SEARCH_TITLE.text)) - 4,
-            TEXT_PIXEL_HEIGHT + 4,
+            self.outer_box.width - 4,
+            self.outer_box.height - 4,
         )
 
         self._y = y
