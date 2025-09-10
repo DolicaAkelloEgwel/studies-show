@@ -91,6 +91,7 @@ class App:
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
         elif pyxel.btnp(pyxel.KEY_TAB):
+            self._restart_timer()
             constants.move_search_selection()
         elif self._idle_limit():
             self._restart_timer()
@@ -217,13 +218,28 @@ class App:
         # title
         self._draw_text(constants.SEARCH_TITLE)
 
-        # year input
+        # year input text
         pyxel.text(
             constants.YEAR_INPUT.x,
             constants.YEAR_INPUT.y,
             constants.YEAR_INPUT.name,
             constants.YEAR_INPUT.colour,
             self.bedstead,
+        )
+
+        pyxel.rect(
+            constants.YEAR_INPUT.x + 50,
+            constants.YEAR_INPUT.y,
+            700,
+            50,
+            constants.YEAR_INPUT.colour,
+        )
+        pyxel.rect(
+            constants.YEAR_INPUT.x + 50 + 2,
+            constants.YEAR_INPUT.y + 2,
+            700 - 4,
+            50 - 4,
+            pyxel.COLOR_BLACK,
         )
 
         # show the go back text
