@@ -115,10 +115,6 @@ class App:
         elif pyxel.btnp(pyxel.KEY_TAB):
             self._restart_timer()
             constants.move_search_selection()
-        elif self._idle_limit():
-            self._restart_timer()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
         elif constants.YEAR_INPUT.selected:
             num = self._check_number_press()
             if not num:
@@ -130,6 +126,14 @@ class App:
                 return
             self._restart_timer()
             constants.YEAR_INPUT.content += num
+        elif constants.SUMMARY_INPUT.selected:
+            pass
+        elif constants.START_SEARCH_BUTTON.selected:
+            pass
+        elif self._idle_limit():
+            self._restart_timer()
+            constants.reset_main_menu()
+            self._state = constants.State.TITLE
 
     def update(self):
         if self._state == constants.State.TITLE:
@@ -245,40 +249,45 @@ class App:
             # show the menu item text
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
+    def _draw_search_input_field(self, input_field: constants.SearchElement):
+
+        # year input text
+        pyxel.text(
+            input_field.x,
+            input_field.y,
+            input_field.name,
+            input_field.colour,
+            self.bedstead,
+        )
+
+        pyxel.rect(
+            input_field.outer_box.x,
+            input_field.outer_box.y,
+            input_field.outer_box.width,
+            input_field.outer_box.height,
+            input_field.colour,
+        )
+        pyxel.rect(
+            input_field.inner_box.x,
+            input_field.inner_box.y,
+            input_field.inner_box.width,
+            input_field.inner_box.height,
+            pyxel.COLOR_BLACK,
+        )
+        pyxel.text(
+            input_field.x + 6,
+            input_field.y + 20 + 2 + 2 + 2 + 1,
+            input_field.content,
+            input_field.colour,
+            self.bedstead,
+        )
+
     def _draw_search_screen(self):
         # title
         self._draw_text(constants.SEARCH_TITLE)
 
         # year input text
-        pyxel.text(
-            constants.YEAR_INPUT.x,
-            constants.YEAR_INPUT.y,
-            constants.YEAR_INPUT.name,
-            constants.YEAR_INPUT.colour,
-            self.bedstead,
-        )
-
-        pyxel.rect(
-            constants.YEAR_INPUT.outer_box.x,
-            constants.YEAR_INPUT.outer_box.y,
-            constants.YEAR_INPUT.outer_box.width,
-            constants.YEAR_INPUT.outer_box.height,
-            constants.YEAR_INPUT.colour,
-        )
-        pyxel.rect(
-            constants.YEAR_INPUT.inner_box.x,
-            constants.YEAR_INPUT.inner_box.y,
-            constants.YEAR_INPUT.inner_box.width,
-            constants.YEAR_INPUT.inner_box.height,
-            pyxel.COLOR_BLACK,
-        )
-        pyxel.text(
-            constants.YEAR_INPUT.x + 6,
-            constants.YEAR_INPUT.y + 20 + 2 + 2 + 2 + 1,
-            constants.YEAR_INPUT.content,
-            constants.YEAR_INPUT.colour,
-            self.bedstead,
-        )
+        self._draw_search_input_field(constants.YEAR_INPUT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
