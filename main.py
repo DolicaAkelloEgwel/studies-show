@@ -86,7 +86,52 @@ def _check_letter_press() -> str:
         return "Y"
     if pyxel.btnp(pyxel.KEY_Z):
         return "Z"
-
+    if pyxel.btnp(pyxel.KEY_SPACE):
+        return " "
+    if pyxel.btnp(pyxel.KEY_EXCLAIM):
+        return "!"
+    if pyxel.btnp(pyxel.KEY_QUOTEDBL):
+        return '"'
+    if pyxel.btnp(pyxel.KEY_PERCENT):
+        return "%"
+    if pyxel.btnp(pyxel.KEY_DOLLAR):
+        return "$"
+    if pyxel.btnp(pyxel.KEY_AMPERSAND):
+        return "&"
+    if pyxel.btnp(pyxel.KEY_QUOTE):
+        return "'"
+    if pyxel.btnp(pyxel.KEY_LEFTPAREN):
+        return "("
+    if pyxel.btnp(pyxel.KEY_RIGHTPAREN):
+        return ")"
+    if pyxel.btnp(pyxel.KEY_ASTERISK):
+        return "*"
+    if pyxel.btnp(pyxel.KEY_PLUS):
+        return "+"
+    if pyxel.btnp(pyxel.KEY_COMMA):
+        return ","
+    if pyxel.btnp(pyxel.KEY_MINUS):
+        return "-"
+    if pyxel.btnp(pyxel.KEY_PERIOD):
+        return "."
+    if pyxel.btnp(pyxel.KEY_SLASH):
+        return "/"
+    if pyxel.btnp(pyxel.KEY_COLON):
+        return ":"
+    if pyxel.btnp(pyxel.KEY_SEMICOLON):
+        return ";"
+    if pyxel.btnp(pyxel.KEY_LESS):
+        return "<"
+    if pyxel.btnp(pyxel.KEY_EQUALS):
+        return "="
+    if pyxel.btnp(pyxel.KEY_GREATER):
+        return ">"
+    if pyxel.btnp(pyxel.KEY_QUESTION):
+        return "?"
+    if pyxel.btnp(pyxel.KEY_AT):
+        return "@"
+    if pyxel.btnp(pyxel.KEY_BACKSLASH):
+        return "\\"
     return ""
 
 
