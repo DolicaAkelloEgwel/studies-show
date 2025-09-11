@@ -247,22 +247,20 @@ class App:
             self._state = constants.State.TITLE
 
     def _update_search(self):
+
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
-            return
 
         if pyxel.btnp(pyxel.KEY_TAB):
             self._restart_timer()
             constants.move_search_selection()
-            return
 
         if constants.YEAR_INPUT.selected:
 
             if pyxel.btnp(pyxel.KEY_BACKSPACE):
                 self._restart_timer()
                 constants.YEAR_INPUT.backspace()
-                return
 
             num = _check_number_press()
             if num:
