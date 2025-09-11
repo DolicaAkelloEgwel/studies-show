@@ -88,24 +88,32 @@ def _check_letter_press() -> str:
         return "Z"
     if pyxel.btnp(pyxel.KEY_SPACE):
         return " "
-    if pyxel.btnp(pyxel.KEY_EXCLAIM):
-        return "!"
-    if pyxel.btnp(pyxel.KEY_QUOTEDBL):
-        return '"'
-    if pyxel.btnp(pyxel.KEY_PERCENT):
-        return "%"
-    if pyxel.btnp(pyxel.KEY_DOLLAR):
-        return "$"
-    if pyxel.btnp(pyxel.KEY_AMPERSAND):
-        return "&"
+
+    if pyxel.btn(pyxel.KEY_RSHIFT):
+        print("rshift!!!")
+        if pyxel.btnp(pyxel.KEY_0):
+            return ")"
+        if pyxel.btnp(pyxel.KEY_1):
+            return "!"
+        if pyxel.btnp(pyxel.KEY_2):
+            return '"'
+        if pyxel.btnp(pyxel.KEY_3):
+            return "£"
+        if pyxel.btnp(pyxel.KEY_4):
+            return "$"
+        if pyxel.btnp(pyxel.KEY_5):
+            return "%"
+        if pyxel.btnp(pyxel.KEY_6):
+            return "^"
+        if pyxel.btnp(pyxel.KEY_7):
+            return "&"
+        if pyxel.btnp(pyxel.KEY_8):
+            return "*"
+        if pyxel.btnp(pyxel.KEY_9):
+            return "("
+
     if pyxel.btnp(pyxel.KEY_QUOTE):
         return "'"
-    if pyxel.btnp(pyxel.KEY_LEFTPAREN):
-        return "("
-    if pyxel.btnp(pyxel.KEY_RIGHTPAREN):
-        return ")"
-    if pyxel.btnp(pyxel.KEY_ASTERISK):
-        return "*"
     if pyxel.btnp(pyxel.KEY_PLUS):
         return "+"
     if pyxel.btnp(pyxel.KEY_COMMA):
@@ -242,10 +250,12 @@ class App:
             char = _check_letter_press()
             num = _check_number_press()
 
-            if not char and not num:
+            if char:
+                constants.SUMMARY_INPUT.add_char(char)
+            elif num:
+                constants.SUMMARY_INPUT.add_char(num)
+            else:
                 return
-
-            constants.SUMMARY_INPUT.add_char(char + num)
 
         elif constants.START_SEARCH_BUTTON.selected:
             pass
