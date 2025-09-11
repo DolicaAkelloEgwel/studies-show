@@ -89,7 +89,7 @@ def _check_letter_press() -> str:
     if pyxel.btnp(pyxel.KEY_SPACE):
         return " "
 
-    if pyxel.btn(pyxel.KEY_RSHIFT):
+    if pyxel.btn(pyxel.KEY_RSHIFT) or pyxel.btn(pyxel.KEY_LSHIFT):
         if pyxel.btnp(pyxel.KEY_0):
             return ")"
         if pyxel.btnp(pyxel.KEY_1):
@@ -126,11 +126,20 @@ def _check_letter_press() -> str:
             return ">"
         if pyxel.btnp(pyxel.KEY_SLASH):
             return "?"
+        if pyxel.btnp(pyxel.KEY_LEFTBRACKET):
+            return "{"
+        if pyxel.btnp(pyxel.KEY_RIGHTBRACKET):
+            return "}"
 
     if pyxel.btnp(pyxel.KEY_MINUS):
         return "-"
     if pyxel.btnp(pyxel.KEY_EQUALS):
         return "="
+
+    if pyxel.btnp(pyxel.KEY_LEFTBRACKET):
+        return "["
+    if pyxel.btnp(pyxel.KEY_RIGHTBRACKET):
+        return "]"
 
     if pyxel.btnp(pyxel.KEY_SEMICOLON):
         return ";"
