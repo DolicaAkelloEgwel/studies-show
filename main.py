@@ -90,7 +90,6 @@ def _check_letter_press() -> str:
         return " "
 
     if pyxel.btn(pyxel.KEY_RSHIFT):
-        print("rshift!!!")
         if pyxel.btnp(pyxel.KEY_0):
             return ")"
         if pyxel.btnp(pyxel.KEY_1):
@@ -111,35 +110,50 @@ def _check_letter_press() -> str:
             return "*"
         if pyxel.btnp(pyxel.KEY_9):
             return "("
+        if pyxel.btnp(pyxel.KEY_MINUS):
+            return "_"
+        if pyxel.btnp(pyxel.KEY_EQUALS):
+            return "+"
+        if pyxel.btnp(pyxel.KEY_SEMICOLON):
+            return ":"
+        if pyxel.btnp(pyxel.KEY_QUOTE):
+            return "@"
+        if pyxel.btnp(pyxel.KEY_HASH):
+            return "~"
+        if pyxel.btnp(pyxel.KEY_COMMA):
+            return "<"
+        if pyxel.btnp(pyxel.KEY_PERIOD):
+            return ">"
+        if pyxel.btnp(pyxel.KEY_SLASH):
+            return "?"
 
-    if pyxel.btnp(pyxel.KEY_QUOTE):
-        return "'"
-    if pyxel.btnp(pyxel.KEY_PLUS):
-        return "+"
-    if pyxel.btnp(pyxel.KEY_COMMA):
-        return ","
     if pyxel.btnp(pyxel.KEY_MINUS):
         return "-"
+    if pyxel.btnp(pyxel.KEY_EQUALS):
+        return "="
+
+    if pyxel.btnp(pyxel.KEY_SEMICOLON):
+        return ";"
+    if pyxel.btnp(pyxel.KEY_QUOTE):
+        return "'"
+
+    if pyxel.btnp(pyxel.KEY_COLON):
+        return ":"
+    if pyxel.btnp(pyxel.KEY_QUOTE):
+        return "'"
+    if pyxel.btnp(pyxel.KEY_HASH):
+        return "#"
+
+    if pyxel.btnp(pyxel.KEY_COMMA):
+        return ","
     if pyxel.btnp(pyxel.KEY_PERIOD):
         return "."
     if pyxel.btnp(pyxel.KEY_SLASH):
         return "/"
-    if pyxel.btnp(pyxel.KEY_COLON):
-        return ":"
-    if pyxel.btnp(pyxel.KEY_SEMICOLON):
-        return ";"
-    if pyxel.btnp(pyxel.KEY_LESS):
-        return "<"
-    if pyxel.btnp(pyxel.KEY_EQUALS):
-        return "="
-    if pyxel.btnp(pyxel.KEY_GREATER):
-        return ">"
-    if pyxel.btnp(pyxel.KEY_QUESTION):
-        return "?"
-    if pyxel.btnp(pyxel.KEY_AT):
-        return "@"
+
     if pyxel.btnp(pyxel.KEY_BACKSLASH):
         return "\\"
+
     return ""
 
 
