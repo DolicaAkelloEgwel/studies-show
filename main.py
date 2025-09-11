@@ -203,6 +203,7 @@ class App:
         return time.time() - self.start_time >= constants.IDLE_LIMIT
 
     def _restart_timer(self):
+        print("restarting timer")
         self.start_time = time.time()
 
     def _update_title(self):
@@ -212,6 +213,7 @@ class App:
 
     def _update_terms_and_conditions(self):
         if pyxel.btnp(pyxel.KEY_A):
+            self._restart_timer()
             self._state = constants.State.MAIN_MENU
         elif pyxel.btnp(pyxel.KEY_D):
             self._state = constants.State.TITLE
@@ -248,10 +250,14 @@ class App:
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
-        elif pyxel.btnp(pyxel.KEY_TAB):
+            return
+
+        if pyxel.btnp(pyxel.KEY_TAB):
             self._restart_timer()
             constants.move_search_selection()
-        elif constants.YEAR_INPUT.selected:
+            return
+
+        if constants.YEAR_INPUT.selected:
 
             if pyxel.btnp(pyxel.KEY_BACKSPACE):
                 self._restart_timer()
@@ -259,10 +265,9 @@ class App:
                 return
 
             num = _check_number_press()
-            if not num:
-                return
-            self._restart_timer()
-            constants.YEAR_INPUT.add_char(num)
+            if num:
+                self._restart_timer()
+                constants.YEAR_INPUT.add_char(num)
 
         elif constants.SUMMARY_INPUT.selected:
             if pyxel.btnp(pyxel.KEY_BACKSPACE):
@@ -279,12 +284,11 @@ class App:
             elif num:
                 self._restart_timer()
                 constants.SUMMARY_INPUT.add_char(num)
-            else:
-                return
 
         elif constants.START_SEARCH_BUTTON.selected:
             pass
-        elif self._idle_limit():
+
+        if self._idle_limit():
             self._restart_timer()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
