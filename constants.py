@@ -439,6 +439,9 @@ class SearchElement:
     def backspace(self):
         self._content = self._content[:-1]
 
+    def clear(self):
+        self._content = ""
+
     @property
     def colour(self) -> int:
         if self._selected:
