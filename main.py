@@ -274,8 +274,10 @@ class App:
             num = _check_number_press()
 
             if char:
+                self._restart_timer()
                 constants.SUMMARY_INPUT.add_char(char)
             elif num:
+                self._restart_timer()
                 constants.SUMMARY_INPUT.add_char(num)
             else:
                 return
