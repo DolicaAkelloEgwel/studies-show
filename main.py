@@ -306,9 +306,11 @@ class App:
                     constants.YEAR_INPUT.content
                     and constants.SUMMARY_INPUT.content
                 ):
+                    self._restart_timer()
                     # can't do nothin'
                     return
                 _generate_article()
+                self._restart_timer()
 
         if self._idle_limit():
             self._reset()
