@@ -477,3 +477,8 @@ def move_search_selection():
                 SEARCH_ELEMENTS[i].selected,
             )
             return
+
+
+def clear_search_inputs():
+    for input in SEARCH_ELEMENTS:
+        input.clear()
