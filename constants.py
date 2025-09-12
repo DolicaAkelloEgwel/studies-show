@@ -459,9 +459,24 @@ class SearchElement(Selectable):
         self._content = ""
 
 
+class SearchButton(Selectable):
+    def __init__(self, y: int, width: int, height: int):
+        super().__init__()
+        x = (APP_WIDTH - width) // 2
+        self.outer_box = Box(x, y, width, height)
+        self.middle_box = Box(x + 2, y + 2, width - 4, height - 4)
+        self.inner_box = Box(x + 4, y + 4, width - 8, height - 8)
+        self.text_x = (
+            x
+            + (width // 2)
+            - _width_of_string_in_pixels(len("START SEARCH")) // 2
+        )
+        self.text_y = y + (height // 2) - 10
+
+
 YEAR_INPUT = SearchElement("YEAR:", 100, 1)
 SUMMARY_INPUT = SearchElement("SUMMARY:", 180, 5)
-START_SEARCH_BUTTON = SearchElement("START SEARCH", 200, 0)
+START_SEARCH_BUTTON = SearchButton(430, 400, 120)
 
 SEARCH_ELEMENTS = [
     YEAR_INPUT,
