@@ -254,6 +254,7 @@ class App:
 
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
+            constants.reset_search_selection()
             self._state = constants.State.MAIN_MENU
 
         if pyxel.btnp(pyxel.KEY_TAB):
