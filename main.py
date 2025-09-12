@@ -231,6 +231,8 @@ class App:
             for item in constants.MENU_OPTIONS:
                 if item.selected:
                     self._state = item.new_state
+                    if item.new_state == constants.State.TITLE:
+                        self._reset()
                     return
         elif pyxel.btnp(pyxel.KEY_UP):
             self._restart_timer()
@@ -469,7 +471,6 @@ class App:
             constants.START_SEARCH_BUTTON.inner_box.height,
             constants.START_SEARCH_BUTTON.colour,
         )
-
         pyxel.text(
             constants.START_SEARCH_BUTTON.text.x,
             constants.START_SEARCH_BUTTON.text.y,
