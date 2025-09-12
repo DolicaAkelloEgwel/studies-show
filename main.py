@@ -225,7 +225,6 @@ class App:
             for item in constants.MENU_OPTIONS:
                 if item.selected:
                     self._state = item.new_state
-                    constants.reset_main_menu()
                     return
         elif pyxel.btnp(pyxel.KEY_UP):
             self._restart_timer()
@@ -288,6 +287,7 @@ class App:
 
         if self._idle_limit():
             self._restart_timer()
+            constants.clear_search_inputs()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
