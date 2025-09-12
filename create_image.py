@@ -1,7 +1,11 @@
 import gc
 
-import torch
-from diffusers import DiffusionPipeline
+try:
+    import torch
+    from diffusers import DiffusionPipeline
+except ModuleNotFoundError:
+    pass
+
 
 IMAGE_MODEL = "segmind/tiny-sd"
 
