@@ -217,6 +217,8 @@ class App:
         elif pyxel.btnp(pyxel.KEY_D):
             self._state = constants.State.TITLE
         elif self._idle_limit():
+            constants.clear_search_inputs()
+            constants.reset_main_menu()
             self._state = constants.State.TITLE
 
     def _update_main_menu(self):
@@ -232,6 +234,7 @@ class App:
             self._restart_timer()
             constants.move_main_menu_selection_down()
         elif self._idle_limit():
+            constants.clear_search_inputs()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
@@ -241,6 +244,7 @@ class App:
             self._state = constants.State.MAIN_MENU
         elif self._idle_limit():
             self._restart_timer()
+            constants.clear_search_inputs()
             constants.reset_main_menu()
             self._state = constants.State.TITLE
 
