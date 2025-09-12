@@ -471,9 +471,9 @@ class App:
         )
 
         pyxel.text(
-            constants.START_SEARCH_BUTTON.text_x,
-            constants.START_SEARCH_BUTTON.text_y,
-            "START SEARCH",
+            constants.START_SEARCH_BUTTON.text.x,
+            constants.START_SEARCH_BUTTON.text.y,
+            constants.START_SEARCH_BUTTON.text.text,
             pyxel.COLOR_BLACK,
             self.bedstead,
         )

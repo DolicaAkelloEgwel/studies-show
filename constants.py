@@ -466,12 +466,7 @@ class SearchButton(Selectable):
         self.outer_box = Box(x, y, width, height)
         self.middle_box = Box(x + 2, y + 2, width - 4, height - 4)
         self.inner_box = Box(x + 4, y + 4, width - 8, height - 8)
-        self.text_x = (
-            x
-            + (width // 2)
-            - _width_of_string_in_pixels(len("START SEARCH")) // 2
-        )
-        self.text_y = y + (height // 2) - 10
+        self.text = CenteredText("START SEARCH", y + (height // 2) - 10)
 
 
 YEAR_INPUT = SearchElement("YEAR:", 100, 1)
