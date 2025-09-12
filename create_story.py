@@ -23,7 +23,7 @@ class NewsArticle(BaseModel):
     article_date: str
 
 
-def _create_story(article_summary: str) -> ChatResponse:
+def _create_story(article_summary: str, year: str) -> ChatResponse:
     return chat(
         model=ARTICLE_GENERATION_MODEL,
         messages=[
@@ -48,8 +48,8 @@ def _create_story(article_summary: str) -> ChatResponse:
             {
                 "role": "user",
                 "content": (
-                    "Please create an article with the given content:"
-                    f" {article_summary}"
+                    f"Please create an article from the year {year} with the"
+                    f" given content: {article_summary}"
                 ),
             },
         ],
@@ -74,8 +74,8 @@ def _stable_diffusion_prompt(
     )
 
 
-def create_story(article_summary: str):
-    response: ChatResponse = _create_story(article_summary)
+def create_story(article_summary: str, year: str):
+    response: ChatResponse = _create_story(article_summary, year)
     news_article = NewsArticle.model_validate_json(response.message.content)
 
     # remove other characters that deepseek sometimes spits out

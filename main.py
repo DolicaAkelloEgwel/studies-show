@@ -171,7 +171,9 @@ def _check_letter_press() -> str:
 
 
 def _generate_article():
-    article, image_prompt = create_story(constants.SUMMARY_INPUT.content)
+    article, image_prompt = create_story(
+        constants.SUMMARY_INPUT.content, constants.YEAR_INPUT.content
+    )
     create_image(image_prompt).save("output.jpg")
     write_document(article)
     print_document()
