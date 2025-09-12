@@ -432,7 +432,7 @@ class App:
         )
         pyxel.text(
             input_field.inner_box.x + 2,
-            input_field.inner_box.y + 3,
+            input_field.inner_box.y + 2,
             input_field.content,
             input_field.colour,
             self.bedstead,
