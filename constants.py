@@ -221,7 +221,7 @@ TERMS_TEXT_Y = _centre_block_of_text(
 )
 
 START_TEXT = CenteredText("[PRESS RETURN TO START]", APP_HEIGHT - 120)
-COPYRIGHT_TEXT = CenteredText("(C) 2025 GRAVE MATTER", APP_HEIGHT - 60)
+COPYRIGHT_TEXT = CenteredText("(C) 2025 MERCURIAL MAANGAAR", APP_HEIGHT - 60)
 ACCEPT_OR_DECLINE = CenteredText(
     "(A)CCEPT" + " " * 20 + "(D)ECLINE",
     APP_HEIGHT - TERMS_TEXT_Y // 2 - 10,
