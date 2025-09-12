@@ -6,6 +6,10 @@ import pyxel
 
 import constants
 import helpers
+from create_image import create_image
+from create_story import create_story
+from printer_wrapper import print_document
+from write_document import write_document
 
 
 def _check_number_press() -> str:
@@ -166,6 +170,13 @@ def _check_letter_press() -> str:
     return ""
 
 
+def _generate_article():
+    article, image_prompt = create_story(constants.SUMMARY_INPUT.content)
+    create_image(image_prompt).save("output.jpg")
+    write_document(article)
+    print_document()
+
+
 class App:
 
     def __init__(
@@ -289,7 +300,15 @@ class App:
                 constants.SUMMARY_INPUT.add_char(num)
 
         elif constants.START_SEARCH_BUTTON.selected:
-            pass
+            if pyxel.btnp(pyxel.KEY_RETURN):
+                self._restart_timer()
+                if not (
+                    constants.YEAR_INPUT.content
+                    and constants.SUMMARY_INPUT.content
+                ):
+                    # can't do nothin'
+                    return
+                _generate_article()
 
         if self._idle_limit():
             self._reset()
