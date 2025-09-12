@@ -205,6 +205,13 @@ class App:
     def _restart_timer(self):
         self.start_time = time.time()
 
+    def _reset(self):
+        self._restart_timer()
+        constants.clear_search_inputs()
+        constants.reset_search_selection()
+        constants.reset_main_menu()
+        self._state = constants.State.TITLE
+
     def _update_title(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
             self._restart_timer()
@@ -217,9 +224,7 @@ class App:
         elif pyxel.btnp(pyxel.KEY_D):
             self._state = constants.State.TITLE
         elif self._idle_limit():
-            constants.clear_search_inputs()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
+            self._reset()
 
     def _update_main_menu(self):
         if pyxel.btnp(pyxel.KEY_RETURN):
@@ -234,19 +239,14 @@ class App:
             self._restart_timer()
             constants.move_main_menu_selection_down()
         elif self._idle_limit():
-            constants.clear_search_inputs()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
+            self._reset()
 
     def _update_info_screen(self):
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             self._state = constants.State.MAIN_MENU
         elif self._idle_limit():
-            self._restart_timer()
-            constants.clear_search_inputs()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
+            self._reset()
 
     def _update_search(self):
 
@@ -289,10 +289,7 @@ class App:
             pass
 
         if self._idle_limit():
-            self._restart_timer()
-            constants.clear_search_inputs()
-            constants.reset_main_menu()
-            self._state = constants.State.TITLE
+            self._reset()
 
     def update(self):
         if self._state == constants.State.TITLE:
