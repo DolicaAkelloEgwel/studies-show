@@ -17,7 +17,7 @@ class State(Enum):
 VERSION = "v8.3.4"
 APP_TITLE = "ЯECOLLECTOR " + VERSION
 
-SELECTED_CHARACTER = "▷ "
+BLOCK_CHARACTER = "█"
 
 # how far down the menu screen the first line of the logo appears
 MENU_LOGO_Y = 100
@@ -431,6 +431,8 @@ class SearchElement:
 
     @property
     def content(self) -> str:
+        if self._selected:
+            return self._content + BLOCK_CHARACTER
         return self._content
 
     def add_char(self, char: str):
