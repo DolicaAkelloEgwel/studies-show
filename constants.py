@@ -324,7 +324,7 @@ TEXT_THANKS = _create_wrapped_text_list(thanks_text)
 THANKS_TITLE = PaddedCenteredText("THANKS", TERMS_TEXT_Y // 2 - 10)
 
 # text for go back message - same y as accept or decline text
-BACK_TEXT = CenteredText("Esc - Back", ACCEPT_OR_DECLINE.y)
+BACK_TEXT = CenteredText("ESC - BACK", ACCEPT_OR_DECLINE.y)
 
 # what's new
 
@@ -357,7 +357,7 @@ SEARCH_TITLE = PaddedCenteredText("SEARCH", TERMS_TEXT_Y // 2 - 10)
 
 # back text
 SEARCH_BACK_TEXT = CenteredText(
-    "Tab - Move || Enter - Search || Esc - Back", ACCEPT_OR_DECLINE.y
+    "TAB - MOVE || ENTER - BEGIN SEARCH || ESC - BACK", ACCEPT_OR_DECLINE.y
 )
 
 
