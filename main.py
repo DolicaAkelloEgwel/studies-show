@@ -203,7 +203,6 @@ class App:
         return time.time() - self.start_time >= constants.IDLE_LIMIT
 
     def _restart_timer(self):
-        print("restarting timer")
         self.start_time = time.time()
 
     def _update_title(self):
