@@ -386,11 +386,33 @@ class Box:
         return self._height
 
 
-# element for search screen
-class SearchElement:
-    def __init__(self, name: str, y: int, n_lines: int):
-        self._name = name
+class Selectable:
+    def __init__(self):
         self._selected = False
+
+    @property
+    def selected(self):
+        return self._selected
+
+    @selected.setter
+    def selected(self, val: bool):
+        self._selected = val
+
+    def clear(self):
+        pass
+
+    @property
+    def colour(self) -> int:
+        if self._selected:
+            return GREEN
+        return GREY
+
+
+# element for search screen
+class SearchElement(Selectable):
+    def __init__(self, name: str, y: int, n_lines: int):
+        super().__init__()
+        self._name = name
         self._x = SEARCH_TITLE.x
 
         self.outer_box = Box(
@@ -414,14 +436,6 @@ class SearchElement:
         return self._name
 
     @property
-    def selected(self) -> bool:
-        return self._selected
-
-    @selected.setter
-    def selected(self, val: bool):
-        self._selected = val
-
-    @property
     def x(self) -> int:
         return self._x
 
@@ -443,12 +457,6 @@ class SearchElement:
 
     def clear(self):
         self._content = ""
-
-    @property
-    def colour(self) -> int:
-        if self._selected:
-            return GREEN
-        return GREY
 
 
 YEAR_INPUT = SearchElement("YEAR:", 100, 1)
