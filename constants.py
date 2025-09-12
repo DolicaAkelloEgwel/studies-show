@@ -505,3 +505,8 @@ def move_search_selection():
 def clear_search_inputs():
     for input in SEARCH_ELEMENTS:
         input.clear()
+
+
+def reset_search_selection():
+    SUMMARY_INPUT.selected = START_SEARCH_BUTTON.selected = False
+    YEAR_INPUT.selected = True
