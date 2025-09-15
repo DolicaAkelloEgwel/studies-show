@@ -388,44 +388,80 @@ class Box:
 
 class Selectable:
     def __init__(self, y: int):
+        """Superclass for selectable items.
+
+        Args:
+            y (int): The y-value for the UI components.
+        """
         self._selected = False
         self._y = y
 
     @property
     def selected(self) -> bool:
+        """
+        Returns:
+            bool: True if the item is selected, False otherwise.
+        """
         return self._selected
 
     @selected.setter
     def selected(self, val: bool):
+        """Sets the item as being selected or not.
+
+        Args:
+            val (bool): The new value for the selected property.
+        """
         self._selected = val
 
     @property
     def y(self) -> int:
+        """
+        Returns:
+            int: Returns the y-value of the input UI elements.
+        """
         return self._y
 
     @property
     def colour(self) -> int:
+        """Returns the colour of the input element.
+
+        Returns:
+            int: Returns green if selected, grey if not.
+        """
         if self._selected:
             return GREEN
         return GREY
 
     def clear(self):
+        """Will clear the content of the selectable element. Implemented in
+        sublass."""
         pass
 
 
 # element for search screen
 class SearchElement(Selectable):
     def __init__(self, name: str, y: int, n_lines: int):
+        """An object for storing information for the input fields in the search
+        menu.
+
+        Args:
+            name (str): The name of the field.
+            y (int): The y-value of the UI elements.
+            n_lines (int): The number of lines that the input box can show.
+        """
         super().__init__(y)
         self._name = name
         self._x = SEARCH_TITLE.x
 
+        # a green outer box
         self.outer_box = Box(
             SEARCH_TITLE.x + 2,
             y + TEXT_PIXEL_HEIGHT + 2,
             _width_of_string_in_pixels(len(SEARCH_TITLE.text)),
             (TEXT_PIXEL_HEIGHT * n_lines) + 8,
         )
+
+        # a black inner box
         self.inner_box = Box(
             self.outer_box.x + 2,
             self.outer_box.y + 2,
@@ -433,30 +469,50 @@ class SearchElement(Selectable):
             self.outer_box.height - 4,
         )
 
-        self._y = y
+        # the field starts out as empty
         self._content = ""
 
     @property
     def name(self) -> str:
+        """
+        Returns:
+            str: The name of the input box.
+        """
         return self._name
 
     @property
     def x(self) -> int:
+        """
+        Returns:
+            int: The x-value for the text of the input box.
+        """
         return self._x
 
     @property
     def content(self) -> str:
+        """Get the content of the input box.
+
+        Returns:
+            str: The content. Adds a block character if it has been selected.
+        """
         if self._selected:
             return self._content + BLOCK_CHARACTER
         return self._content
 
     def add_char(self, char: str):
+        """Add a character to the content of the input box.
+
+        Args:
+            char (str): The character to add.
+        """
         self._content += char
 
     def backspace(self):
+        """Delete the last character of the input box."""
         self._content = self._content[:-1]
 
     def clear(self):
+        """Clear the content of the input box."""
         self._content = ""
 
 
@@ -477,6 +533,7 @@ class SearchButton(Selectable):
         self.text = CenteredText("START SEARCH", y + (height // 2) - 10)
 
 
+# create the search element objects
 YEAR_INPUT = SearchElement("YEAR:", 100, 1)
 SUMMARY_INPUT = SearchElement("SUMMARY:", 180, 5)
 START_SEARCH_BUTTON = SearchButton(430, 400, 120)
@@ -487,6 +544,7 @@ SEARCH_ELEMENTS = [
     START_SEARCH_BUTTON,
 ]
 
+# the year input is what's selected initially
 YEAR_INPUT.selected = True
 
 
