@@ -516,21 +516,22 @@ class SearchElement(Selectable):
         self._name = name
         self._x = SEARCH_TITLE.x
 
-        # a green outer box
-        self.outer_box = Box(
+        outer_box = Box(
             SEARCH_TITLE.x + 2,
             y + TEXT_PIXEL_HEIGHT + 2,
             _width_of_string_in_pixels(len(SEARCH_TITLE.text)),
             (TEXT_PIXEL_HEIGHT * n_lines) + 8,
+            self,
         )
 
-        # a black inner box
-        self.inner_box = Box(
-            self.outer_box.x + 2,
-            self.outer_box.y + 2,
-            self.outer_box.width - 4,
-            self.outer_box.height - 4,
+        inner_box = Box(
+            outer_box.x + 2,
+            outer_box.y + 2,
+            outer_box.width - 4,
+            outer_box.height - 4,
         )
+
+        self.boxes = [outer_box, inner_box]
 
         # the field starts out as empty
         self._content = ""

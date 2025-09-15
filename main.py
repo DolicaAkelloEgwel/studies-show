@@ -442,23 +442,12 @@ class App:
             self.bedstead,
         )
 
-        pyxel.rect(
-            input_field.outer_box.x,
-            input_field.outer_box.y,
-            input_field.outer_box.width,
-            input_field.outer_box.height,
-            input_field.colour,
-        )
-        pyxel.rect(
-            input_field.inner_box.x,
-            input_field.inner_box.y,
-            input_field.inner_box.width,
-            input_field.inner_box.height,
-            pyxel.COLOR_BLACK,
-        )
+        for box in input_field.boxes:
+            pyxel.rect(box.x, box.y, box.width, box.height, box.colour)
+
         pyxel.text(
-            input_field.inner_box.x + 2,
-            input_field.inner_box.y + 2,
+            input_field.boxes[-1].x + 2,
+            input_field.boxes[-1].y + 2,
             input_field.content,
             input_field.colour,
             self.bedstead,
