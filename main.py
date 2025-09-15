@@ -474,27 +474,9 @@ class App:
         # summary input text
         self._draw_search_input_field(constants.SUMMARY_INPUT)
 
-        pyxel.rect(
-            constants.START_SEARCH_BUTTON.outer_box.x,
-            constants.START_SEARCH_BUTTON.outer_box.y,
-            constants.START_SEARCH_BUTTON.outer_box.width,
-            constants.START_SEARCH_BUTTON.outer_box.height,
-            constants.START_SEARCH_BUTTON.colour,
-        )
-        pyxel.rect(
-            constants.START_SEARCH_BUTTON.middle_box.x,
-            constants.START_SEARCH_BUTTON.middle_box.y,
-            constants.START_SEARCH_BUTTON.middle_box.width,
-            constants.START_SEARCH_BUTTON.middle_box.height,
-            pyxel.COLOR_BLACK,
-        )
-        pyxel.rect(
-            constants.START_SEARCH_BUTTON.inner_box.x,
-            constants.START_SEARCH_BUTTON.inner_box.y,
-            constants.START_SEARCH_BUTTON.inner_box.width,
-            constants.START_SEARCH_BUTTON.inner_box.height,
-            constants.START_SEARCH_BUTTON.colour,
-        )
+        for box in constants.START_SEARCH_BUTTON.boxes:
+            pyxel.rect(box.x, box.y, box.width, box.height, box.colour)
+
         pyxel.text(
             constants.START_SEARCH_BUTTON.text.x,
             constants.START_SEARCH_BUTTON.text.y,
