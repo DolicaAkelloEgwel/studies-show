@@ -401,12 +401,13 @@ SEARCH_BACK_TEXT = CenteredText(
 
 # class for input box info
 class Box:
-    def __init__(self, x: int, y: int, width: int, height: int):
+    def __init__(self, x: int, y: int, width: int, height: int, owner=None):
         """Stores information about the boxes."""
         self._x = x
         self._y = y
         self._width = width
         self._height = height
+        self._owner = owner
 
     @property
     def x(self) -> int:
@@ -439,6 +440,13 @@ class Box:
             int: Height parameter for the box.
         """
         return self._height
+
+    @property
+    def colour(self) -> int:
+        if self._owner:
+            return self._owner.colour
+        else:
+            return 0
 
 
 class Selectable:
@@ -582,9 +590,11 @@ class SearchButton(Selectable):
         """
         super().__init__(y)
         x = (APP_WIDTH - width) // 2
-        self.outer_box = Box(x, y, width, height)
-        self.middle_box = Box(x + 2, y + 2, width - 4, height - 4)
-        self.inner_box = Box(x + 4, y + 4, width - 8, height - 8)
+        self.boxes = [
+            Box(x, y, width, height, self),
+            Box(x + 2, y + 2, width - 4, height - 4),
+            Box(x + 4, y + 4, width - 8, height - 8, self),
+        ]
         self.text = CenteredText("START SEARCH", y + (height // 2) - 10)
 
 
