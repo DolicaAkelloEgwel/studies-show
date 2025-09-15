@@ -111,6 +111,15 @@ def get_vline_colour(show_vline: bool) -> int:
 
 
 def wrap_text_for_border(text: str, border: int) -> str:
+    """Determines how to wrap a block of text based on the width of the border.
+
+    Args:
+        text (str): The text to be wrapped.
+        border (int): The width of the border in pixels.
+
+    Returns:
+        str: A wrapped from the string that won't go beyond the borders.
+    """
     max_pixel_width = APP_WIDTH - border * 2
     max_chars = floor(max_pixel_width / 12 + (1 / 6))
     return textwrap.wrap(text, max_chars)
@@ -153,6 +162,12 @@ class CenteredText:
 
 class PaddedCenteredText(CenteredText):
     def __init__(self, title: str, y: int):
+        """Creates a padded form of text for titles.
+
+        Args:
+            title (str): The string that should appear in the title.
+            y (int): The y-value that will be used for the text.
+        """
         padding = _create_title_padding(title)
         super().__init__(f"{padding} {title} {padding}", y)
 
