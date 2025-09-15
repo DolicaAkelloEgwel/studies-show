@@ -48,11 +48,27 @@ PRINTER_NAME = "M834"
 
 
 def _read_text_block_from_file(filename: str) -> list[str]:
+    """Reads a block of text from a file.
+
+    Args:
+        filename (str): The filename.
+
+    Returns:
+        list[str]: The contents of the file in a list of strings.
+    """
     with open(filename, "r") as f:
         return f.readlines()
 
 
 def _create_title_padding(title: str) -> str:
+    """Creates padding for a string to use it for a title.
+
+    Args:
+        title (str): The original string.
+
+    Returns:
+        str: A padded form of the string.
+    """
     padding = (TEXT_EXTENT - len(title)) // 2 - 1
     padding = "*" * padding
     return padding
@@ -132,6 +148,14 @@ terms_and_conditions_text = _read_text_block_from_file(
 
 
 def _create_wrapped_text_list(text: list[str]) -> list[str]:
+    """_summary_
+
+    Args:
+        text (list[str]): _description_
+
+    Returns:
+        list[str]: _description_
+    """
     wrapped_lines = []
     for line in text:
         split_text = wrap_text_for_border(line, BORDER_TEXT_BLOCK)
