@@ -200,7 +200,7 @@ class MenuCenteredText(CenteredText):
         return self._new_state
 
     @selected.setter
-    def selected(self, selected):
+    def selected(self, selected: bool):
         self._selected = selected
 
     @property
@@ -229,9 +229,8 @@ ACCEPT_OR_DECLINE = CenteredText(
 
 # creating some padding to make it look more title-ish
 TEXT_EXTENT = max([len(line) for line in TEXT_TERMS_AND_CONDITIONS])
-padding = _create_title_padding("TERMS AND CONDITIONS")
-TERMS_AND_CONDITIONS_TITLE = CenteredText(
-    padding + " TERMS AND CONDITIONS " + padding, TERMS_TEXT_Y // 2 - 10
+TERMS_AND_CONDITIONS_TITLE = PaddedCenteredText(
+    "TERMS AND CONDITIONS", TERMS_TEXT_Y // 2 - 10
 )
 
 MENU_LOGO_PIXEL_HEIGHT = (2 * MENU_LOGO_Y) + (TEXT_PIXEL_HEIGHT * len(LOGO))
