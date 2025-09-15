@@ -387,19 +387,21 @@ class Box:
 
 
 class Selectable:
-    def __init__(self):
+    def __init__(self, y: int):
         self._selected = False
+        self._y = y
 
     @property
-    def selected(self):
+    def selected(self) -> bool:
         return self._selected
 
     @selected.setter
     def selected(self, val: bool):
         self._selected = val
 
-    def clear(self):
-        pass
+    @property
+    def y(self) -> int:
+        return self._y
 
     @property
     def colour(self) -> int:
@@ -407,11 +409,14 @@ class Selectable:
             return GREEN
         return GREY
 
+    def clear(self):
+        pass
+
 
 # element for search screen
 class SearchElement(Selectable):
     def __init__(self, name: str, y: int, n_lines: int):
-        super().__init__()
+        super().__init__(y)
         self._name = name
         self._x = SEARCH_TITLE.x
 
@@ -440,10 +445,6 @@ class SearchElement(Selectable):
         return self._x
 
     @property
-    def y(self) -> int:
-        return self._y
-
-    @property
     def content(self) -> str:
         if self._selected:
             return self._content + BLOCK_CHARACTER
@@ -461,7 +462,14 @@ class SearchElement(Selectable):
 
 class SearchButton(Selectable):
     def __init__(self, y: int, width: int, height: int):
-        super().__init__()
+        """Stores information relating to the search button.
+
+        Args:
+            y (int): The y-position of the button.
+            width (int): The width of the button.
+            height (int): The height of the button.
+        """
+        super().__init__(y)
         x = (APP_WIDTH - width) // 2
         self.outer_box = Box(x, y, width, height)
         self.middle_box = Box(x + 2, y + 2, width - 4, height - 4)
@@ -498,10 +506,12 @@ def move_search_selection():
 
 
 def clear_search_inputs():
+    """Clears the input on the search input elements."""
     for input in SEARCH_ELEMENTS:
         input.clear()
 
 
 def reset_search_selection():
+    """Resets the selected element on the search screen."""
     SUMMARY_INPUT.selected = START_SEARCH_BUTTON.selected = False
     YEAR_INPUT.selected = True
