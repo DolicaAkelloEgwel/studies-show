@@ -148,13 +148,13 @@ terms_and_conditions_text = _read_text_block_from_file(
 
 
 def _create_wrapped_text_list(text: list[str]) -> list[str]:
-    """_summary_
+    """Creates a wrapped list of text.
 
     Args:
-        text (list[str]): _description_
+        text (list[str]): Text read from a file.
 
     Returns:
-        list[str]: _description_
+        list[str]: The text broken up at points so that it fits in a border.
     """
     wrapped_lines = []
     for line in text:
@@ -224,26 +224,54 @@ class MenuCenteredText(CenteredText):
 
     @property
     def selected(self) -> bool:
+        """
+        Returns:
+            bool: True if the menu item is selected, False otherwise.
+        """
         return self._selected
 
     @property
     def description_text(self) -> str:
+        """
+        Returns:
+            str: The description text that appears when an item has been
+            selected.
+        """
         return self._description_text
 
     @property
     def description_x(self) -> int:
+        """
+        Returns:
+            int: x parameter for the description text.
+        """
         return self._description_x
 
     @property
     def new_state(self) -> int:
+        """
+        Returns:
+            int: The int value for the new state the menu should switch too
+            when this item has been selected.
+        """
         return self._new_state
 
     @selected.setter
     def selected(self, selected: bool):
+        """Changes whether or not the menu item has been selected.
+
+        Args:
+            selected (bool): The new selected value.
+        """
         self._selected = selected
 
     @property
     def color(self) -> int:
+        """Determines the colour of the menu text.
+
+        Returns:
+            int: Black if selected, green otherwise.
+        """
         if self._selected:
             return 0
         else:
@@ -402,7 +430,6 @@ SEARCH_BACK_TEXT = CenteredText(
 # class for input box info
 class Box:
     def __init__(self, x: int, y: int, width: int, height: int, owner=None):
-        """Stores information about the boxes."""
         self._x = x
         self._y = y
         self._width = width
