@@ -364,6 +364,7 @@ SEARCH_BACK_TEXT = CenteredText(
 # class for input box info
 class Box:
     def __init__(self, x: int, y: int, width: int, height: int):
+        """Stores information about the boxes."""
         self._x = x
         self._y = y
         self._width = width
@@ -371,18 +372,34 @@ class Box:
 
     @property
     def x(self) -> int:
+        """
+        Returns:
+            int: x-parameter for the box.
+        """
         return self._x
 
     @property
     def y(self) -> int:
+        """
+        Returns:
+            int: y-paramter for the box.
+        """
         return self._y
 
     @property
     def width(self) -> int:
+        """
+        Returns:
+            int: Width parameter for the box.
+        """
         return self._width
 
     @property
     def height(self) -> int:
+        """
+        Returns:
+            int: Height parameter for the box.
+        """
         return self._height
 
 
