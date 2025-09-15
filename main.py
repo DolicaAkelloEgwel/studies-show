@@ -13,6 +13,12 @@ from write_document import write_document
 
 
 def _check_number_press() -> str:
+    """Checks if a number has been pressed.
+
+    Returns:
+        str: Returns the number in string form if it was pressed, or an empty
+        string if no number was pressed.
+    """
     if pyxel.btnp(pyxel.KEY_0):
         return "0"
     if pyxel.btnp(pyxel.KEY_1):
@@ -38,6 +44,12 @@ def _check_number_press() -> str:
 
 
 def _check_letter_press() -> str:
+    """Checks if a letter or character on the keyboard has been pressed.
+
+    Returns:
+        str: The character that was pressed, or an empty string if the press
+        isn't mapped.
+    """
     if pyxel.btnp(pyxel.KEY_A):
         return "A"
     if pyxel.btnp(pyxel.KEY_B):
@@ -171,6 +183,7 @@ def _check_letter_press() -> str:
 
 
 def _generate_article():
+    """Creates an article with an image and text and prints it."""
     article, image_prompt = create_story(
         constants.SUMMARY_INPUT.content, constants.YEAR_INPUT.content
     )
@@ -212,13 +225,20 @@ class App:
 
         pyxel.run(self.update, self.draw)
 
-    def _idle_limit(self):
+    def _idle_limit(self) -> bool:
+        """Checks if the idle limit has been exceeded.
+
+        Returns:
+            bool: True if the idle limit has been exceeded, False otherwise.
+        """
         return time.time() - self.start_time >= constants.IDLE_LIMIT
 
     def _restart_timer(self):
+        """Restarts the idle limit timer."""
         self.start_time = time.time()
 
     def _reset(self):
+        """Resets stuff and sets the state to the title screen."""
         self._restart_timer()
         constants.clear_search_inputs()
         constants.reset_search_selection()
@@ -264,7 +284,6 @@ class App:
             self._reset()
 
     def _update_search(self):
-
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             constants.reset_search_selection()
@@ -275,7 +294,6 @@ class App:
             constants.move_search_selection()
 
         if constants.YEAR_INPUT.selected:
-
             if pyxel.btnp(pyxel.KEY_BACKSPACE):
                 self._restart_timer()
                 constants.YEAR_INPUT.backspace()
@@ -366,7 +384,6 @@ class App:
         self._draw_text(constants.COPYRIGHT_TEXT)
 
     def _draw_terms_and_conditions(self):
-
         # terms and conditions title
         self._draw_text(constants.TERMS_AND_CONDITIONS_TITLE)
 
@@ -403,9 +420,8 @@ class App:
         self._draw_text(constants.BACK_TEXT)
 
     def _draw_main_menu(self):
-
+        # draw the logo at the top of the menu screen
         for i, line in enumerate(constants.LOGO):
-            # draw the logo at the top of the menu screen
             pyxel.text(
                 self.logo_x,
                 constants.MENU_LOGO_Y + (i * constants.TEXT_PIXEL_HEIGHT),
@@ -432,7 +448,6 @@ class App:
             pyxel.text(item.x, item.y, item.text, item.color, self.bedstead)
 
     def _draw_search_input_field(self, input_field: constants.SearchElement):
-
         # year input text
         pyxel.text(
             input_field.x,
@@ -442,9 +457,11 @@ class App:
             self.bedstead,
         )
 
+        # draw the input boxes
         for box in input_field.boxes:
             pyxel.rect(box.x, box.y, box.width, box.height, box.colour)
 
+        # write the text within the boxes
         pyxel.text(
             input_field.boxes[-1].x + 2,
             input_field.boxes[-1].y + 2,
@@ -463,9 +480,11 @@ class App:
         # summary input text
         self._draw_search_input_field(constants.SUMMARY_INPUT)
 
+        # draw the search button boxes
         for box in constants.START_SEARCH_BUTTON.boxes:
             pyxel.rect(box.x, box.y, box.width, box.height, box.colour)
 
+        # write the search text
         pyxel.text(
             constants.START_SEARCH_BUTTON.text.x,
             constants.START_SEARCH_BUTTON.text.y,
