@@ -675,7 +675,7 @@ progress_y = (
 )
 
 SEARCHING_TEXT = CenteredText("SEARCHING...", progress_y)
-FOUND_TEXT = CenteredText("ARTICLE FOUND. PRINTING...", progress_y)
+FOUND_TEXT = CenteredText("ARTICLE FOUND. PRINTING IN PROGRESS...", progress_y)
 THANKS_TEXT = CenteredText(
-    "THANK YOU FOR USING THE RECOLLECTOR. ENJOY YOUR DAY.", progress_y
+    "THANK YOU FOR USING THE RECOLLECTOR. ENJOY THE REST OF YOUR DAY :)", progress_y
 )
