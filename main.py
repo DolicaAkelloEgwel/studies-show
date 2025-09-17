@@ -369,6 +369,23 @@ class App:
             self.bedstead,
         )
 
+    def _draw_waiting_text(self, text: constants.CenteredText):
+        if pyxel.frame_count % 40 < 10:
+            txt = text.text[:-3]
+        elif pyxel.frame_count % 40 < 20:
+            txt = text.text[:-2]
+        elif pyxel.frame_count % 40 < 30:
+            txt = text.text[:-1]
+        else:
+            txt = text.text
+        pyxel.text(
+            text.x,
+            text.y,
+            txt,
+            pyxel.COLOR_LIME,
+            self.bedstead,
+        )
+
     def _draw_title_screen(self):
         # draw the logo text
         for i, line in enumerate(constants.LOGO):
@@ -503,9 +520,9 @@ class App:
         )
 
         if self.searcher.search_in_progress:
-            self._draw_text(constants.SEARCHING_TEXT)
+            self._draw_waiting_text(constants.SEARCHING_TEXT)
         elif self.searcher.begun_printing:
-            self._draw_text(constants.FOUND_TEXT)
+            self._draw_waiting_text(constants.FOUND_TEXT)
         elif self.searcher.finished_search:
             self._draw_text(constants.THANKS_TEXT)
 
