@@ -503,6 +503,8 @@ class App:
             self._draw_text(constants.SEARCHING_TEXT)
         elif self.searcher.begun_printing:
             self._draw_text(constants.FOUND_TEXT)
+        elif self.searcher.finished_search:
+            self._draw_text(constants.THANKS_TEXT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
