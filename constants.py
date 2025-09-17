@@ -646,11 +646,12 @@ def move_search_selection():
     length = len(SEARCH_ELEMENTS)
     for i in range(length):
         if SEARCH_ELEMENTS[i].selected:
+            next = (i + 1) % length
             (
                 SEARCH_ELEMENTS[i].selected,
-                SEARCH_ELEMENTS[(i + 1) % length].selected,
+                SEARCH_ELEMENTS[next].selected,
             ) = (
-                SEARCH_ELEMENTS[(i + 1) % length].selected,
+                SEARCH_ELEMENTS[next].selected,
                 SEARCH_ELEMENTS[i].selected,
             )
             return
