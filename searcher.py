@@ -1,23 +1,33 @@
+import time
+
 from create_image import create_image
 from create_story import create_story
 from printer_wrapper import print_document
 from write_document import write_document
-import time
 
 
 class Searcher:
     def __init__(self):
+        """An object for generating articles."""
         self._search_in_progress = False
         self._begun_printing = False
         self._finished_search = False
 
     def search(
         self,
-        title: str,
+        summary: str,
         year: str,
         create_image: bool = True,
         print: bool = True,
     ):
+        """Generates article text + image + caption, creates a document, then prints it.
+
+        Args:
+            summary (str): The article summary provided by the user.
+            year (str): The year of the article.
+            create_image (bool, optional): Whether or not to create an image. Defaults to True.
+            print (bool, optional): Whether or not to print the document. Defaults to True.
+        """
         self._search_in_progress = True
         article, image_prompt = create_story(title, year)
         if create_image:

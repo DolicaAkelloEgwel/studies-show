@@ -1,5 +1,6 @@
 import argparse
 import math
+import threading
 import time
 
 import pyxel
@@ -11,7 +12,6 @@ from create_story import create_story
 from printer_wrapper import print_document
 from searcher import Searcher
 from write_document import write_document
-import threading
 
 
 def _check_number_press() -> str:
