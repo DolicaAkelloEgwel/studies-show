@@ -666,3 +666,16 @@ def reset_search_selection():
     """Resets the selected element on the search screen."""
     SUMMARY_INPUT.selected = START_SEARCH_BUTTON.selected = False
     YEAR_INPUT.selected = True
+
+
+progress_y = (
+    (START_SEARCH_BUTTON.y + 120)
+    + (ACCEPT_OR_DECLINE.y - (START_SEARCH_BUTTON.y + 120)) // 2
+    - 10
+)
+
+SEARCHING_TEXT = CenteredText("SEARCHING...", progress_y)
+FOUND_TEXT = CenteredText("ARTICLE FOUND. PRINTING...", progress_y)
+THANKS_TEXT = CenteredText(
+    "THANK YOU FOR USING THE RECOLLECTOR. ENJOY YOUR DAY.", progress_y
+)

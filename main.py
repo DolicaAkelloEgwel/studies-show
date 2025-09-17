@@ -11,6 +11,7 @@ from create_story import create_story
 from printer_wrapper import print_document
 from searcher import Searcher
 from write_document import write_document
+import threading
 
 
 def _check_number_press() -> str:
@@ -324,8 +325,17 @@ class App:
                     # can't do nothin'
                     return
 
-                self._started_search = True
-                self._generate_article()
+                t1 = threading.Thread(
+                    target=self.searcher.search,
+                    args=(
+                        constants.SUMMARY_INPUT.content,
+                        constants.YEAR_INPUT.content,
+                        False,
+                        False,
+                    ),
+                )
+                t1.start()
+
                 self._restart_timer()
 
         if self._idle_limit():
@@ -489,12 +499,10 @@ class App:
             self.bedstead,
         )
 
-        if self._started_search:
+        if self.searcher.search_in_progress:
             self._draw_text(constants.SEARCHING_TEXT)
-        elif self._finished_search:
+        elif self.searcher.begun_printing:
             self._draw_text(constants.FOUND_TEXT)
-        elif self._finished_printing:
-            self._draw_text(constants.THANKS_TEXT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
