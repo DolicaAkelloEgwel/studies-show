@@ -29,7 +29,7 @@ class Searcher:
             print (bool, optional): Whether or not to print the document. Defaults to True.
         """
         self._search_in_progress = True
-        article, image_prompt = create_story(title, year)
+        article, image_prompt = create_story(summary, year)
         if create_image:
             img = create_image(image_prompt)
             img.save("output.jpg")
