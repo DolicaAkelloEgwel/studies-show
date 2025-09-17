@@ -9,6 +9,7 @@ import helpers
 from create_image import create_image
 from create_story import create_story
 from printer_wrapper import print_document
+from searcher import Searcher
 from write_document import write_document
 
 
@@ -182,16 +183,6 @@ def _check_letter_press() -> str:
     return ""
 
 
-def _generate_article():
-    """Creates an article with an image and text and prints it."""
-    article, image_prompt = create_story(
-        constants.SUMMARY_INPUT.content, constants.YEAR_INPUT.content
-    )
-    create_image(image_prompt).save("output.jpg")
-    write_document(article)
-    print_document()
-
-
 class App:
 
     def __init__(
@@ -222,6 +213,9 @@ class App:
 
         # start timer
         self.start_time = None
+
+        # search bools
+        self.searcher = Searcher()
 
         pyxel.run(self.update, self.draw)
 
@@ -329,7 +323,9 @@ class App:
                     self._restart_timer()
                     # can't do nothin'
                     return
-                _generate_article()
+
+                self._started_search = True
+                self._generate_article()
                 self._restart_timer()
 
         if self._idle_limit():
@@ -492,6 +488,13 @@ class App:
             pyxel.COLOR_BLACK,
             self.bedstead,
         )
+
+        if self._started_search:
+            self._draw_text(constants.SEARCHING_TEXT)
+        elif self._finished_search:
+            self._draw_text(constants.FOUND_TEXT)
+        elif self._finished_printing:
+            self._draw_text(constants.THANKS_TEXT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
