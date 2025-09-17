@@ -279,6 +279,9 @@ class App:
             self._reset()
 
     def _update_search(self):
+        if self.searcher.busy:
+            return
+
         if pyxel.btnp(pyxel.KEY_ESCAPE):
             self._restart_timer()
             constants.reset_search_selection()
