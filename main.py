@@ -2,6 +2,7 @@ import argparse
 import math
 import threading
 import time
+from multiprocessing import Manager, Process, set_start_method
 
 import pyxel
 
@@ -216,7 +217,8 @@ class App:
         self.start_time = None
 
         # search bools
-        self.searcher = Searcher()
+        self.manager = Manager()
+        self.searcher = Searcher(self.manager)
 
         pyxel.run(self.update, self.draw)
 
@@ -328,16 +330,16 @@ class App:
                     # can't do nothin'
                     return
 
-                t1 = threading.Thread(
+                p = Process(
                     target=self.searcher.search,
                     args=(
                         constants.SUMMARY_INPUT.content,
                         constants.YEAR_INPUT.content,
-                        False,
+                        True,
                         False,
                     ),
                 )
-                t1.start()
+                p.start()
 
                 self._restart_timer()
 
@@ -566,6 +568,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-vl", "--vline", action="store_true")
 args = parser.parse_args()
 
-App(
-    args.vline,
-)
+if __name__ == "__main__":
+    set_start_method("spawn")
+    App(
+        args.vline,
+    )
