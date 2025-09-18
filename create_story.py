@@ -82,6 +82,8 @@ def create_story(article_summary: str, year: str):
     news_article.article_content = re.sub(
         r"[^\x00-\x7f]", r"", news_article.article_content
     )
+    # make sure the article doesn't end after a percentage symbol appears
+    news_article.article_content = news_article.article_content.replace("%", "\%")
 
     image_prompt = _stable_diffusion_prompt(
         news_article.article_image_description
