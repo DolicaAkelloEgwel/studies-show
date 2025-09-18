@@ -17,7 +17,7 @@ class Searcher:
         self,
         summary: str,
         year: str,
-        create_image: bool = True,
+        generate_image: bool = True,
         print: bool = True,
     ):
         """Generates article text + image + caption, creates a document, then prints it.
@@ -30,10 +30,10 @@ class Searcher:
         """
         self._search_in_progress = True
         article, image_prompt = create_story(summary, year)
-        if create_image:
+        if generate_image:
             img = create_image(image_prompt)
             img.save("output.jpg")
-        # write_document(article)
+        write_document(article)
         self._begun_printing, self._search_in_progress = (
             self._search_in_progress,
             self._begun_printing,
