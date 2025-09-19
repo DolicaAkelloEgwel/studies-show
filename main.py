@@ -219,6 +219,7 @@ class App:
         # search bools
         self.manager = Manager()
         self.searcher = Searcher(self.manager)
+        self.processes = []
 
         pyxel.run(self.update, self.draw)
 
@@ -330,17 +331,22 @@ class App:
                     # can't do nothin'
                     return
 
+                if len(self.processes) > 0:
+                    self.processes[0].terminate()
+                    self.processes[0].join()
+
                 self.searcher.search_in_progress = True
                 p = Process(
                     target=self.searcher.search,
                     args=(
                         constants.SUMMARY_INPUT.content,
                         constants.YEAR_INPUT.content,
-                        True,
+                        False,
                         False,
                     ),
                 )
                 p.start()
+                self.processes.append(p)
 
                 self._restart_timer()
 
