@@ -330,6 +330,7 @@ class App:
                     # can't do nothin'
                     return
 
+                self.searcher.search_in_progress = True
                 p = Process(
                     target=self.searcher.search,
                     args=(

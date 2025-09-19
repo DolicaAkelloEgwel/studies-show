@@ -28,7 +28,6 @@ class Searcher:
             create_image (bool, optional): Whether or not to create an image. Defaults to True.
             print (bool, optional): Whether or not to print the document. Defaults to True.
         """
-        self._search_in_progress.value = True
         article, image_prompt = create_story(summary, year)
         if generate_image:
             img = create_image(image_prompt)
@@ -51,6 +50,10 @@ class Searcher:
     @property
     def search_in_progress(self):
         return self._search_in_progress.value
+
+    @search_in_progress.setter
+    def search_in_progress(self, val: bool):
+        self._search_in_progress.value = val
 
     @property
     def begun_printing(self):
