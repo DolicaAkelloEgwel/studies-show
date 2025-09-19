@@ -6,7 +6,7 @@ from write_document import write_document
 print("Enter a title:")
 title = input()
 
-article, image_prompt = create_story(title)
+article, image_prompt = create_story(title, "1991")
 img = create_image(image_prompt)
 img.save("output.jpg")
 
