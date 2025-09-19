@@ -55,11 +55,9 @@ def write_document(article):
         # put our stable diffusion image at the top of the article
         outfile.write(
             "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
-            + ",\\centerline{"
-            + first_line
-            + "}, \\centerline{"
-            + second_line
-            + "}]\n"
+            + ",{\\centering "
+            + article.short_image_caption
+            + "\par}]\n"
         )
         outfile.write("\\end{window}")
 
