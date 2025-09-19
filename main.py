@@ -1,6 +1,5 @@
 import argparse
 import math
-import threading
 import time
 from multiprocessing import Manager, Process, set_start_method
 
@@ -8,11 +7,7 @@ import pyxel
 
 import constants
 import helpers
-from create_image import create_image
-from create_story import create_story
-from printer_wrapper import print_document
 from searcher import Searcher
-from write_document import write_document
 
 
 def _check_number_press() -> str:
@@ -334,6 +329,7 @@ class App:
                 if len(self.processes) > 0:
                     self.processes[0].terminate()
                     self.processes[0].join()
+                    self.processes.clear()
 
                 self.searcher.search_in_progress = True
                 p = Process(
