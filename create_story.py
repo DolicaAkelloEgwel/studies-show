@@ -3,13 +3,6 @@ import re
 from ollama import ChatResponse, chat
 from pydantic import BaseModel
 
-# will experiment with this...
-prompt_models = [
-    "trollek/qwen2-diffusion-prompter",
-    "gnokit/improve-prompt:latest",
-    "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
-    "brxce/stable-diffusion-prompt-generator:latest",
-]
 IMAGE_PROMPT_MODEL = "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest"
 ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
 
