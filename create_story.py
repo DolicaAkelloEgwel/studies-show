@@ -68,7 +68,11 @@ def _stable_diffusion_prompt(
 
 
 def _clear_weird_characters(text: str) -> str:
-    return re.sub(r"[^\x00-\x7F]+", "", text).replace("%", "\%")
+    return (
+        re.sub(r"[^\x00-\x7F]+", "", text)
+        .replace("%", "\%")
+        .replace("&", "\&")
+    )
 
 
 def create_story(article_summary: str, year: str):
