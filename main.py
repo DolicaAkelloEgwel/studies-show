@@ -337,8 +337,8 @@ class App:
                     args=(
                         constants.SUMMARY_INPUT.content,
                         constants.YEAR_INPUT.content,
-                        False,
-                        False,
+                        True,
+                        True,
                     ),
                 )
                 p.start()
