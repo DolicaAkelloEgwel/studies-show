@@ -74,17 +74,26 @@ def _stable_diffusion_prompt(
     )
 
 
+def _clear_weird_characters(text: str) -> str:
+    return re.sub(r"[^\x00-\x7F]+", "", text).replace("%", "\%")
+
+
 def create_story(article_summary: str, year: str):
     response: ChatResponse = _create_story(article_summary, year)
     news_article = NewsArticle.model_validate_json(response.message.content)
 
     # remove other characters that deepseek sometimes spits out
-    news_article.article_content = re.sub(
-        r"[^\x00-\x7F]+", "", news_article.article_content
+    news_article.article_content = _clear_weird_characters(
+        news_article.article_content
     )
-    # make sure the article doesn't end after a percentage symbol appears
-    news_article.article_content = news_article.article_content.replace(
-        "%", "\%"
+    news_article.article_title = _clear_weird_characters(
+        news_article.article_title
+    )
+    news_article.article_image_description = _clear_weird_characters(
+        news_article.article_image_description
+    )
+    news_article.article_author = _clear_weird_characters(
+        news_article.article_author
     )
 
     image_prompt = _stable_diffusion_prompt(
