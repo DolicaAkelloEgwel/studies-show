@@ -1,3 +1,5 @@
+import datetime
+import shutil
 import time
 
 from create_image import create_image
@@ -39,6 +41,13 @@ class Searcher:
         )
         if print:
             print_document()
+        current_time = (
+            str(datetime.datetime.now())
+            .replace(" ", "-")
+            .replace(":", "")
+            .replace(".", "")
+        )
+        shutil.copyfile("output.pdf", f"exhibition/{current_time}.pdf")
         time.sleep(10)
         self._begun_printing.value, self._finished_search.value = (
             self._finished_search.value,
