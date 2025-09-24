@@ -6,8 +6,6 @@ from pydantic import BaseModel
 IMAGE_PROMPT_MODEL = "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest"
 ARTICLE_GENERATION_MODEL = "deepseek-r1:7b"
 
-REPLACE_CHARS = ["{", "}", "$", "&", "#", "_", "%"]
-
 
 class NewsArticle(BaseModel):
     article_content: str
@@ -70,13 +68,14 @@ def _stable_diffusion_prompt(
 
 
 def _clear_weird_characters(text: str) -> str:
-    text = re.sub(r"[^\x00-\x7F]+", "", text)
-    for char in REPLACE_CHARS:
-        text = text.replace(char, "\\" + char)
     return (
-        text.replace("\\", "\\textbackslash{}")
-        .replace("~", "\\textasciitilde{}")
-        .replace("^", "\\^{}")
+        re.sub(r"[^\x00-\x7F]+", "", text)
+        .replace("\\", r"\textbackslash{}")
+        .replace("&", r"\&")
+        .replace("$", r"\$")
+        .replace("%", r"\%")
+        .replace("~", "")
+        .replace("^", "")
     )
 
 
