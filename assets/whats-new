@@ -1,13 +1,20 @@
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+# Changelog
 
-Aliquam tincidunt mauris eu risus.
+## v8.3.4 - 2025-09-24
 
-Vestibulum auctor dapibus neque.
+### Added
 
-Nunc dignissim risus id metus.
+◦ a "something is happening" bit of text beneath the start button
+◦ experimental future-searching feature
 
-Cras ornare tristique elit.
+### Changed
 
-Vivamus vestibulum ntulla nec ante.
+◦ 
+◦ 
+◦ 
 
-Praesent placerat risus quis eros.
+### Fixed
+
+◦ presence of emojis causing article compilation errors
+◦ caption mismatch bug
+◦ occassional Semi-Qualified Universal Epistemological Answering Kernel timeline swapping crashes
