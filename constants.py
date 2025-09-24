@@ -677,7 +677,9 @@ progress_y = (
 )
 
 # creating some messages that will appear when a search has been started
-SEARCHING_TEXT = CenteredText("SEARCHING...", progress_y)
+SEARCHING_TEXT = CenteredText(
+    "SEARCHING. THIS CAN TAKE A WHILE...", progress_y
+)
 FOUND_TEXT = CenteredText("ARTICLE FOUND. PRINTING IN PROGRESS...", progress_y)
 THANKS_TEXT = CenteredText(
     "THANK YOU FOR USING THE RECOLLECTOR. ENJOY THE REST OF YOUR DAY :)",
