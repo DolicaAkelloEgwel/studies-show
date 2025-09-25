@@ -669,7 +669,8 @@ def reset_search_selection():
     YEAR_INPUT.selected = True
 
 
-# the y-value for the search in progress messages - should be between the button and the commands text
+# the y-value for the search in progress messages - should be between the
+# button and the commands text
 progress_y = (
     (START_SEARCH_BUTTON.y + 120)
     + (ACCEPT_OR_DECLINE.y - (START_SEARCH_BUTTON.y + 120)) // 2
@@ -684,4 +685,7 @@ FOUND_TEXT = CenteredText("ARTICLE FOUND! PRINTING IN PROGRESS...", progress_y)
 THANKS_TEXT = CenteredText(
     "THANK YOU FOR USING THE RECOLLECTOR. ENJOY THE REST OF YOUR DAY :)",
     progress_y,
+)
+FAILED_TEXT = CenteredText(
+    "SORRY, I WASN'T ABLE TO FIND THAT. PLEASE TRY AGAIN LATER.", progress_y
 )

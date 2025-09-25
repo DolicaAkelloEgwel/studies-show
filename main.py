@@ -530,6 +530,8 @@ class App:
             self._draw_waiting_text(constants.FOUND_TEXT)
         elif self.searcher.finished_search:
             self._draw_text(constants.THANKS_TEXT)
+        elif self.searcher.search_failed:
+            self._draw_text(constants.FAILED_TEXT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
