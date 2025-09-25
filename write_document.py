@@ -10,7 +10,7 @@ SLOGANS = [
 ]
 
 
-def write_document(article):
+def write_document(article) -> int:
     fname = "output.tex"
     with open(fname, "w") as outfile:
 
@@ -47,17 +47,12 @@ def write_document(article):
             + "}\n"
         )
 
-        # lazy way of breaking up the caption
-        words = article.short_image_caption.split()
-        first_line = " ".join(words[:6])
-        second_line = " ".join(words[6:])
-
         # put our stable diffusion image at the top of the article
         outfile.write(
             "\\begin{window}[2,r,\\includegraphics[width=2.2in]{./output.jpg}"
             + ",{\\centering "
             + article.short_image_caption
-            + "\par}]\n"
+            + "\\par}]\n"
         )
         outfile.write("\\end{window}")
 
@@ -70,4 +65,4 @@ def write_document(article):
         ) as doc:
             outfile.write(doc.read())
 
-    os.system("pdflatex output.tex")
+    return os.system("pdflatex -halt-on-error output.tex")
