@@ -21,7 +21,7 @@ class Searcher:
         summary: str,
         year: str,
         generate_image: bool = True,
-        print: bool = True,
+        print_output: bool = True,
     ):
         """Generates article text + image + caption, creates a document, then
            prints it.
@@ -45,7 +45,7 @@ class Searcher:
                 self._search_in_progress.value,
                 self._begun_printing.value,
             )
-            if print:
+            if print_output:
                 print_document()
             current_time = (
                 str(datetime.datetime.now())
@@ -59,6 +59,7 @@ class Searcher:
                 self._finished_search.value,
                 self._begun_printing.value,
             )
+
             time.sleep(10)
             self._finished_search.value = False
         else:
@@ -67,7 +68,7 @@ class Searcher:
                 self._search_in_progress.value,
                 self._search_failed.value,
             )
-            time.sleep(3)
+            time.sleep(7)
             self._search_failed.value = False
 
     @property
