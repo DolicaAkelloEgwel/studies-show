@@ -185,6 +185,8 @@ class App:
     def __init__(
         self,
         show_vline: bool,
+        skip_sd: bool,
+        skip_print: bool,
     ):
         pyxel.init(
             constants.APP_WIDTH,
@@ -213,7 +215,7 @@ class App:
 
         # search bools
         self.manager = Manager()
-        self.searcher = Searcher(self.manager)
+        self.searcher = Searcher(self.manager, not skip_sd, not skip_print)
         self.processes = []
 
         pyxel.run(self.update, self.draw)
@@ -337,8 +339,6 @@ class App:
                     args=(
                         constants.SUMMARY_INPUT.content,
                         constants.YEAR_INPUT.content,
-                        True,
-                        True,
                     ),
                 )
                 p.start()
@@ -532,6 +532,7 @@ class App:
             self._draw_text(constants.THANKS_TEXT)
         elif self.searcher.search_failed:
             self._draw_text(constants.FAILED_TEXT)
+            self._draw_text(constants.OTHER_FAILED_TEXT)
 
         # show the go back text
         self._draw_text(constants.SEARCH_BACK_TEXT)
@@ -571,10 +572,11 @@ class App:
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-vl", "--vline", action="store_true")
+parser.add_argument("-ssd", "--skip_sd", action="store_true")
+parser.add_argument("-sp", "--skip_print", action="store_true")
 args = parser.parse_args()
+
 
 if __name__ == "__main__":
     set_start_method("spawn")
-    App(
-        args.vline,
-    )
+    App(args.vline, args.skip_sd, args.skip_print)
