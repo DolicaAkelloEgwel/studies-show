@@ -9,19 +9,20 @@ from write_document import write_document
 
 
 class Searcher:
-    def __init__(self, manager):
+    def __init__(self, manager, generate_image, print_output):
         """An object for generating articles."""
         self._search_in_progress = manager.Value("b", False)
         self._begun_printing = manager.Value("b", False)
         self._finished_search = manager.Value("b", False)
         self._search_failed = manager.Value("b", False)
 
+        self._generate_image = generate_image
+        self._print_output = print_output
+
     def search(
         self,
         summary: str,
         year: str,
-        generate_image: bool = True,
-        print_output: bool = True,
     ):
         """Generates article text + image + caption, creates a document, then
            prints it.
@@ -35,17 +36,16 @@ class Searcher:
             Defaults to True.
         """
         article, image_prompt = create_story(summary, year)
-        if generate_image:
+        if self._generate_image:
             img = create_image(image_prompt)
             img.save("output.jpg")
-        latex_success = write_document(article)
 
-        if latex_success == 0:
+        if write_document(article) == 0:
             self._begun_printing.value, self._search_in_progress.value = (
                 self._search_in_progress.value,
                 self._begun_printing.value,
             )
-            if print_output:
+            if self._print_output:
                 print_document()
             current_time = (
                 str(datetime.datetime.now())
@@ -68,7 +68,7 @@ class Searcher:
                 self._search_in_progress.value,
                 self._search_failed.value,
             )
-            time.sleep(7)
+            time.sleep(10)
             self._search_failed.value = False
 
     @property
