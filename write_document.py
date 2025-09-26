@@ -22,14 +22,14 @@ def write_document(article) -> int:
         outfile.write("\n")
 
         # article info/args
-        outfile.write(r"\date{" + article.article_date + "}\n")
-        outfile.write(r"\currentvolume{" + str(randint(100, 500)) + "}\n")
-        outfile.write(r"\currentissue{" + str(randint(1, 20)) + "}\n")
-        outfile.write(r"\SetPaperName{" + "Recollector Times:" + "}\n")
-        outfile.write(r"\SetPaperLocation{" + "London" + "}\n")
-        outfile.write(r"\SetPaperSlogan{``" + choice(SLOGANS) + "''}\n")
-        outfile.write(r"\SetPaperName{" + "Recollector Times:" + "}\n")
-        outfile.write(r"\SetPaperPrice{" + "£3.99" + "}\n")
+        outfile.write(r"\date{" + article.article_date + "}" + "\n")
+        outfile.write(r"\currentvolume{" + str(randint(100, 500)) + "}" + "\n")
+        outfile.write(r"\currentissue{" + str(randint(1, 20)) + "}" + "\n")
+        outfile.write(r"\SetPaperName{" + "Recollector Times:" + "}" + "\n")
+        outfile.write(r"\SetPaperLocation{" + "London" + "}" + "\n")
+        outfile.write(r"\SetPaperSlogan{``" + choice(SLOGANS) + "''}" + "\n")
+        outfile.write(r"\SetPaperName{" + "Recollector Times:" + "}" + "\n")
+        outfile.write(r"\SetPaperPrice{" + "£3.99" + "}" + "\n")
 
         # start by putting the top stuff in the file
         with open(
@@ -52,7 +52,8 @@ def write_document(article) -> int:
             r"\begin{window}[2,r,\includegraphics[width=2.2in]{./output.jpg}"
             + r",{\centering "
             + article.short_image_caption
-            + r"\par}]\n"
+            + r"\par}]"
+            + "\n"
         )
         outfile.write(r"\end{window}")
 
