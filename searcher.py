@@ -30,10 +30,6 @@ class Searcher:
         Args:
             summary (str): The article summary provided by the user.
             year (str): The year of the article.
-            create_image (bool, optional): Whether or not to create an image.
-            Defaults to True.
-            print (bool, optional): Whether or not to print the document
-            Defaults to True.
         """
         article, image_prompt = create_story(summary, year)
         if self._generate_image:
