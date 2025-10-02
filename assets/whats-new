@@ -6,9 +6,11 @@
 
 ◦ a "something is happening" bit of text beneath the start button
 ◦ experimental future-searching feature
+◦ kinda sorta making LaTeX problems look like part of the program
 
 ### Fixed
 
 ◦ presence of emojis causing article compilation errors
 ◦ caption mismatch bug
-◦ occassional Semi-Qualified Universal Epistemological Answering Kernel timeline swapping crashes
+◦ occassional Semi-Qualified Universal Epistemological Answering
+  Kernel timeline swapping crashes
