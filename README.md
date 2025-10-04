@@ -9,7 +9,7 @@ deepseek-r1:7b (with Ollama) for creating text.
 [pyxel](https://github.com/kitao/pyxel) for the interface.  
 LaTeX + the [newspaper](https://ctan.org/pkg/newspaper) package for making it look like a newspaper.  
 
-I wanted an excuse to use LaTeX again for something.
+I wanted an excuse to use LaTeX again for something. Everything ran on a NVIDIA Jetson AGX Orin Developer Kit and would take 2-5 minutes to complete its article ~generation~ search.
 
 ## Output
 The output that people generated can be seen [here](https://github.com/DolicaAkelloEgwel/studies-show/tree/main/exhibition).
