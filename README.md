@@ -12,8 +12,15 @@ LaTeX + the [newspaper](https://ctan.org/pkg/newspaper) package for making it lo
 I wanted an excuse to use LaTeX again for something.
 
 ## Output
-The output that people created can be seen [here](https://github.com/DolicaAkelloEgwel/studies-show/tree/main/exhibition)
+The output that people generated can be seen [here](https://github.com/DolicaAkelloEgwel/studies-show/tree/main/exhibition).
 
 ## Inspiration
 These sorts of things were living rent-free in my mind for a few weeks.  
 https://www.science.org/content/article/unethical-ai-research-reddit-under-fire
+
+## Feedback
+Some of the things people said during the private viewing and the exhibition...
+"This would blow the mind of a medieval peasant."  
+"Well that's a big fat lie."  
+"This one's my favourite."  
+"It's like a fever dream."  
