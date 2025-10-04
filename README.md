@@ -19,7 +19,7 @@ These sorts of things were living rent-free in my mind for a few weeks.
 https://www.science.org/content/article/unethical-ai-research-reddit-under-fire
 
 ## Feedback
-Some of the things people said during the private viewing and the exhibition...
+Some of the things people said during the private viewing and the exhibition...  
 "This would blow the mind of a medieval peasant."  
 "Well that's a big fat lie."  
 "This one's my favourite."  
