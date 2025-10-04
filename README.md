@@ -21,6 +21,8 @@ https://www.science.org/content/article/unethical-ai-research-reddit-under-fire
   
 I was also motivated by a desire to learn how much you can get out of free-to-use Gen AI tools, as this is part of a student workshop I had been developing over the summer. 
 
+Vimothee Shellamet did something in a similar vein: https://github.com/SylvanFranklin/nonsense. I wanted The Recollector to generate either newspapers or scientific papers at first (giving the user an option to choose) but I ran out of time.
+
 ## Feedback
 Some of the things people said during the private viewing and the exhibition...  
 "This would blow the mind of a medieval peasant."  
